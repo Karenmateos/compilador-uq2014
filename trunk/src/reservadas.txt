@@ -1,0 +1,15 @@
+<->
+<+>
+<BOX>
+<CLASS>
+<EXIT>
+INT
+WHILE
+FOR
+REAL
+<SEND>
+WHEN
+!WHEN
+TEXT
+hola
+ 
