@@ -1,4 +1,4 @@
-package mundo;
+package analizadorLexico;
 
 /**
  * La clase SimboloLexico define los atributos de los símbolos y sus métodos

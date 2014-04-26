@@ -5,6 +5,9 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+import analizadorLexico.Configuracion;
+import analizadorLexico.SimboloLexico;
+
 public class SimboloLexicoTest {
 
 	@Test

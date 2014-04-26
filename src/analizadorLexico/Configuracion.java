@@ -1,4 +1,4 @@
-package mundo;
+package analizadorLexico;
 
 import java.util.ResourceBundle;
 

@@ -4,8 +4,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.io.File;
 import java.io.IOException;
-import javax.swing.BorderFactory;
 
+import javax.swing.BorderFactory;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -28,8 +28,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.SwingUtilities;
 
-import mundo.AnalizadorLexico;
-import mundo.Configuracion;
+import analizadorLexico.AnalizadorLexico;
+import analizadorLexico.Configuracion;
 
 
 /**
