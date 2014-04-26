@@ -8,6 +8,9 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+import analizadorLexico.AnalizadorLexico;
+import analizadorLexico.Configuracion;
+
 public class AnalizadorLexicoTest {
 
 

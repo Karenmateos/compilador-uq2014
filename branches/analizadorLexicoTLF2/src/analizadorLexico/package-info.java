@@ -9,4 +9,4 @@
  * @version 2.0
  *
  */
-package mundo;
+package analizadorLexico;
