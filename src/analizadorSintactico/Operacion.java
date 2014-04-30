@@ -8,7 +8,7 @@ public class Operacion {
 
 	SimboloLexico operadorMatematico = null;
 	SimboloLexico idVariable = null;
-	Operacion operacion = null;
+	
 
 	public Operacion(SimboloLexico operadorMatematico, SimboloLexico idVariable){
 
@@ -16,11 +16,7 @@ public class Operacion {
 		this.idVariable = idVariable;
 	}
 
-	public Operacion(SimboloLexico operadorMatematico, Operacion operacion){
-
-		this.operadorMatematico = operadorMatematico;
-		this.operacion = operacion;
-	}
+	
 
 	public DefaultMutableTreeNode getArbolVisual(){
 
@@ -34,11 +30,8 @@ public class Operacion {
 			return miRaiz;
 		}
 
-		if(operacion != null){
-
-			miRaiz.add(operacion.getArbolVisual());
-			return miRaiz;
-		}
+		
+		
 		return miRaiz;
 	}
 }

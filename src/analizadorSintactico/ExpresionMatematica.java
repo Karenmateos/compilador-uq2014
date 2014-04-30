@@ -1,18 +1,22 @@
 package analizadorSintactico;
 
+import java.util.ArrayList;
+
 import javax.swing.tree.DefaultMutableTreeNode;
+
+import com.sun.xml.internal.bind.v2.model.core.ID;
 
 import analizadorLexico.SimboloLexico;
 
 public class ExpresionMatematica {
 
 	SimboloLexico idVariable = null;
-	Operacion operacion = null;
+	ArrayList<Operacion> operaciones= null;
 	
-	public ExpresionMatematica(SimboloLexico idVariable, Operacion operacion){
+	public ExpresionMatematica(SimboloLexico idVariable, ArrayList<Operacion> operaciones){
 		
 		this.idVariable = idVariable;
-		this.operacion = operacion;
+		this.operaciones = operaciones;
 		
 	}
 	
@@ -20,9 +24,22 @@ public class ExpresionMatematica {
 		
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode("Exprecion Matematica");
 		
+		if(idVariable!=null){
 		miRaiz.add(new DefaultMutableTreeNode(idVariable.getTipo()+": "+idVariable.getLexema()));
+		}
+		if(operaciones.size()>0){
+			DefaultMutableTreeNode nodo = new DefaultMutableTreeNode("Operaciones");
+			
+			for(Operacion operacion: operaciones){
+				
+				nodo.add(operacion.getArbolVisual());
+			}
+			
+			miRaiz.add(nodo);
+			
+			return miRaiz;
+		}
 		
-		miRaiz.add(operacion.getArbolVisual());
 		
 		return miRaiz;
 	}

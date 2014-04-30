@@ -454,28 +454,28 @@ public class AnalizadorSintactico {
 	public ExpresionMatematica esExpresionMatematica(){
 		int posBacktraking = indice;
 		SimboloLexico idVariable = null;
-		Operacion operacion = null;
+		ArrayList<Operacion> operaciones = null;
 		
 		if(tokenActual.getTipo().equals(Configuracion.IdVariable) || tokenActual.getTipo().equals(Configuracion.Real)|| tokenActual.getTipo().equals(Configuracion.Entero)){
 			idVariable = tokenActual;
 			darSiguienteToken();
 		}
 		else{
-			operacion = esOperacion();
-			if(operacion!=null){
+			operaciones = esOperaciones();
+			if(operaciones.size()>0){
 				reportarError("falta el valor para realizar la operación", tokenActual.getFila(), tokenActual.getColumna());
 				modoPanico(";");
-				return new ExpresionMatematica(idVariable, operacion);
+				return new ExpresionMatematica(idVariable, operaciones);
 			}
 			else{
 				return null;
 			}
 		}
 		
-		operacion = esOperacion();
+		operaciones = esOperaciones();
 		
-		if(operacion!=null){
-			return new ExpresionMatematica(idVariable, operacion);
+		if(operaciones.size()>0){
+			return new ExpresionMatematica(idVariable, operaciones);
 		}else{
 			
 			realizarBactracking(posBacktraking);
@@ -484,11 +484,44 @@ public class AnalizadorSintactico {
 		
 	}
 	
-	public Operacion esOperacion(){
+	public ArrayList<Operacion> esOperaciones(){
 		
+		ArrayList<Operacion> operaciones = new ArrayList<Operacion>();
+		Operacion operacion = esOperacion();
+		
+		while(operacion != null){
+			
+			operaciones.add(operacion);
+			operacion = esOperacion();
+		}
+		return operaciones;
+	}
+	
+	public Operacion esOperacion(){
+		int posBacktraking = indice;
 		SimboloLexico OperadorMatematico = null;
 		SimboloLexico idVariable = null;
 		Operacion operacion = null;
+		
+		if(tokenActual.getTipo().equals(Configuracion.OperadorMatematico)){
+			OperadorMatematico = tokenActual;
+			darSiguienteToken();
+		}
+		else{
+			return null;
+		}
+		
+		if(tokenActual.getTipo().equals(Configuracion.IdVariable) || tokenActual.getTipo().equals(Configuracion.Real) || tokenActual.getTipo().equals(Configuracion.Entero) ) {
+			idVariable = tokenActual;
+			darSiguienteToken();
+			return new Operacion(OperadorMatematico,idVariable);
+		}
+		else{
+			realizarBactracking(posBacktraking);
+			return null;
+		}
+		
+		
 	}
 
 	private SimboloLexico esModificadorAcceso(){
