@@ -4,7 +4,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import analizadorLexico.SimboloLexico;
 
-public class Asignacion {
+public class Asignacion extends Sentencia{
 
 	SimboloLexico idVariable = null;
 	ExpresionMatematica expresionMatematica = null;

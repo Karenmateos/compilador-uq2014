@@ -12,36 +12,33 @@ public class ExpresionMatematica {
 
 	SimboloLexico idVariable = null;
 	ArrayList<Operacion> operaciones= null;
-	
+
 	public ExpresionMatematica(SimboloLexico idVariable, ArrayList<Operacion> operaciones){
-		
+
 		this.idVariable = idVariable;
 		this.operaciones = operaciones;
-		
+
 	}
-	
+
 	public DefaultMutableTreeNode getArbolVisual(){
-		
+
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode("Exprecion Matematica");
-		
+
 		if(idVariable!=null){
-		miRaiz.add(new DefaultMutableTreeNode(idVariable.getTipo()+": "+idVariable.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(idVariable.getTipo()+": "+idVariable.getLexema()));
 		}
+
 		if(operaciones.size()>0){
 			DefaultMutableTreeNode nodo = new DefaultMutableTreeNode("Operaciones");
-			
-			for(Operacion operacion: operaciones){
-				
+
+			for(Operacion operacion: operaciones){				
 				nodo.add(operacion.getArbolVisual());
-			}
-			
-			miRaiz.add(nodo);
-			
-			return miRaiz;
-		}
-		
-		
+			}			
+			miRaiz.add(nodo);		
+
+		}	
+
 		return miRaiz;
 	}
-	
+
 }

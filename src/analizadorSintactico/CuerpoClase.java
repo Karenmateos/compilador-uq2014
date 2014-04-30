@@ -21,38 +21,38 @@ public class CuerpoClase {
 	{
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode("Cuerpo de la Clase");
 
-		if(listaDeclaraciones !=null && listaDeclaraciones.size() > 0)
+		if(listaDeclaraciones.size() > 0)
 		{
-			DefaultMutableTreeNode nodoDeclaraciones = new DefaultMutableTreeNode("lista de declaraciones");
+			DefaultMutableTreeNode nodo = new DefaultMutableTreeNode("lista de declaraciones");
 
 			for (DeclaracionVariable declaracion : listaDeclaraciones) 
 			{
-				nodoDeclaraciones.add(declaracion.getArbolVisual());			
+				nodo.add(declaracion.getArbolVisual());			
 			}
-			miRaiz.add(nodoDeclaraciones);
+			miRaiz.add(nodo);
 		}
 		
-		if(listaAsignaciones != null && listaAsignaciones.size() >0){
+		if(listaAsignaciones.size() >0){
 		
-			DefaultMutableTreeNode nodoAsignaciones = new DefaultMutableTreeNode("lista de asignaciones");
+			DefaultMutableTreeNode nodo = new DefaultMutableTreeNode("lista de asignaciones");
 
 			for (Asignacion asignacion : listaAsignaciones) 
 			{
-				nodoAsignaciones.add(asignacion.getArbolVisual());			
+				nodo.add(asignacion.getArbolVisual());			
 			}
-			miRaiz.add(nodoAsignaciones);
+			miRaiz.add(nodo);
 			
 		}
 
-		if(listaMetodos !=null && listaMetodos.size()>0)
+		if(listaMetodos.size()>0)
 		{
-			DefaultMutableTreeNode nodoMetodos = new DefaultMutableTreeNode("lista de metodos");
+			DefaultMutableTreeNode nodo = new DefaultMutableTreeNode("lista de metodos");
 
 			for (DeclaracionMetodo metodo : listaMetodos) 
 			{
-				nodoMetodos.add(metodo.getArbolVisual());			
+				nodo.add(metodo.getArbolVisual());			
 			}
-			miRaiz.add(nodoMetodos);
+			miRaiz.add(nodo);
 		}
 
 		return miRaiz;

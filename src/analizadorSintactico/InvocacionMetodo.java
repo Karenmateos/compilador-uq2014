@@ -9,13 +9,13 @@ import analizadorLexico.SimboloLexico;
 public class InvocacionMetodo {
 	SimboloLexico identificador;
 	ArrayList<Argumento> argumentos;
-	SimboloLexico abreParentesis;
+	SimboloLexico aperturaParentesis;
 	SimboloLexico cierreParentesis;
 
 	public InvocacionMetodo(SimboloLexico identificador, SimboloLexico abreParentesis, ArrayList<Argumento> argumentos, SimboloLexico cierreParentesis) 
 	{
 		this.identificador = identificador;
-		this.abreParentesis = abreParentesis;
+		this.aperturaParentesis = abreParentesis;
 		this.argumentos = argumentos;
 		this.cierreParentesis = cierreParentesis;
 	}
@@ -29,20 +29,20 @@ public class InvocacionMetodo {
 			miRaiz.add(new DefaultMutableTreeNode(identificador.getTipo() +":"+ identificador.getLexema()));
 		}
 		
-		if(abreParentesis != null){
-			miRaiz.add(new DefaultMutableTreeNode(abreParentesis.getLexema()));
+		if(aperturaParentesis != null){
+			miRaiz.add(new DefaultMutableTreeNode(aperturaParentesis.getLexema()));
 		}
 		
-		if(argumentos !=null || argumentos.size() > 0)
+		if(argumentos.size() > 0)
 		{		
-			DefaultMutableTreeNode aNode = new DefaultMutableTreeNode("Argumentos");
+			DefaultMutableTreeNode nodo = new DefaultMutableTreeNode("Argumentos");
 
 			for (Argumento argumento : argumentos) 
 			{
-				aNode.add(argumento.getArbolVisual());
+				nodo.add(argumento.getArbolVisual());
 			}
 
-			miRaiz.add(aNode);
+			miRaiz.add(nodo);
 		}
 		
 		if(cierreParentesis != null){

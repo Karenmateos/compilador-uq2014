@@ -248,4 +248,7 @@ public  class Configuracion {
 	public static final String imgComentario = ruta.getString("imgComentario");
 	public static final String imgCadena = ruta.getString("imgCadena");
 	
+	
+	// ANALIZADOR SINTACTICO
+	public static final String unidadCompilacion  = properties.getString("unidadCompilacion");
 }

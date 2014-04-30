@@ -2,6 +2,8 @@ package analizadorSintactico;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import analizadorLexico.Configuracion;
+
 public class UnidadCompilacion {
 
 	static Clase clase;
@@ -16,7 +18,7 @@ public class UnidadCompilacion {
 
 	public DefaultMutableTreeNode getArbolVisual()
 	{
-		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode("Unidad de Compilacion");
+		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.unidadCompilacion);
 		miRaiz.add(clase.getArbolVisual());
 
 		return miRaiz;
