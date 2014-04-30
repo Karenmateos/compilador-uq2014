@@ -6,22 +6,20 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import analizadorLexico.SimboloLexico;
 
-public class CuerpoMetodo {
+public class CuerpoCiclo {
 	SimboloLexico aperturaParentesis;
 	ArrayList<Sentencia> sentencias;
-	Retorno retorno;
 	SimboloLexico cierreParentesis;
 
-	public CuerpoMetodo(SimboloLexico aperturaParentesis, ArrayList<Sentencia> sentencias, Retorno retorno, SimboloLexico cierreParentesis){
+	public CuerpoCiclo(SimboloLexico aperturaParentesis, ArrayList<Sentencia> sentencias, SimboloLexico cierreParentesis){
 		this.aperturaParentesis = aperturaParentesis;
 		this.sentencias = sentencias;
-		this.retorno = retorno;
 		this.cierreParentesis = cierreParentesis;
 	}
 	
 	public DefaultMutableTreeNode getArbolVisual()
 	{
-		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode("Cuerpo Metodo");
+		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode("Cuerpo Ciclo");
 
 		if(aperturaParentesis != null)
 		{
@@ -34,10 +32,6 @@ public class CuerpoMetodo {
 				nodo.add(sentencia.getArbolVisual());
 			}
 			miRaiz.add(nodo);
-		}
-		
-		if(retorno != null){
-			miRaiz.add(retorno.getArbolVisual());
 		}
 		
 		if(cierreParentesis != null){

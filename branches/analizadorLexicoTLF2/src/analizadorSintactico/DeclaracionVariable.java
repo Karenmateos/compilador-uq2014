@@ -6,33 +6,39 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import analizadorLexico.SimboloLexico;
 
-public class DeclaracionVariable {
+public class DeclaracionVariable extends Sentencia{
 
 	SimboloLexico tipoDato;
 	ArrayList<SimboloLexico> idVariables;
 	SimboloLexico terminal;
-	
+
 	public DeclaracionVariable(SimboloLexico tipoDato, ArrayList<SimboloLexico> idVariables, SimboloLexico terminal){
-	
+
 		this.tipoDato = tipoDato;
 		this.idVariables = idVariables;
 		this.terminal = terminal;
-		
+
 	}
-	
+
 	public DefaultMutableTreeNode getArbolVisual()
 	{
-		DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("Declaracion de Variables");
+		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode("Declaracion de Variables");
 
-		raiz.add(new DefaultMutableTreeNode(tipoDato.getLexema()));
-		
-		for (SimboloLexico identificador : idVariables)
-		{
-			raiz.add(new DefaultMutableTreeNode(identificador.getLexema()));
+		if(tipoDato != null){
+			miRaiz.add(new DefaultMutableTreeNode(tipoDato.getLexema()));
 		}
 
-		raiz.add(new DefaultMutableTreeNode(terminal.getTipo()));
+		if(idVariables.size() > 0){
+			for (SimboloLexico identificador : idVariables)
+			{
+				miRaiz.add(new DefaultMutableTreeNode(identificador.getLexema()));
+			}
+		}
 		
-		return raiz;
+		if(terminal != null){
+			miRaiz.add(new DefaultMutableTreeNode(terminal.getTipo()));
+		}
+		
+		return miRaiz;
 	}
 }

@@ -26,22 +26,22 @@ public class ExpresionComparacion {
 
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode("Expresion de comparacion");
 
-if(idVariable != null){
-	miRaiz.add(new DefaultMutableTreeNode(idVariable.getTipo()+": "+idVariable.getLexema()) );
-}
-	
-if(operadorComparacion != null){
-	
-	miRaiz.add(new DefaultMutableTreeNode(operadorComparacion.getTipo()+": "+operadorComparacion.getLexema()));
-}
+		if(idVariable != null){
+			miRaiz.add(new DefaultMutableTreeNode(idVariable.getTipo()+": "+idVariable.getLexema()) );
+		}
 
-if(idVariable2 !=null){
-	
-	miRaiz.add(new DefaultMutableTreeNode(idVariable2.getTipo()+": "+idVariable2.getLexema()));
-		
-		
+		if(operadorComparacion != null){
+
+			miRaiz.add(new DefaultMutableTreeNode(operadorComparacion.getTipo()+": "+operadorComparacion.getLexema()));
+		}
+
+		if(idVariable2 !=null){
+
+			miRaiz.add(new DefaultMutableTreeNode(idVariable2.getTipo()+": "+idVariable2.getLexema()));
+
+
+		}
+
+		return miRaiz;
 	}
-
-return miRaiz;
-}
 }
