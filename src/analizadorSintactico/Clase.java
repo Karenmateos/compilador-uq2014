@@ -2,6 +2,7 @@ package analizadorSintactico;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
 public class Clase {
@@ -19,7 +20,7 @@ public class Clase {
 
 	public DefaultMutableTreeNode getArbolVisual(){
 
-		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode("Clase");
+		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.declaracionClase);
 
 		if(modificadorAcceso != null){
 			miRaiz.add(new DefaultMutableTreeNode(modificadorAcceso));

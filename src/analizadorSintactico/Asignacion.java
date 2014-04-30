@@ -2,6 +2,7 @@ package analizadorSintactico;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
 public class Asignacion extends Sentencia{
@@ -35,11 +36,14 @@ public class Asignacion extends Sentencia{
 
 	public DefaultMutableTreeNode getArbolVisual()
 	{
-		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode("Asignacion");
-		miRaiz.add(new DefaultMutableTreeNode("Nombre: "+idVariable.getLexema()));
+		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.asignacion);
+		if(idVariable != null){
+			miRaiz.add(new DefaultMutableTreeNode(idVariable.getLexema()));
+		}
 
-		miRaiz.add(new DefaultMutableTreeNode("Operador Asignacion: "+operadorAsignacion.getLexema()));
-
+		if(operadorAsignacion != null){
+			miRaiz.add(new DefaultMutableTreeNode(operadorAsignacion.getLexema()));
+		}
 
 		if(expresionMatematica!=null)
 		{
@@ -55,7 +59,7 @@ public class Asignacion extends Sentencia{
 
 		if(idVariable2!=null)
 		{
-			miRaiz.add(new DefaultMutableTreeNode(idVariable2.getTipo()+": "+idVariable2.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(idVariable2.getTipo()+Configuracion.dosPuntos+idVariable2.getLexema()));
 			return miRaiz;
 		}
 		return miRaiz;

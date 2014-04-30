@@ -251,4 +251,27 @@ public  class Configuracion {
 	
 	// ANALIZADOR SINTACTICO
 	public static final String unidadCompilacion  = properties.getString("unidadCompilacion");
+	public static final String when = properties.getString("when");
+	public static final String retorno = properties.getString("retorno");
+	public static final String operacion = properties.getString("operacion");
+	public static final String invocacionMetodo = properties.getString("invocacionMetodo");
+	public static final String argumentos = properties.getString("argumentos");
+	public static final String expresionMatematica = properties.getString("expresionMatematica");
+	public static final String operaciones = properties.getString("operaciones");
+	public static final String expresionComparacion = properties.getString("expresionComparacion");
+	public static final String dosPuntos = properties.getString("dosPuntos");
+	public static final String declaracionVariable = properties.getString("declaracionVariable");
+	public static final String declaracionMetodo = properties.getString("declaracionMetodo");
+	public static final String cuerpoCiclo = properties.getString("cuerpoCiclo");
+	public static final String listaSentencias = properties.getString("listaSentencias");
+	public static final String cuerpoMetodo = properties.getString("cuerpoMetodo");
+	public static final String cuerpoClase = properties.getString("cuerpoClase");
+	public static final String listaDeclaraciones = properties.getString("listaDeclaraciones");
+	public static final String listaAsignaciones = properties.getString("listaAsignaciones");
+	public static final String listaMetodos = properties.getString("listaMetodos");
+	public static final String declaracionClase = properties.getString("declaracionClase");
+	public static final String cicloWhile = properties.getString("cicloWhile");
+	public static final String asignacion = properties.getString("asignacion");
+	public static final String argumento = properties.getString("argumento");
+	public static final String  = properties.getString("");
 }

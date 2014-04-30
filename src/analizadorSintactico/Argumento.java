@@ -2,6 +2,7 @@ package analizadorSintactico;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
 public class Argumento {
@@ -15,7 +16,7 @@ public class Argumento {
 	
 	public DefaultMutableTreeNode getArbolVisual()
 	{
-		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode("Argumento");
+		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.argumento);
 
 		if(tipoDato != null)
 		{

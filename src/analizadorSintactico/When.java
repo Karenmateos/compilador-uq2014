@@ -2,6 +2,7 @@ package analizadorSintactico;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
 public class When extends Sentencia{
@@ -21,7 +22,7 @@ public class When extends Sentencia{
 	
 	public DefaultMutableTreeNode getArbolVisual()
 	{
-		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode("When");
+		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.when);
 
 		if(when != null)
 		{

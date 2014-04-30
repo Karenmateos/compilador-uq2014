@@ -2,6 +2,7 @@ package analizadorSintactico;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
 public class Retorno {
@@ -18,7 +19,7 @@ public class Retorno {
 
 	public DefaultMutableTreeNode getArbolVisual()
 	{
-		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode("Retorno");
+		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.retorno);
 
 		if(send != null)
 		{
