@@ -26,8 +26,9 @@ public class Operacion {
 
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode("Operacion");
 
+		if(operadorMatematico!=null){
 		miRaiz.add(new DefaultMutableTreeNode(operadorMatematico.getTipo()+": "+ operadorMatematico.getLexema()));
-
+		}
 		if(idVariable!=null){
 			miRaiz.add(new DefaultMutableTreeNode(idVariable.getTipo()+": "+ idVariable.getLexema()) );
 			return miRaiz;
