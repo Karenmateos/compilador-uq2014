@@ -278,16 +278,19 @@ public class AnalizadorSintactico {
 			return new DeclaracionVariable(tipoDato,idVariables,terminal);
 
 		}
+
 		
-		if(idVariables.size() > 0 && tipoDato!=null && terminal==null){
-			
-			modoPanico(";");
-		}
 		if(tipoDato == null && idVariables.size() > 0 && terminal!=null){
 
 			reportarError("falta el tipo de dato", tokenActual.getFila(), tokenActual.getColumna());
 
 			return new DeclaracionVariable(tipoDato,idVariables,terminal);	
+		}
+		
+		if(idVariables.size() > 0 && tipoDato!=null && terminal==null){
+
+			modoPanico(";");
+			return new DeclaracionVariable(tipoDato, idVariables, terminal);
 		}
 		realizarBactracking(posBacktraking);
 		return null;
@@ -309,9 +312,9 @@ public class AnalizadorSintactico {
 			}
 			else{
 				if(tokenActual.getTipo().equals(Configuracion.IdVariable)){
-				
-				reportarError("falta el separador",tokenActual.getFila() , tokenActual.getColumna());
-				break;
+
+					reportarError("falta el separador",tokenActual.getFila() , tokenActual.getColumna());
+					break;
 				}
 			}
 		}
@@ -335,20 +338,157 @@ public class AnalizadorSintactico {
 	}
 
 	public Asignacion esAsignacion(){
-		
-		int posBacktraking = indice;
-		SimboloLexico idVarible = null;
-		SimboloLexico asignacion = null;
+
+
+		SimboloLexico idVariable = null;
+		SimboloLexico idVariable2 = null;
+		SimboloLexico operadorAsignacion = null;
 		SimboloLexico Valor = null;
-		ExpresionComparacion exprecionComparacion = null;
-		ExprecionMatematica exprecionMatematica = null;
-		
-		
-		
+		ExpresionComparacion expresionComparacion = null;
+		ExpresionMatematica expresionMatematica = null;
+
+		if(tokenActual.getTipo().equals(Configuracion.IdVariable)){
+			idVariable = tokenActual;
+			darSiguienteToken(); 
+		}
+		else
+		{
+			return null;
+		}
+
+		if(tokenActual.getTipo().equals(Configuracion.OperadorAsignacion)){
+			operadorAsignacion = tokenActual;
+			darSiguienteToken();
+		}
+		else
+		{
+			reportarError("Falta operador de asignacion", tokenActual.getFila(), tokenActual.getColumna());
+		}
+
+		if(tokenActual.getTipo().equals(Configuracion.IdVariable)){
+			idVariable2 = tokenActual;
+			darSiguienteToken();
+			return new Asignacion(idVariable, operadorAsignacion, idVariable2);
+
+		}
+
+		if(tokenActual.getTipo().equals(Configuracion.Entero)){
+			idVariable2 = tokenActual;
+			darSiguienteToken();
+			return new Asignacion(idVariable, operadorAsignacion, idVariable2);
+		}
+
+		if(tokenActual.getTipo().equals(Configuracion.Real)){
+			idVariable2 = tokenActual;
+			darSiguienteToken();
+			return new Asignacion(idVariable, operadorAsignacion, idVariable2);
+		}
+
+		expresionComparacion = esExpresionComparacion();
+		if(expresionComparacion != null){
+
+			darSiguienteToken();
+			return new Asignacion(idVariable, operadorAsignacion, expresionComparacion);
+		}
+		expresionMatematica = esExpresionMatematica();
+		if(expresionMatematica != null){
+
+			darSiguienteToken();
+			return new Asignacion(idVariable, operadorAsignacion, expresionMatematica);
+		}
+
+		reportarError("falta asignar algun valor", tokenActual.getFila(), tokenActual.getColumna());
+		return new Asignacion(idVariable, operadorAsignacion, expresionComparacion);
+	}
+
+	public ExpresionComparacion esExpresionComparacion(){
+		int posBacktraking = indice;
+		SimboloLexico idVariable = null;
+		SimboloLexico operadorComparacion = null;
+		SimboloLexico idVariable2 = null;
 
 		
+			if(tokenActual.getTipo().equals(Configuracion.IdVariable) ||tokenActual.getTipo().equals(Configuracion.Entero) || tokenActual.getTipo().equals(Configuracion.Real) ){
+				idVariable = tokenActual;
+				darSiguienteToken();
+			}
+			else{
+
+				if(tokenActual.getTipo().equals(Configuracion.OperadorRelacional)){
+					reportarError("falta el valor a comparar", tokenActual.getFila(), tokenActual.getColumna());
+					modoPanico(";");
+					return new ExpresionComparacion(idVariable, operadorComparacion, idVariable);
+					
+				}
+				else{
+					
+					return null;
+				}
+
+			}
+			
+			if(tokenActual.getTipo().equals(Configuracion.OperadorRelacional)){
+				
+				operadorComparacion = tokenActual;
+				darSiguienteToken();
+				
+			}
+			else{
+				if(tokenActual.getTipo().equals(Configuracion.IdVariable) || tokenActual.getTipo().equals(Configuracion.Entero) || tokenActual.getTipo().equals(Configuracion.Real)){
+				   reportarError("falta el operador relacional", tokenActual.getFila(), tokenActual.getColumna());
+				   modoPanico(";");
+				   return new ExpresionComparacion(idVariable, operadorComparacion, idVariable2);
+				}else{
+					realizarBactracking(posBacktraking);
+					return null;
+				}
+			}
+			
+			if(tokenActual.getTipo().equals(Configuracion.IdVariable) || tokenActual.getTipo().equals(Configuracion.Entero) || tokenActual.getTipo().equals(Configuracion.Real)){
+				idVariable2 = tokenActual;
+				return new ExpresionComparacion(idVariable, operadorComparacion, idVariable2);
+			}
 		
+	}
+	
+	public ExpresionMatematica esExpresionMatematica(){
+		int posBacktraking = indice;
+		SimboloLexico idVariable = null;
+		Operacion operacion = null;
 		
+		if(tokenActual.getTipo().equals(Configuracion.IdVariable) || tokenActual.getTipo().equals(Configuracion.Real)|| tokenActual.getTipo().equals(Configuracion.Entero)){
+			idVariable = tokenActual;
+			darSiguienteToken();
+		}
+		else{
+			operacion = esOperacion();
+			if(operacion!=null){
+				reportarError("falta el valor para realizar la operación", tokenActual.getFila(), tokenActual.getColumna());
+				modoPanico(";");
+				return new ExpresionMatematica(idVariable, operacion);
+			}
+			else{
+				return null;
+			}
+		}
+		
+		operacion = esOperacion();
+		
+		if(operacion!=null){
+			return new ExpresionMatematica(idVariable, operacion);
+		}else{
+			
+			realizarBactracking(posBacktraking);
+			return null;
+		}
+		
+	}
+	
+	public Operacion esOperacion(){
+		
+		SimboloLexico OperadorMatematico = null;
+		SimboloLexico idVariable = null;
+		Operacion operacion = null;
 	}
 
 	private SimboloLexico esModificadorAcceso(){
@@ -384,11 +524,11 @@ public class AnalizadorSintactico {
 			return tipoDato;
 		}
 	}
-public void modoPanico(String tokenParada) {
-		
+	public void modoPanico(String tokenParada) {
+
 		while (!tokenActual.getLexema().equals(tokenParada)) {
-				darSiguienteToken();
-			}
-			
+			darSiguienteToken();
 		}
+
+	}
 }

@@ -857,7 +857,7 @@ public class AnalizadorLexico {
 		{
 			lexema+=caracterActual;
 			if(verificarEspacio()){
-				almacenarToken(lexema, Configuracion.OperadorRelacionalMayorI, filaIniToken, columnaInicialToken);
+				almacenarToken(lexema, Configuracion.OperadorRelacional, filaIniToken, columnaInicialToken);
 				return true;
 			}
 			backtraking(posicionParaBactraking, filaIniToken, columnaInicialToken);
@@ -899,7 +899,7 @@ public class AnalizadorLexico {
 		{
 			lexema+=caracterActual;
 			if(verificarEspacio()){
-				almacenarToken(lexema, Configuracion.OperadorRelacionalMenorI, filaIniToken, columnaInicialToken);
+				almacenarToken(lexema, Configuracion.OperadorRelacional, filaIniToken, columnaInicialToken);
 				return true;
 			}
 			backtraking(posicionParaBactraking, filaIniToken, columnaInicialToken);
@@ -941,7 +941,7 @@ public class AnalizadorLexico {
 		{
 			lexema+=caracterActual;
 			if(verificarEspacio()){
-				almacenarToken(lexema, Configuracion.OperadorRelacionalII, filaIniToken, columnaInicialToken);
+				almacenarToken(lexema, Configuracion.OperadorRelacional, filaIniToken, columnaInicialToken);
 				return true;
 			}
 			backtraking(posicionParaBactraking, filaIniToken, columnaInicialToken);
@@ -1034,7 +1034,7 @@ public class AnalizadorLexico {
 		{
 			lexema+=caracterActual;
 			if(verificarEspacio()){
-				almacenarToken(lexema, Configuracion.OperadorRelacionalMenor, filaIniToken, columnaInicialToken);
+				almacenarToken(lexema, Configuracion.OperadorRelacional, filaIniToken, columnaInicialToken);
 				return true;
 			}
 			backtraking(posicionParaBactraking, filaIniToken, columnaInicialToken);
@@ -1065,7 +1065,7 @@ public class AnalizadorLexico {
 		{
 			lexema+=caracterActual;
 			if(verificarEspacio()){
-				almacenarToken(lexema, Configuracion.OperadorRelacionalMayor, filaIniToken, columnaInicialToken);
+				almacenarToken(lexema, Configuracion.OperadorRelacional, filaIniToken, columnaInicialToken);
 				return true;
 			}
 			backtraking(posicionParaBactraking, filaIniToken, columnaInicialToken);
@@ -1096,7 +1096,7 @@ public class AnalizadorLexico {
 		{
 			lexema+=caracterActual;
 			if(verificarEspacio()){
-				almacenarToken(lexema, Configuracion.OperadorDivision, filaIniToken, columnaInicialToken);
+				almacenarToken(lexema, Configuracion.OperadorMatematico, filaIniToken, columnaInicialToken);
 				return true;
 			}
 			backtraking(posicionParaBactraking, filaIniToken, columnaInicialToken);
@@ -1127,7 +1127,7 @@ public class AnalizadorLexico {
 		{
 			lexema+=caracterActual;
 			if(verificarEspacio()){
-				almacenarToken(lexema, Configuracion.OperadorResta, filaIniToken, columnaInicialToken);
+				almacenarToken(lexema, Configuracion.OperadorMatematico, filaIniToken, columnaInicialToken);
 				return true;
 			}
 			backtraking(posicionParaBactraking, filaIniToken, columnaInicialToken);
@@ -1158,7 +1158,7 @@ public class AnalizadorLexico {
 		{
 			lexema+=caracterActual;
 			if(verificarEspacio()){
-				almacenarToken(lexema,Configuracion.OperadorSuma, filaIniToken, columnaInicialToken);
+				almacenarToken(lexema,Configuracion.OperadorMatematico, filaIniToken, columnaInicialToken);
 				return true;
 			}
 			backtraking(posicionParaBactraking, filaIniToken, columnaInicialToken);
@@ -1189,7 +1189,7 @@ public class AnalizadorLexico {
 		{
 			lexema+=caracterActual;
 			if(verificarEspacio()){
-				almacenarToken(lexema,Configuracion.OperadorMultiplicacion, filaIniToken, columnaInicialToken);
+				almacenarToken(lexema,Configuracion.OperadorMatematico, filaIniToken, columnaInicialToken);
 				return true;
 			}
 			backtraking(posicionParaBactraking, filaIniToken, columnaInicialToken);

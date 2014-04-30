@@ -31,10 +31,12 @@ public  class Configuracion {
 	public static final String ReservadaWhile = properties.getString("ReservadaWhile");
 	public static final String OperadorDivision = properties.getString("OperadorDivision");
 	public static final String OperadorMultiplicacion = properties.getString("OperadorMultiplicacion");
+	public static final String OperadorMatematico = properties.getString("OperadorMatematico");
 	public static final String OperadorResta = properties.getString("OperadorResta");
 	public static final String OperadorSuma = properties.getString("OperadorSuma");
 	public static final String OperadorRelacionalII = properties.getString("OperadorRelacionalII");
 	public static final String OperadorRelacionalMayor = properties.getString("OperadorRelacionalMayor");
+	public static final String OperadorRelacional = properties.getString("OperadorRelacional");
 	public static final String OperadorRelacionalMayorI = properties.getString("OperadorRelacionalMayorI");
 	public static final String OperadorRelacionalMenor = properties.getString("OperadorRelacionalMenor");
 	public static final String OperadorRelacionalMenorI = properties.getString("OperadorRelacionalMenorI");
