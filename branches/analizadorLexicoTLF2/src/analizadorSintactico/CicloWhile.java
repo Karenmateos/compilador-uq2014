@@ -2,6 +2,7 @@ package analizadorSintactico;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
 public class CicloWhile {
@@ -23,7 +24,7 @@ public class CicloWhile {
 	
 	public DefaultMutableTreeNode getArbolVisual()
 	{
-		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode("Ciclo While");
+		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.cicloWhile);
 
 		if(palabraWhile != null)
 		{

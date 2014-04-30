@@ -2,6 +2,7 @@ package analizadorSintactico;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
 public class Operacion {
@@ -20,13 +21,13 @@ public class Operacion {
 
 	public DefaultMutableTreeNode getArbolVisual(){
 
-		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode("Operacion");
+		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.operacion);
 
 		if(operadorMatematico!=null){
-			miRaiz.add(new DefaultMutableTreeNode(operadorMatematico.getTipo()+": "+ operadorMatematico.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(operadorMatematico.getTipo()+Configuracion.dosPuntos+ operadorMatematico.getLexema()));
 		}
 		if(idVariable!=null){
-			miRaiz.add(new DefaultMutableTreeNode(idVariable.getTipo()+": "+ idVariable.getLexema()) );
+			miRaiz.add(new DefaultMutableTreeNode(idVariable.getTipo()+Configuracion.dosPuntos+ idVariable.getLexema()) );
 		}
 
 		return miRaiz;

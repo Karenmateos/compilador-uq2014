@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
 public class DeclaracionMetodo {
@@ -28,7 +29,7 @@ public class DeclaracionMetodo {
 	
 	public DefaultMutableTreeNode getArbolVisual()
 	{
-		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode("Declaracion Metodo");
+		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.declaracionMetodo);
 
 		if(modificadorAcceso != null)
 		{
@@ -49,7 +50,7 @@ public class DeclaracionMetodo {
 		
 		if(argumentos !=null || argumentos.size() > 0)
 		{		
-			DefaultMutableTreeNode aNode = new DefaultMutableTreeNode("Argumentos");
+			DefaultMutableTreeNode aNode = new DefaultMutableTreeNode(Configuracion.argumentos);
 
 			for (Argumento argumento : argumentos) 
 			{

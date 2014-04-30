@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
 public class DeclaracionVariable extends Sentencia{
@@ -22,7 +23,7 @@ public class DeclaracionVariable extends Sentencia{
 
 	public DefaultMutableTreeNode getArbolVisual()
 	{
-		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode("Declaracion de Variables");
+		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.declaracionVariable);
 
 		if(tipoDato != null){
 			miRaiz.add(new DefaultMutableTreeNode(tipoDato.getLexema()));

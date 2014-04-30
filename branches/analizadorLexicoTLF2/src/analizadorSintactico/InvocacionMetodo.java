@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
 public class InvocacionMetodo {
@@ -22,11 +23,11 @@ public class InvocacionMetodo {
 
 	public DefaultMutableTreeNode getArbolVisual()
 	{
-		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode("Invocacion Metodo");
+		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.unidadCompilacion);
 
 		if(identificador != null)
 		{
-			miRaiz.add(new DefaultMutableTreeNode(identificador.getTipo() +":"+ identificador.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(identificador.getTipo() +Configuracion.dosPuntos+ identificador.getLexema()));
 		}
 		
 		if(aperturaParentesis != null){
@@ -35,7 +36,7 @@ public class InvocacionMetodo {
 		
 		if(argumentos.size() > 0)
 		{		
-			DefaultMutableTreeNode nodo = new DefaultMutableTreeNode("Argumentos");
+			DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(Configuracion.argumentos);
 
 			for (Argumento argumento : argumentos) 
 			{

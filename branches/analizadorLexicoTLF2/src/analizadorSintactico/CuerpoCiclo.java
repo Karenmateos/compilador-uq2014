@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
 public class CuerpoCiclo {
@@ -19,7 +20,7 @@ public class CuerpoCiclo {
 	
 	public DefaultMutableTreeNode getArbolVisual()
 	{
-		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode("Cuerpo Ciclo");
+		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.cuerpoCiclo);
 
 		if(aperturaParentesis != null)
 		{
@@ -27,7 +28,7 @@ public class CuerpoCiclo {
 		}
 		
 		if(sentencias.size() > 0){
-			DefaultMutableTreeNode nodo = new DefaultMutableTreeNode("Lista de Sentencias");
+			DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(Configuracion.listaSentencias);
 			for(Sentencia sentencia : sentencias){
 				nodo.add(sentencia.getArbolVisual());
 			}

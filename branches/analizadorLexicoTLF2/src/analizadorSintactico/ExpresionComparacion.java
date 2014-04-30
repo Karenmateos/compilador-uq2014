@@ -6,6 +6,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeNode;
 
+import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
 public class ExpresionComparacion {
@@ -24,20 +25,20 @@ public class ExpresionComparacion {
 
 	public DefaultMutableTreeNode getArbolVisual(){
 
-		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode("Expresion de comparacion");
+		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.expresionComparacion);
 
 		if(idVariable != null){
-			miRaiz.add(new DefaultMutableTreeNode(idVariable.getTipo()+": "+idVariable.getLexema()) );
+			miRaiz.add(new DefaultMutableTreeNode(idVariable.getTipo()+Configuracion.dosPuntos+idVariable.getLexema()) );
 		}
 
 		if(operadorComparacion != null){
 
-			miRaiz.add(new DefaultMutableTreeNode(operadorComparacion.getTipo()+": "+operadorComparacion.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(operadorComparacion.getTipo()+Configuracion.dosPuntos+operadorComparacion.getLexema()));
 		}
 
 		if(idVariable2 !=null){
 
-			miRaiz.add(new DefaultMutableTreeNode(idVariable2.getTipo()+": "+idVariable2.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(idVariable2.getTipo()+Configuracion.dosPuntos+idVariable2.getLexema()));
 
 
 		}

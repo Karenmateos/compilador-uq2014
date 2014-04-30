@@ -6,6 +6,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import com.sun.xml.internal.bind.v2.model.core.ID;
 
+import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
 public class ExpresionMatematica {
@@ -22,14 +23,14 @@ public class ExpresionMatematica {
 
 	public DefaultMutableTreeNode getArbolVisual(){
 
-		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode("Exprecion Matematica");
+		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.expresionMatematica);
 
 		if(idVariable!=null){
-			miRaiz.add(new DefaultMutableTreeNode(idVariable.getTipo()+": "+idVariable.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(idVariable.getTipo()+Configuracion.dosPuntos+idVariable.getLexema()));
 		}
 
 		if(operaciones.size()>0){
-			DefaultMutableTreeNode nodo = new DefaultMutableTreeNode("Operaciones");
+			DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(Configuracion.operaciones);
 
 			for(Operacion operacion: operaciones){				
 				nodo.add(operacion.getArbolVisual());

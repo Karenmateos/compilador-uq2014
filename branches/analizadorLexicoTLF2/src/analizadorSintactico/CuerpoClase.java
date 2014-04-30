@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import analizadorLexico.Configuracion;
+
 public class CuerpoClase {
 
 	ArrayList<DeclaracionVariable> listaDeclaraciones;
@@ -19,11 +21,11 @@ public class CuerpoClase {
 	
 	public DefaultMutableTreeNode getArbolVisual()
 	{
-		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode("Cuerpo de la Clase");
+		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.cuerpoClase);
 
 		if(listaDeclaraciones.size() > 0)
 		{
-			DefaultMutableTreeNode nodo = new DefaultMutableTreeNode("lista de declaraciones");
+			DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(Configuracion.listaDeclaraciones);
 
 			for (DeclaracionVariable declaracion : listaDeclaraciones) 
 			{
@@ -34,7 +36,7 @@ public class CuerpoClase {
 		
 		if(listaAsignaciones.size() >0){
 		
-			DefaultMutableTreeNode nodo = new DefaultMutableTreeNode("lista de asignaciones");
+			DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(Configuracion.listaAsignaciones);
 
 			for (Asignacion asignacion : listaAsignaciones) 
 			{
@@ -46,7 +48,7 @@ public class CuerpoClase {
 
 		if(listaMetodos.size()>0)
 		{
-			DefaultMutableTreeNode nodo = new DefaultMutableTreeNode("lista de metodos");
+			DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(Configuracion.listaMetodos);
 
 			for (DeclaracionMetodo metodo : listaMetodos) 
 			{
