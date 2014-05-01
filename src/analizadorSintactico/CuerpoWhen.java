@@ -7,6 +7,14 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
+/**
+*
+* @author Jorge Leonardo Aguirre Martinez
+* @author Luis Alberto Delgado Ortiz
+* 
+* <CuerpoWHEN> ::= “{“ [<ListaSentencias>] [<Retorno>] “}” | “{“ [<ListaSentencias>] [“<Exit>”] “}” 
+* 
+*/
 public class CuerpoWhen {
 	SimboloLexico aperturaLlaves;
 	ArrayList<Sentencia> sentencias;
