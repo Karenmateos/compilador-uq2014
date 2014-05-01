@@ -15,25 +15,25 @@ import analizadorLexico.SimboloLexico;
 * <CuerpoMetodo> ::= “{” [<ListaSentencias>] [<Retorno>] “}”
 */
 public class CuerpoMetodo {
-	SimboloLexico aperturaParentesis;
+	SimboloLexico aperturaLlaves;
 	ArrayList<Sentencia> sentencias;
 	Retorno retorno;
-	SimboloLexico cierreParentesis;
+	SimboloLexico cierreLlaves;
 
 	public CuerpoMetodo(SimboloLexico aperturaParentesis, ArrayList<Sentencia> sentencias, Retorno retorno, SimboloLexico cierreParentesis){
-		this.aperturaParentesis = aperturaParentesis;
+		this.aperturaLlaves = aperturaParentesis;
 		this.sentencias = sentencias;
 		this.retorno = retorno;
-		this.cierreParentesis = cierreParentesis;
+		this.cierreLlaves = cierreParentesis;
 	}
 	
 	public DefaultMutableTreeNode getArbolVisual()
 	{
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.cuerpoMetodo);
 
-		if(aperturaParentesis != null)
+		if(aperturaLlaves != null)
 		{
-			miRaiz.add(new DefaultMutableTreeNode(aperturaParentesis.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(aperturaLlaves.getLexema()));
 		}
 		
 		if(sentencias.size() > 0){
@@ -48,8 +48,8 @@ public class CuerpoMetodo {
 			miRaiz.add(retorno.getArbolVisual());
 		}
 		
-		if(cierreParentesis != null){
-			miRaiz.add(new DefaultMutableTreeNode(cierreParentesis.getLexema()));
+		if(cierreLlaves != null){
+			miRaiz.add(new DefaultMutableTreeNode(cierreLlaves.getLexema()));
 		}
 
 		return miRaiz;

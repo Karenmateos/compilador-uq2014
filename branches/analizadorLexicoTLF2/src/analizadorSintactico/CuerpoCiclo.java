@@ -16,23 +16,23 @@ import analizadorLexico.SimboloLexico;
 
 */
 public class CuerpoCiclo {
-	SimboloLexico aperturaParentesis;
+	SimboloLexico aperturaLlaves;
 	ArrayList<Sentencia> sentencias;
-	SimboloLexico cierreParentesis;
+	SimboloLexico cierreLlaves;
 
 	public CuerpoCiclo(SimboloLexico aperturaParentesis, ArrayList<Sentencia> sentencias, SimboloLexico cierreParentesis){
-		this.aperturaParentesis = aperturaParentesis;
+		this.aperturaLlaves = aperturaParentesis;
 		this.sentencias = sentencias;
-		this.cierreParentesis = cierreParentesis;
+		this.cierreLlaves = cierreParentesis;
 	}
 	
 	public DefaultMutableTreeNode getArbolVisual()
 	{
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.cuerpoCiclo);
 
-		if(aperturaParentesis != null)
+		if(aperturaLlaves != null)
 		{
-			miRaiz.add(new DefaultMutableTreeNode(aperturaParentesis.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(aperturaLlaves.getLexema()));
 		}
 		
 		if(sentencias.size() > 0){
@@ -43,8 +43,8 @@ public class CuerpoCiclo {
 			miRaiz.add(nodo);
 		}
 		
-		if(cierreParentesis != null){
-			miRaiz.add(new DefaultMutableTreeNode(cierreParentesis.getLexema()));
+		if(cierreLlaves != null){
+			miRaiz.add(new DefaultMutableTreeNode(cierreLlaves.getLexema()));
 		}
 
 		return miRaiz;

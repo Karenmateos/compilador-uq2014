@@ -101,18 +101,18 @@ public class AnalizadorSintactico {
 				if (tokenActual.getTipo().equals(Configuracion.IdMetodo)) {
 
 					reportarError(
-							"El identificador corresponde a un identificador de metodo",
+							Configuracion.errorIdentificador1,
 							tokenActual.getFila(), tokenActual.getColumna());
 					return new Argumento(tipoDato, identificadorVariable);
 
 				} else if (tokenActual.getTipo().equals(Configuracion.IdClase)) {
 					reportarError(
-							"El identificador corresponde a un identificador de clase",
+							Configuracion.errorIdentificador2,
 							tokenActual.getFila(), tokenActual.getColumna());
 					return new Argumento(tipoDato, identificadorVariable);
 
 				} else {
-					reportarError("Falta el nombre del parámetro",
+					reportarError(Configuracion.errorNombreParametro,
 							tokenActual.getFila(), tokenActual.getColumna());
 					return new Argumento(tipoDato, identificadorVariable);
 				}
@@ -121,7 +121,7 @@ public class AnalizadorSintactico {
 		}
 		else
 			if (tokenActual.getTipo().equals(Configuracion.IdVariable)) {
-				reportarError("falta el tipo de dato", tokenActual.getFila(), tokenActual.getColumna());
+				reportarError(Configuracion.errorFaltaTipoDato, tokenActual.getFila(), tokenActual.getColumna());
 				identificadorVariable = tokenActual;
 				darSiguienteToken();
 				return new Argumento(tipoDato, identificadorVariable);
@@ -153,7 +153,7 @@ public class AnalizadorSintactico {
 			else{
 				if(tokenActual.getTipo().equals(Configuracion.IdVariable)){
 
-					reportarError("falta el separador",tokenActual.getFila() , tokenActual.getColumna());
+					reportarError(Configuracion.errorFaltaSeparador,tokenActual.getFila() , tokenActual.getColumna());
 					break;
 				}
 			}
@@ -163,7 +163,7 @@ public class AnalizadorSintactico {
 	}
 
 	/**
-	 * Indica si cierto conjunto de tokens conforman La Unidad de Compilación
+	 * Indica si cierto conjunto de tokens conforman La Unidad de Compilaciï¿½n
 	 * GIC: <UnidadDeCompilacion> ::=<Clase>
 	 * 
 	 * @return unidadCompilacion
@@ -192,7 +192,7 @@ public class AnalizadorSintactico {
 
 		if(modificadorAcceso == null){
 
-			reportarError("Falta modificador de acceso",tokenActual.getFila(), tokenActual.getColumna());
+			reportarError(Configuracion.errorFaltaModificadorAcceso,tokenActual.getFila(), tokenActual.getColumna());
 
 		}
 
@@ -211,13 +211,13 @@ public class AnalizadorSintactico {
 				darSiguienteToken();	
 			}
 			else{
-				reportarError("falta el identificador de la clase",tokenActual.getFila(), tokenActual.getColumna());
+				reportarError(Configuracion.errorFaltaIdClase,tokenActual.getFila(), tokenActual.getColumna());
 
 			}
 		}
 		else{
 			if(idClase==null){
-				reportarError("falta el identificador de la clase",tokenActual.getFila(), tokenActual.getColumna());
+				reportarError(Configuracion.errorFaltaIdClase,tokenActual.getFila(), tokenActual.getColumna());
 			}
 		}
 
@@ -227,7 +227,7 @@ public class AnalizadorSintactico {
 			return new Clase(modificadorAcceso, idClase, cuerpoClase);
 		}
 		else{
-			reportarError("Falta el cuerpo de la clase",tokenActual.getFila(), tokenActual.getColumna());
+			reportarError(Configuracion.errorFaltaCuerpoClase,tokenActual.getFila(), tokenActual.getColumna());
 		}
 		return new Clase(modificadorAcceso, idClase, cuerpoClase);
 	}
@@ -366,7 +366,7 @@ public class AnalizadorSintactico {
 			if(idVariables.size()==0){
 				if(tokenActual.getTipo().equals(Configuracion.FinSentencia)){
 					terminal = tokenActual;
-					reportarError("faltan las variables",tokenActual.getFila(), tokenActual.getColumna());
+					reportarError(Configuracion.errorFaltaVariables,tokenActual.getFila(), tokenActual.getColumna());
 					return new DeclaracionVariable(tipoDato,idVariables,terminal);
 				}
 				else{
@@ -379,7 +379,7 @@ public class AnalizadorSintactico {
 				return  new DeclaracionVariable(tipoDato, idVariables, terminal);
 			}
 			else{
-				modoPanico(";");
+				modoPanico(Configuracion.puntoyComa);
 				return new DeclaracionVariable(tipoDato, idVariables, terminal);
 
 			}
@@ -409,7 +409,7 @@ public class AnalizadorSintactico {
 			else{
 				if(tokenActual.getTipo().equals(Configuracion.IdVariable)){
 
-					reportarError("falta el separador",tokenActual.getFila() , tokenActual.getColumna());
+					reportarError(Configuracion.errorFaltaSeparador,tokenActual.getFila() , tokenActual.getColumna());
 					break;
 				}
 				else{
@@ -474,7 +474,7 @@ public class AnalizadorSintactico {
 		}
 		else
 		{
-			reportarError("Falta operador de asignacion", tokenActual.getFila(), tokenActual.getColumna());
+			reportarError(Configuracion.errorOperadorAsignacion, tokenActual.getFila(), tokenActual.getColumna());
 		}
 
 		if(tokenActual.getTipo().equals(Configuracion.IdVariable)){
@@ -509,7 +509,7 @@ public class AnalizadorSintactico {
 			return new Asignacion(idVariable, operadorAsignacion, expresionMatematica);
 		}
 
-		reportarError("falta asignar algun valor", tokenActual.getFila(), tokenActual.getColumna());
+		reportarError(Configuracion.errorFaltaValor, tokenActual.getFila(), tokenActual.getColumna());
 		return new Asignacion(idVariable, operadorAsignacion, expresionComparacion);
 	}
 
@@ -533,8 +533,8 @@ public class AnalizadorSintactico {
 		else{
 
 			if(tokenActual.getTipo().equals(Configuracion.OperadorRelacional)){
-				reportarError("falta el valor a comparar", tokenActual.getFila(), tokenActual.getColumna());
-				modoPanico(";");
+				reportarError(Configuracion.errorFaltaValorComparar, tokenActual.getFila(), tokenActual.getColumna());
+				modoPanico(Configuracion.puntoyComa);
 				return new ExpresionComparacion(idVariable, operadorComparacion, idVariable);
 
 			}
@@ -553,8 +553,8 @@ public class AnalizadorSintactico {
 		}
 		else{
 			if(tokenActual.getTipo().equals(Configuracion.IdVariable) || tokenActual.getTipo().equals(Configuracion.Entero) || tokenActual.getTipo().equals(Configuracion.Real)){
-				reportarError("falta el operador relacional", tokenActual.getFila(), tokenActual.getColumna());
-				modoPanico(";");
+				reportarError(Configuracion.errorFaltaOperadorRelacional, tokenActual.getFila(), tokenActual.getColumna());
+				modoPanico(Configuracion.puntoyComa);
 				return new ExpresionComparacion(idVariable, operadorComparacion, idVariable2);
 			}else{
 				realizarBactracking(posBacktraking);
@@ -567,8 +567,8 @@ public class AnalizadorSintactico {
 			return new ExpresionComparacion(idVariable, operadorComparacion, idVariable2);
 		}
 
-		reportarError("falta el valor a comparar", tokenActual.getFila(), tokenActual.getColumna());
-		modoPanico(";");
+		reportarError(Configuracion.errorFaltaValorComparar, tokenActual.getFila(), tokenActual.getColumna());
+		modoPanico(Configuracion.puntoyComa);
 		return new ExpresionComparacion(idVariable, operadorComparacion, idVariable2);
 
 	}
@@ -591,8 +591,8 @@ public class AnalizadorSintactico {
 		else{
 			operaciones = esOperaciones();
 			if(operaciones.size()>0){
-				reportarError("falta el valor para realizar la operación", tokenActual.getFila(), tokenActual.getColumna());
-				modoPanico(";");
+				reportarError(Configuracion.errorFaltaValorOperacion, tokenActual.getFila(), tokenActual.getColumna());
+				modoPanico(Configuracion.puntoyComa);
 				return new ExpresionMatematica(idVariable, operaciones);
 			}
 			else{
@@ -671,7 +671,7 @@ public class AnalizadorSintactico {
 
 		SimboloLexico modificadorAcceso = null;
 
-		if(tokenActual.getLexema().equals("<+>") || tokenActual.getLexema().equals("<->") ){
+		if(tokenActual.getLexema().equals(Configuracion.publico) || tokenActual.getLexema().equals(Configuracion.privado) ){
 
 			modificadorAcceso = tokenActual;
 			darSiguienteToken();

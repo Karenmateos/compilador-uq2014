@@ -273,5 +273,22 @@ public  class Configuracion {
 	public static final String cicloWhile = properties.getString("cicloWhile");
 	public static final String asignacion = properties.getString("asignacion");
 	public static final String argumento = properties.getString("argumento");
-	public static final String  = properties.getString("");
+	public static final String errorIdentificador1 = properties.getString("errorIdentificador1");
+	public static final String errorIdentificador2 = properties.getString("errorIdentificador2");
+	public static final String errorNombreParametro = properties.getString("errorNombreParametro");
+	public static final String errorFaltaTipoDato = properties.getString("errorFaltaTipoDato");
+	public static final String errorFaltaSeparador = properties.getString("errorFaltaSeparador");
+	public static final String errorFaltaModificadorAcceso = properties.getString("errorFaltaModificadorAcceso");
+	public static final String errorFaltaIdClase = properties.getString("errorFaltaIdClase");
+	public static final String errorFaltaCuerpoClase = properties.getString("errorFaltaCuerpoClase");
+	public static final String errorFaltaVariables = properties.getString("errorFaltaVariables");
+	public static final String puntoyComa = properties.getString("puntoyComa");
+	public static final String errorOperadorAsignacion = properties.getString("errorOperadorAsignacion");
+	public static final String errorFaltaValor = properties.getString("errorFaltaValor");
+	public static final String errorFaltaValorComparar = properties.getString("errorFaltaValorComparar");
+	public static final String errorFaltaOperadorRelacional = properties.getString("errorFaltaOperadorRelacional");
+	public static final String errorFaltaValorOperacion = properties.getString("errorFaltaValorOperacion");
+	public static final String publico = properties.getString("publico");
+	public static final String privado = properties.getString("privado");
+	
 }
