@@ -223,15 +223,15 @@ public class AnalizadorSintactico {
 				reportarError(Configuracion.errorFaltaIdClase,tokenActual.getFila(), tokenActual.getColumna());
 			}
 		}
-
-		cuerpoClase = esCuerpoClase(); 
-		if(cuerpoClase != null){
-
-			return new Clase(modificadorAcceso, idClase, cuerpoClase);
-		}
-		else{
-			reportarError(Configuracion.errorFaltaCuerpoClase,tokenActual.getFila(), tokenActual.getColumna());
-		}
+cuerpoClase=null;
+//		cuerpoClase = esCuerpoClase(); 
+//		if(cuerpoClase != null){
+//
+//			return new Clase(modificadorAcceso, idClase, cuerpoClase);
+//		}
+//		else{
+//			reportarError(Configuracion.errorFaltaCuerpoClase,tokenActual.getFila(), tokenActual.getColumna());
+//		}
 		return new Clase(modificadorAcceso, idClase, cuerpoClase);
 	}
 
@@ -812,4 +812,14 @@ public class AnalizadorSintactico {
 		}
 
 	}
+
+	public UnidadCompilacion getMiUnidadDeCompilacion() {
+		return miUnidadDeCompilacion;
+	}
+
+	public void setMiUnidadDeCompilacion(UnidadCompilacion miUnidadDeCompilacion) {
+		this.miUnidadDeCompilacion = miUnidadDeCompilacion;
+	}
+	
+	
 }
