@@ -9,6 +9,13 @@ import com.sun.xml.internal.bind.v2.model.core.ID;
 import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
+/**
+*
+* @author Jorge Leonardo Aguirre Martinez
+* @author Luis Alberto Delgado Ortiz
+* 
+* <ExprecionMatematica> ::= <IdVariable> <Operacion> | <valor> <Operacion> 
+*/
 public class ExpresionMatematica {
 
 	SimboloLexico idVariable = null;
