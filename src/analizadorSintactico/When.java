@@ -1,5 +1,12 @@
 package analizadorSintactico;
 
+/**
+*
+* @author Jorge Leonardo Aguirre Martinez
+* @author Luis Alberto Delgado Ortiz
+* 
+* <SentenciaDecision> ::=  “WHEN” “(“ <ExpresionComparacion> “)” <CuerpoWHEN>
+*/
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import analizadorLexico.Configuracion;
