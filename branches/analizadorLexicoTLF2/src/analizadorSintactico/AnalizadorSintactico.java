@@ -5,12 +5,27 @@ import java.util.ArrayList;
 import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
+/**
+ *
+ * @author Jorge Leonardo Aguirre Martinez
+ * @author Luis Alberto Delgado Ortiz
+ * 
+ *  Esta clase permite analizar la sintaxis de una lista de tokens 
+ *  pasados por el analizador lexico
+ */
 public class AnalizadorSintactico {
-
-	private ArrayList<SimboloLexico> listaSimbolosLexicos;
+    /**
+     * Variables globales de la clase AnalizadorSintactico
+     */
+	// arrayList que contiene los simbolos lexicos reconocidos por el analizador lexico
+	private ArrayList<SimboloLexico> listaSimbolosLexicos; 
+	//Arraylist que almacenara los errores sintacticos
 	private ArrayList<ErrorSintactico> listaErroresSintacticos;
+	//variable que almacena el simbolo lexico actual
 	private SimboloLexico tokenActual;
+	//variable que contiene la pocision actual en la lista de simbolos lexicos
 	private int indice;
+	//almacena la unidad de compilacion
 	private UnidadCompilacion miUnidadDeCompilacion;
 
 	/**
@@ -67,12 +82,15 @@ public class AnalizadorSintactico {
 	 * @return parametro
 	 */
 	public Argumento esArgumento() {
+		//almacena la pocision a la cual se va a devolver
 		int posBacktraking = indice;
+		//variables necesarias para conformar un argumento
 		SimboloLexico tipoDato = null;
 		SimboloLexico identificadorVariable = null;
-
+        
 		tipoDato = esTipoDato();
 
+		
 		if(tipoDato!=null){
 
 			if (tokenActual.getTipo().equals(Configuracion.IdVariable)) {
@@ -155,6 +173,13 @@ public class AnalizadorSintactico {
 
 		return new UnidadCompilacion(clase);
 	}
+	
+	/**
+	 * indica si cierto conjunto de tokens conforman la clase
+	 * GIC:<Clase> ::= <ModificadorAcceso> <IdClase> <CuerpoClase>
+	 * 
+	 * @return
+	 */
 
 	public Clase esClase(){
 
@@ -207,6 +232,13 @@ public class AnalizadorSintactico {
 		return new Clase(modificadorAcceso, idClase, cuerpoClase);
 	}
 
+	/**
+	 * indica si cierto conjunto de tokens conforman el cuerpo de la clase
+	 * GIC: <CuerpoClase> ::= “{“ [<ListaDeclaraciones>] [ListaAsignaciones] [<ListaMetodos>] “}”
+
+	 * 
+	 * @return
+	 */
 	public CuerpoClase esCuerpoClase(){
 
 		ArrayList<DeclaracionVariable> listaDeclaraciones = esListaDeclaraciones();
@@ -218,6 +250,12 @@ public class AnalizadorSintactico {
 
 	}
 
+	/**
+	 * indica si cierto conjunto de tokens conforman una lista de declaraciones
+	 * GIC: <ListaDeclaraciones> ::= <DeclaracionVariable> [<ListaDeclaraciones>] 
+	 * 
+	 * @return
+	 */
 	public ArrayList<DeclaracionVariable> esListaDeclaraciones(){
 
 		ArrayList<DeclaracionVariable> listaDeclaraciones = new ArrayList<DeclaracionVariable>();
@@ -231,6 +269,12 @@ public class AnalizadorSintactico {
 		return listaDeclaraciones; 
 	}
 
+	/**
+	 * indica si cierto conjunto de tokens conforman una lista de Asignaciones
+	 * GIC: <ListaAsignaciones> ::= <Asignacion> [<ListaAsignaciones>]
+	 *
+	 * @return
+	 */
 	public ArrayList<Asignacion> esListaAsignaciones(){
 
 		ArrayList<Asignacion> listaAsignacion = new ArrayList<Asignacion>();
@@ -246,6 +290,12 @@ public class AnalizadorSintactico {
 
 	}
 
+	/**
+	 * indica si cierto conjunto de tokens conforman una lista de metodos
+	 * GIC:<Metodos> ::= <DeclaracionMetodo> [<Metodos>]
+	 * 
+	 * @return
+	 */
 	public ArrayList<DeclaracionMetodo> esListaMetodos(){
 
 		ArrayList<DeclaracionMetodo> listaMetodos = new ArrayList<DeclaracionMetodo>();
@@ -258,6 +308,12 @@ public class AnalizadorSintactico {
 		return listaMetodos;
 	}
 
+	/**
+	 * indica si cierto conjunto de tokens conforman la declaracion de un metodo
+	 * GIC:<DeclaracionMetodo> ::= <ModificadorAcceso> <TipoDato> <IdMetodo> “(“ [<Argumentos>] “)”  <CuerpoMetodo> 
+	 * 
+	 * @return
+	 */
 	public DeclaracionMetodo esDeclaracionMetodo(){
 
 		SimboloLexico modificadorAcceso = null;
@@ -289,6 +345,12 @@ public class AnalizadorSintactico {
 
 	}
 
+	/**
+	 * indica si cierto conjunto de tokens conforman la declaracion de una variable
+	 * GIC:<DeclaracionVariable> ::= <TipoDato> <Variables> “;”
+	 * 
+	 * @return
+	 */
 	public DeclaracionVariable esDeclaracionVariable(){
 		int posBacktraking = indice;
 		SimboloLexico tipoDato = null;
@@ -323,12 +385,14 @@ public class AnalizadorSintactico {
 			}
 		}
 
-
-
-
-
 	}
 
+	/**
+	 *Indica si cierto conjunto de tokens pertenecen a la categoria sintactica Lista de variables 
+	 *  GIC: <Variables> ::= <IdVariable> [“,” <Variables>]
+	 *  
+	 * @return
+	 */
 	public ArrayList<SimboloLexico> esVariables(){
 
 		ArrayList<SimboloLexico> idVariables = new ArrayList<SimboloLexico>();
@@ -359,6 +423,12 @@ public class AnalizadorSintactico {
 
 	}
 
+	/**
+	 * indica si el token es un identificador de variable
+	 * 
+	 * 
+	 * @return
+	 */
 	public SimboloLexico esIdVariable(){
 
 		SimboloLexico idVariable = null;
@@ -373,6 +443,12 @@ public class AnalizadorSintactico {
 
 	}
 
+	/**
+	 *Indica si cierto conjunto de tokens pertenecen a la categoria sintactica de asignaciones 
+	 * GIC: <Asignacion> ::= <IdVariable> “=” <ExpresioneComparacion> |<IdVariable> “=” <ExpresioneMatematica>| <idVariable> “=” <Valor> | <idVariable> “=” <idVariable>
+	 * 
+	 * @return
+	 */
 	public Asignacion esAsignacion(){
 
 
@@ -437,6 +513,12 @@ public class AnalizadorSintactico {
 		return new Asignacion(idVariable, operadorAsignacion, expresionComparacion);
 	}
 
+	/**
+	 * Indica si cierto conjunto de tokens pertenecen a la categoria sintactica ExprecionComparacion
+	 * GIC: <ExpresionComparacion> ::= <IdVariable> <OperadorComparacion> <IdVariable> | <IdVariable> <OperadorComparacion> <Valor> | <Valor> <OperadorComparacion> <Valor> | <Valor> <OperadorComparacion> <IdVariable>
+	 * 
+	 * @return
+	 */
 	public ExpresionComparacion esExpresionComparacion(){
 		int posBacktraking = indice;
 		SimboloLexico idVariable = null;
@@ -491,6 +573,12 @@ public class AnalizadorSintactico {
 
 	}
 
+	/**
+	 *Indica si cierto conjunto de tokens pertenecen a la categoria sintactica ExprecionMatematica 
+	 *GIC:<ExprecionMatematica> ::= <IdVariable> <Operacion> | <valor> <Operacion> 
+	 * 
+	 * @return
+	 */
 	public ExpresionMatematica esExpresionMatematica(){
 		int posBacktraking = indice;
 		SimboloLexico idVariable = null;
@@ -524,6 +612,12 @@ public class AnalizadorSintactico {
 
 	}
 
+	/**
+	 * Indica si cierto conjunto de tokens pertenecen a la categoria sintactica de operaciones
+	 * GIC: <Operacion> ::= <OperadorMatematico> <IdVariable> | <OperadorMatematico> <valor> | <OperadorMatematico> <IdVariable> <Operacion> | <OperadorMatematico> <valor> <Operacion>
+	 * 
+	 * @return
+	 */
 	public ArrayList<Operacion> esOperaciones(){
 
 		ArrayList<Operacion> operaciones = new ArrayList<Operacion>();
@@ -537,6 +631,10 @@ public class AnalizadorSintactico {
 		return operaciones;
 	}
 
+	/**
+	 * indica si el token actual es una operacion
+	 * @return
+	 */
 	public Operacion esOperacion(){
 		int posBacktraking = indice;
 		SimboloLexico OperadorMatematico = null;
@@ -563,6 +661,11 @@ public class AnalizadorSintactico {
 
 
 	}
+	
+	/**
+	 * metodo que indica si el token actual es un modoficador de acceso
+	 * @return
+	 */
 
 	private SimboloLexico esModificadorAcceso(){
 
@@ -582,6 +685,10 @@ public class AnalizadorSintactico {
 		}
 	}
 
+	/**
+	 * metodo que indica si el token actual corresponde a uno de los tipos de dato
+	 * @return
+	 */
 	private SimboloLexico esTipoDato(){
 		SimboloLexico tipoDato = null;
 
@@ -597,6 +704,11 @@ public class AnalizadorSintactico {
 			return tipoDato;
 		}
 	}
+	
+	/**
+	 * Este metodo avanza hasta encontrar el token indicado
+	 * @param tokenParada
+	 */
 	public void modoPanico(String tokenParada) {
 
 		while (!tokenActual.getLexema().equals(tokenParada)) {
