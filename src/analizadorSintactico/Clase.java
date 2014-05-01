@@ -5,6 +5,13 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
+/**
+*
+* @author Jorge Leonardo Aguirre Martinez
+* @author Luis Alberto Delgado Ortiz
+* 
+* <Clase> ::= <ModificadorAcceso> <IdClase> <CuerpoClase>
+*/
 public class Clase {
 
 	SimboloLexico modificadorAcceso;
