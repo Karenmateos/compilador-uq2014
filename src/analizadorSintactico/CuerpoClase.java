@@ -7,6 +7,13 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import analizadorLexico.Configuracion;
 
+/**
+ * 
+ * @author Jorge Leonardo Aguirre Martinez
+ * @author Luis Alberto Delgado Ortiz
+ *<CuerpoClase> ::= “{“ [<ListaDeclaraciones>] [ListaAsignaciones] [<ListaMetodos>] “}”
+
+ */
 
 public class CuerpoClase {
 
