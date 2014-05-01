@@ -4,6 +4,13 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 import analizadorLexico.Configuracion;
 
+/**
+*
+* @author Jorge Leonardo Aguirre Martinez
+* @author Luis Alberto Delgado Ortiz
+* 
+* <UnidadCompilacion> ::=  <Clase>
+*/
 public class UnidadCompilacion {
 
 	static Clase clase;
