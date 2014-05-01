@@ -68,6 +68,9 @@ public class Ventana extends javax.swing.JFrame implements ActionListener{
 	// Declaracion de los atributos
 
 	private JScrollPane jScrollPane2;
+	private JTable jTableErroresSintacticos;
+	private JScrollPane jScrollPaneErroresSintacticos;
+	private JLabel jLabelErroresSintacticos;
 	private JPanel panelSintactico;
 	private JTabbedPane panelPestanas;
 	private JPanel panelLexico;
@@ -275,6 +278,27 @@ public class Ventana extends javax.swing.JFrame implements ActionListener{
 					panelSintactico2 = new PanelAnalizadorSintactico(300,630);
 					panelSintactico.add(panelSintactico2);
 					panelSintactico2.setBounds(0, 0, 362, 641);
+					{
+						jLabelErroresSintacticos = new JLabel();
+						panelSintactico.add(jLabelErroresSintacticos);
+						jLabelErroresSintacticos.setText("Tabla de errores Sintacticos");
+						jLabelErroresSintacticos.setBounds(384, 11, 154, 16);
+					}
+					{
+						jScrollPaneErroresSintacticos = new JScrollPane();
+						panelSintactico.add(jScrollPaneErroresSintacticos);
+						jScrollPaneErroresSintacticos.setBounds(390, 50, 473, 233);
+						{
+							TableModel jTableErroresSintacticosModel = 
+									new DefaultTableModel(
+											new String[][] {},
+											new String[] {});
+							jTableErroresSintacticos = new JTable();
+							jScrollPaneErroresSintacticos.setViewportView(jTableErroresSintacticos);
+							jTableErroresSintacticos.setModel(jTableErroresSintacticosModel);
+							jTableErroresSintacticos.setForeground(new java.awt.Color(255,0,0));
+						}
+					}
 				}
 			}
 
@@ -311,6 +335,8 @@ public class Ventana extends javax.swing.JFrame implements ActionListener{
 			
 			AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico(analizadorLexico.getTablaSimbolos());
 			panelSintactico2.getArbolVisual().setModel(new DefaultTreeModel(analizadorSintactico.getMiUnidadDeCompilacion().getArbolVisual()));
+			TableModel modeloS = new DefaultTableModel(analizadorSintactico.mostrarTokensError(),new String[]{"error","fila","columna" });
+			jTableErroresSintacticos.setModel(modeloS); 
 
 		}
 
