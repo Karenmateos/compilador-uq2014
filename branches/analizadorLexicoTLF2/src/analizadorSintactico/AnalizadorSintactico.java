@@ -2,6 +2,8 @@ package analizadorSintactico;
 
 import java.util.ArrayList;
 
+import com.sun.org.apache.bcel.internal.generic.RETURN;
+
 import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
@@ -14,9 +16,9 @@ import analizadorLexico.SimboloLexico;
  *  pasados por el analizador lexico
  */
 public class AnalizadorSintactico {
-    /**
-     * Variables globales de la clase AnalizadorSintactico
-     */
+	/**
+	 * Variables globales de la clase AnalizadorSintactico
+	 */
 	// arrayList que contiene los simbolos lexicos reconocidos por el analizador lexico
 	private ArrayList<SimboloLexico> listaSimbolosLexicos; 
 	//Arraylist que almacenara los errores sintacticos
@@ -87,10 +89,10 @@ public class AnalizadorSintactico {
 		//variables necesarias para conformar un argumento
 		SimboloLexico tipoDato = null;
 		SimboloLexico identificadorVariable = null;
-        
+
 		tipoDato = esTipoDato();
 
-		
+
 		if(tipoDato!=null){
 
 			if (tokenActual.getTipo().equals(Configuracion.IdVariable)) {
@@ -169,11 +171,12 @@ public class AnalizadorSintactico {
 	 * @return unidadCompilacion
 	 */
 	public UnidadCompilacion esUnidadDeCompilacion() {
+
 		Clase clase = esClase();
 
 		return new UnidadCompilacion(clase);
 	}
-	
+
 	/**
 	 * indica si cierto conjunto de tokens conforman la clase
 	 * GIC:<Clase> ::= <ModificadorAcceso> <IdClase> <CuerpoClase>
@@ -315,34 +318,127 @@ public class AnalizadorSintactico {
 	 * @return
 	 */
 	public DeclaracionMetodo esDeclaracionMetodo(){
-
+		int posBacktraking = indice;
 		SimboloLexico modificadorAcceso = null;
 		SimboloLexico tipoDato = null;
 		SimboloLexico idMetodo = null;
 		ArrayList<Argumento> argumentos = null;
 		SimboloLexico aperturaParentesis = null;
 		SimboloLexico cierreParentesis = null;
+		CuerpoMetodo cuerpoMetodo = null;
 
 		modificadorAcceso = esModificadorAcceso();
 
-		if(modificadorAcceso!=null){
-			darSiguienteToken();
+		if(modificadorAcceso == null){
+			tipoDato = esTipoDato();
+			if(tipoDato==null){
+				if(tokenActual.getTipo().equals(Configuracion.IdMetodo)){
+					idMetodo = tokenActual;
+					reportarError("falta el modificador de acceso",tokenActual.getFila(), tokenActual.getColumna());
+					reportarError("falta el tipo de dato",tokenActual.getFila(), tokenActual.getColumna());
+					modoPanico(";");
+					return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
+
+				}
+				else{
+					return null;
+				}
+			}
+			else{
+				if(tokenActual.getTipo().equals(Configuracion.IdMetodo)){
+					idMetodo = tokenActual;
+					reportarError("falta el modificador de acceso",tokenActual.getFila(), tokenActual.getColumna());
+					modoPanico(";");
+					return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
+				}
+				else{
+					realizarBactracking(posBacktraking);
+					return null;
+				}
+			}
 		}
 		else{
-
+			tipoDato = esTipoDato();
+			if(tipoDato==null){
+				if(tokenActual.getTipo().equals(Configuracion.IdMetodo)){
+					reportarError("falta el tipo de dato de retorno", tokenActual.getFila(), tokenActual.getColumna());
+				modoPanico(";");
+				return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
+				}
+				else{
+					reportarError("falta el tipo de dato de retorno del metodo",tokenActual.getFila(), tokenActual.getColumna());
+				    modoPanico(";");
+				    return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
+				}
+				
+			}
+			if(tokenActual.getTipo().equals(Configuracion.IdMetodo)){
+				idMetodo = tokenActual;
+				darSiguienteToken();
+				
+				if(tokenActual.getTipo().equals(Configuracion.AperturaParentesis)){
+					aperturaParentesis = tokenActual;
+					darSiguienteToken();
+					
+					argumentos = esListaArgumentos();
+					if(tokenActual.getTipo().equals(Configuracion.CierreParentesis)){
+						cierreParentesis = tokenActual;
+						darSiguienteToken();
+						
+						cuerpoMetodo = esCuerpoMetodo();
+						
+						if(cuerpoMetodo != null ){
+							return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
+						}
+						else{
+							reportarError("falta el cuerpo del metodo", tokenActual.getFila(), tokenActual.getColumna());
+							return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
+						}
+						
+					}
+					else{
+						reportarError("falta el cierre de parentesis", tokenActual.getFila(),tokenActual.getColumna());
+						modoPanico(";");
+						return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
+					} 
+				}
+				else{
+					reportarError("falta abrir parentesis", tokenActual.getFila(),tokenActual.getColumna());
+					modoPanico(";");
+					return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
+				}
+			}
+			else{
+				reportarError("falta el identificador de metodo", tokenActual.getFila(),tokenActual.getColumna());
+				modoPanico(";");
+				return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
+			}
 		}
-
-		tipoDato = esTipoDato();
-
-
-
-
-
-
-
-
-
-
+		
+	}
+	
+	public CuerpoMetodo esCuerpoMetodo(){
+		
+		int posBacktraking = indice;
+		SimboloLexico llaveAbre = null;
+		SimboloLexico llaveCierre = null;
+		ArrayList<Sentencia> sentencias = null;
+		Retorno retorno = null;
+		
+//		if(tokenActual.getTipo().equals(Configuracion.AbrirLlaves)){
+//			
+////			sentencias = esListaSentencias();
+////			retorno = esRetorno();
+//			if(retorno!=null){
+//				if(tokenActual.getTipo().equals(Configuracion.CerrarLLaves)){
+//					return new CuerpoMetodo(llaveAbre, sentencias, retorno, llaveCierre);
+//					
+//				}
+//			}
+//			
+//		}
+		
+		return new CuerpoMetodo(llaveAbre, sentencias, retorno, llaveCierre);
 	}
 
 	/**
@@ -415,7 +511,7 @@ public class AnalizadorSintactico {
 				else{
 					break;
 				}
-					
+
 			}
 		}
 
@@ -661,7 +757,7 @@ public class AnalizadorSintactico {
 
 
 	}
-	
+
 	/**
 	 * metodo que indica si el token actual es un modoficador de acceso
 	 * @return
@@ -704,7 +800,7 @@ public class AnalizadorSintactico {
 			return tipoDato;
 		}
 	}
-	
+
 	/**
 	 * Este metodo avanza hasta encontrar el token indicado
 	 * @param tokenParada
