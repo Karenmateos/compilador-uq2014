@@ -7,6 +7,13 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
+/**
+*
+* @author Jorge Leonardo Aguirre Martinez
+* @author Luis Alberto Delgado Ortiz
+* 
+* <DeclaracionMetodo> ::= <ModificadorAcceso> <TipoDato> <IdMetodo> “(“ [<Argumentos>] “)”  <CuerpoMetodo> 
+*/
 public class DeclaracionMetodo {
 	
 	SimboloLexico modificadorAcceso;
