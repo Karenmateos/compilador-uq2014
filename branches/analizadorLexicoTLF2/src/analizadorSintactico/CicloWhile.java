@@ -5,6 +5,14 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
+/**
+*
+* @author Jorge Leonardo Aguirre Martinez
+* @author Luis Alberto Delgado Ortiz
+* 
+* <WHILE> ::= “WHILE” “(“ <ExpresionComparacion> “)” <CuerpoCiclo>
+
+*/
 public class CicloWhile {
 	
 	SimboloLexico palabraWhile;
