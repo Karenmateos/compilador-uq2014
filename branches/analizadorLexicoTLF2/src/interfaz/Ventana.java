@@ -27,10 +27,13 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.tree.DefaultTreeModel;
 import javax.swing.SwingUtilities;
 
 import analizadorLexico.AnalizadorLexico;
 import analizadorLexico.Configuracion;
+import analizadorSintactico.AnalizadorSintactico;
+
 import java.awt.BorderLayout;
 
 /**
@@ -87,6 +90,8 @@ public class Ventana extends javax.swing.JFrame implements ActionListener{
 	private JTable TablaDeTokens;
 	private JButton Analizar;
 	private AnalizadorLexico analizadorLexico;
+	private AnalizadorSintactico analizadorSintactico;
+	private PanelAnalizadorSintactico panelSintactico2;
 
 	/**
 	 * Auto-generated main method to display this JFrame
@@ -267,6 +272,9 @@ public class Ventana extends javax.swing.JFrame implements ActionListener{
 					panelSintactico = new JPanel();
 					panelPestanas.addTab("Sintáctico", null, panelSintactico, null);
 					panelSintactico.setLayout(null);
+					panelSintactico2 = new PanelAnalizadorSintactico(300,630);
+					panelSintactico.add(panelSintactico2);
+					panelSintactico2.setBounds(0, 0, 362, 641);
 				}
 			}
 
@@ -300,7 +308,9 @@ public class Ventana extends javax.swing.JFrame implements ActionListener{
 
 			TableModel modeloE =	new DefaultTableModel(analizadorLexico.mostrarTokensError(),	new String[] { Configuracion.lexema,Configuracion.tipo ,Configuracion.fila,Configuracion.columna });
 			tablaErrores.setModel(modeloE);
-
+			
+			AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico(analizadorLexico.getTablaSimbolos());
+			panelSintactico2.getArbolVisual().setModel(new DefaultTreeModel(analizadorSintactico.getMiUnidadDeCompilacion().getArbolVisual()));
 
 		}
 

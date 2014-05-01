@@ -30,11 +30,11 @@ public class Clase {
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.declaracionClase);
 
 		if(modificadorAcceso != null){
-			miRaiz.add(new DefaultMutableTreeNode(modificadorAcceso));
+			miRaiz.add(new DefaultMutableTreeNode(modificadorAcceso.getLexema()));
 		}
 
 		if(idClase != null){
-			miRaiz.add(new DefaultMutableTreeNode(idClase));
+			miRaiz.add(new DefaultMutableTreeNode(idClase.getLexema()));
 		}
 
 		if(cuerpoClase != null){
