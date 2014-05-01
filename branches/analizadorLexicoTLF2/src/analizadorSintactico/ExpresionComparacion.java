@@ -9,6 +9,14 @@ import javax.swing.tree.TreeNode;
 import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
+/**
+*
+* @author Jorge Leonardo Aguirre Martinez
+* @author Luis Alberto Delgado Ortiz
+* 
+* <ExpresionComparacion> ::= <IdVariable> <OperadorComparacion> <IdVariable> | <IdVariable> <OperadorComparacion> <Valor> | <Valor> <OperadorComparacion> <Valor> | <Valor> <OperadorComparacion> <IdVariable>
+
+*/
 public class ExpresionComparacion {
 
 	SimboloLexico idVariable = null;
