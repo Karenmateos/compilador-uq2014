@@ -20,6 +20,7 @@ public class CuerpoMetodo {
 	Retorno retorno;
 	SimboloLexico cierreLlaves;
 
+	
 	public CuerpoMetodo(SimboloLexico aperturaParentesis, ArrayList<Sentencia> sentencias, Retorno retorno, SimboloLexico cierreParentesis){
 		this.aperturaLlaves = aperturaParentesis;
 		this.sentencias = sentencias;

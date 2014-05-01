@@ -17,6 +17,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.ListModel;
@@ -30,7 +31,7 @@ import javax.swing.SwingUtilities;
 
 import analizadorLexico.AnalizadorLexico;
 import analizadorLexico.Configuracion;
-
+import java.awt.BorderLayout;
 
 /**
  * This code was edited or generated using CloudGarden's Jigloo
@@ -64,6 +65,9 @@ public class Ventana extends javax.swing.JFrame implements ActionListener{
 	// Declaracion de los atributos
 
 	private JScrollPane jScrollPane2;
+	private JPanel panelSintactico;
+	private JTabbedPane panelPestanas;
+	private JPanel panelLexico;
 	private JLabel jLabelCargar;
 	private JPanel jPanelCargar;
 	private JComboBox listaAutomatas;
@@ -112,145 +116,162 @@ public class Ventana extends javax.swing.JFrame implements ActionListener{
 	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-			getContentPane().setLayout(null);
+			BorderLayout thisLayout = new BorderLayout();
+			getContentPane().setLayout(thisLayout);
 			this.setTitle(Configuracion.tituloVentana);
+
 			{
-				Analizar = new JButton();
-				getContentPane().add(Analizar);
-				Analizar.setText(Configuracion.Analizar);
-				Analizar.setBounds(244, 194, 92, 26);
-				Analizar.addActionListener(this);
-			}
-			{
-				jLabel1 = new JLabel();
-				getContentPane().add(jLabel1);
-				jLabel1.setText(Configuracion.codigo);
-				jLabel1.setBounds(35, 6, 325, 24);
-				jLabel1.setFont(new java.awt.Font("SansSerif",1,12));
-			}
-			{
-				jScrollPane1 = new JScrollPane();
-				getContentPane().add(jScrollPane1);
-				jScrollPane1.setBounds(29, 31, 403, 151);
+				panelPestanas = new JTabbedPane();
+				getContentPane().add(panelPestanas, BorderLayout.NORTH);
+				panelPestanas.setPreferredSize(new java.awt.Dimension(878, 697));
 				{
-					texto = new JTextArea();
-					jScrollPane1.setViewportView(texto);
-
+					panelLexico = new JPanel();
+					panelPestanas.addTab("Léxico", null, panelLexico, null);
+					panelLexico.setLayout(null);
+					panelLexico.setPreferredSize(new java.awt.Dimension(874, 531));
+					panelLexico.setLocale(new java.util.Locale("es", "US"));
+					{
+						Analizar = new JButton();
+						panelLexico.add(Analizar);
+						Analizar.setText(Configuracion.Analizar);
+						Analizar.setBounds(244, 194, 92, 26);
+						Analizar.addActionListener(this);
+					}
+					{
+						jLabel1 = new JLabel();
+						panelLexico.add(jLabel1);
+						jLabel1.setText(Configuracion.codigo);
+						jLabel1.setBounds(35, 6, 325, 24);
+						jLabel1.setFont(new java.awt.Font("SansSerif",1,12));
+					}
+					{
+						jScrollPane1 = new JScrollPane();
+						panelLexico.add(jScrollPane1);
+						jScrollPane1.setBounds(29, 31, 403, 151);
+						{
+							texto = new JTextArea();
+							jScrollPane1.setViewportView(texto);
+							
+						}
+					}
+					{
+						jScrollPane2 = new JScrollPane();
+						panelLexico.add(jScrollPane2);
+						jScrollPane2.setBounds(444, 35, 413, 139);
+						
+						
+						{
+							
+							TableModel modelo =	new DefaultTableModel(new String[][] {},	new String[] {});
+							
+							
+							TablaDeTokens= new JTable();
+							jScrollPane2.setViewportView(TablaDeTokens);
+							TablaDeTokens.setModel(modelo);
+						}
+						
+					}
+					{
+						jLabel6 = new JLabel();
+						panelLexico.add(jLabel6);
+						jLabel6.setText(Configuracion.tablaTokens);
+						jLabel6.setBounds(450, 10, 247, 19);
+						jLabel6.setFont(new java.awt.Font("SansSerif",1,12));
+					}
+					{
+						clean = new JButton();
+						panelLexico.add(clean);
+						clean.setText(Configuracion.limpiar);
+						clean.setBounds(349, 193, 75, 28);
+						clean.addActionListener(this);
+					}
+					{
+						jScrollPane3 = new JScrollPane();
+						panelLexico.add(jScrollPane3);
+						jScrollPane3.setBounds(29, 343, 810, 313);
+						{
+							imagen = new JLabel();
+							jScrollPane3.setViewportView(imagen);
+						}
+					}
+					{
+						jScrollPane4 = new JScrollPane();
+						panelLexico.add(jScrollPane4);
+						jScrollPane4.setBounds(444, 200, 413, 126);
+						{
+							TableModel modeloE = new DefaultTableModel(	new String[][] {},new String[] {});
+							tablaErrores = new JTable();
+							jScrollPane4.setViewportView(tablaErrores);
+							tablaErrores.setModel(modeloE);
+							tablaErrores.setForeground(new java.awt.Color(255,0,0));
+						}
+					}
+					{
+						jLabel2 = new JLabel();
+						panelLexico.add(jLabel2);
+						jLabel2.setText(Configuracion.tablaErrores);
+						jLabel2.setBounds(450, 178, 153, 16);
+						jLabel2.setFont(new java.awt.Font("SansSerif",1,12));
+					}
+					{
+						cargar = new JButton();
+						panelLexico.add(cargar);
+						cargar.setText(Configuracion.cargarImagen);
+						cargar.setBounds(237, 298, 186, 28);
+						cargar.addActionListener(this);
+					}
+					{
+						ComboBoxModel listaAutomatasModel = 
+								new DefaultComboBoxModel(
+										new String[] {Configuracion.Entero,Configuracion.Real,Configuracion.IdClase,Configuracion.IdClase,Configuracion.IdVariable,Configuracion.Break,Configuracion.Clase,"Importar",Configuracion.Paquete,Configuracion.Private,Configuracion.Public,
+												Configuracion.ReservadaEntero,Configuracion.ReservadaFor,Configuracion.ReservadaReal,Configuracion.ReservadaReturn,Configuracion.ReservadaWhile,
+												Configuracion.OperadorDivision,Configuracion.OperadorMultiplicacion,Configuracion.OperadorResta,Configuracion.OperadorSuma,Configuracion.OperadorRelacionalII,
+												Configuracion.OperadorRelacionalMayor,Configuracion.OperadorRelacionalMayorI,Configuracion.OperadorRelacionalMenor,Configuracion.OperadorRelacionalMenorI,
+												Configuracion.OperadorLogicoO,Configuracion.OperadorLogicoY,Configuracion.OperadorAsignacion,Configuracion.AperturaParentesis,Configuracion.CierreParentesis,
+												Configuracion.AbrirLlaves,Configuracion.CerrarLLaves,Configuracion.FinSentencia,Configuracion.Comentario,Configuracion.Cadena});
+						listaAutomatas = new JComboBox();
+						panelLexico.add(listaAutomatas);
+						listaAutomatas.setModel(listaAutomatasModel);
+						listaAutomatas.setBounds(35, 300, 170, 26);
+					}
+					{
+						jPanelCargar = new JPanel();
+						panelLexico.add(jPanelCargar);
+						jPanelCargar.setBounds(41, 216, 151, 78);
+						jPanelCargar.setBorder(new LineBorder(new java.awt.Color(192,192,192), 1, false));
+						jPanelCargar.setLayout(null);
+						jPanelCargar.setOpaque(false);
+						{
+							cargarCodigoFuente = new JButton();
+							jPanelCargar.add(cargarCodigoFuente);
+							cargarCodigoFuente.setText(Configuracion.cargarCodigo);
+							cargarCodigoFuente.setBounds(7, 7, 136, 28);
+							cargarCodigoFuente.addActionListener(this);
+						}
+						{
+							cargarReservadas = new JButton();
+							jPanelCargar.add(cargarReservadas);
+							cargarReservadas.setText(Configuracion.cargarReservadas);
+							cargarReservadas.setBounds(7, 40, 136, 28);
+							cargarReservadas.addActionListener(this);
+						}
+					}
+					{
+						jLabelCargar = new JLabel();
+						panelLexico.add(jLabelCargar);
+						jLabelCargar.setText(Configuracion.cargar);
+						jLabelCargar.setBounds(41, 194, 44, 16);
+					}
 				}
-			}
-
-			{
-				jScrollPane2 = new JScrollPane();
-				getContentPane().add(jScrollPane2);
-				jScrollPane2.setBounds(444, 35, 413, 139);
-
-
 				{
-
-					TableModel modelo =	new DefaultTableModel(new String[][] {},	new String[] {});
-
-
-					TablaDeTokens= new JTable();
-					jScrollPane2.setViewportView(TablaDeTokens);
-					TablaDeTokens.setModel(modelo);
+					panelSintactico = new JPanel();
+					panelPestanas.addTab("Sintáctico", null, panelSintactico, null);
+					panelSintactico.setLayout(null);
 				}
-
-			}
-			{
-				jLabel6 = new JLabel();
-				getContentPane().add(jLabel6);
-				jLabel6.setText(Configuracion.tablaTokens);
-				jLabel6.setBounds(450, 10, 247, 19);
-				jLabel6.setFont(new java.awt.Font("SansSerif",1,12));
-			}
-			{
-				clean = new JButton();
-				getContentPane().add(clean);
-				clean.setText(Configuracion.limpiar);
-				clean.setBounds(349, 193, 75, 28);
-				clean.addActionListener(this);
-			}
-			{
-				jScrollPane3 = new JScrollPane();
-				getContentPane().add(jScrollPane3);
-				jScrollPane3.setBounds(29, 343, 810, 313);
-				{
-					imagen = new JLabel();
-					jScrollPane3.setViewportView(imagen);
-				}
-			}
-			{
-				jScrollPane4 = new JScrollPane();
-				getContentPane().add(jScrollPane4);
-				jScrollPane4.setBounds(444, 200, 413, 126);
-				{
-					TableModel modeloE = new DefaultTableModel(	new String[][] {},new String[] {});
-					tablaErrores = new JTable();
-					jScrollPane4.setViewportView(tablaErrores);
-					tablaErrores.setModel(modeloE);
-					tablaErrores.setForeground(new java.awt.Color(255,0,0));
-				}
-			}
-			{
-				jLabel2 = new JLabel();
-				getContentPane().add(jLabel2);
-				jLabel2.setText(Configuracion.tablaErrores);
-				jLabel2.setBounds(450, 178, 153, 16);
-				jLabel2.setFont(new java.awt.Font("SansSerif",1,12));
-			}
-			{
-				cargar = new JButton();
-				getContentPane().add(cargar);
-				cargar.setText(Configuracion.cargarImagen);
-				cargar.setBounds(237, 298, 186, 28);
-				cargar.addActionListener(this);
-			}
-			{
-				ComboBoxModel listaAutomatasModel = 
-						new DefaultComboBoxModel(
-								new String[] {Configuracion.Entero,Configuracion.Real,Configuracion.IdClase,Configuracion.IdClase,Configuracion.IdVariable,Configuracion.Break,Configuracion.Clase,"Importar",Configuracion.Paquete,Configuracion.Private,Configuracion.Public,
-										Configuracion.ReservadaEntero,Configuracion.ReservadaFor,Configuracion.ReservadaReal,Configuracion.ReservadaReturn,Configuracion.ReservadaWhile,
-										Configuracion.OperadorDivision,Configuracion.OperadorMultiplicacion,Configuracion.OperadorResta,Configuracion.OperadorSuma,Configuracion.OperadorRelacionalII,
-										Configuracion.OperadorRelacionalMayor,Configuracion.OperadorRelacionalMayorI,Configuracion.OperadorRelacionalMenor,Configuracion.OperadorRelacionalMenorI,
-										Configuracion.OperadorLogicoO,Configuracion.OperadorLogicoY,Configuracion.OperadorAsignacion,Configuracion.AperturaParentesis,Configuracion.CierreParentesis,
-										Configuracion.AbrirLlaves,Configuracion.CerrarLLaves,Configuracion.FinSentencia,Configuracion.Comentario,Configuracion.Cadena});
-				listaAutomatas = new JComboBox();
-				getContentPane().add(listaAutomatas);
-				listaAutomatas.setModel(listaAutomatasModel);
-				listaAutomatas.setBounds(35, 300, 170, 26);
-			}
-
-			{
-				jPanelCargar = new JPanel();
-				getContentPane().add(jPanelCargar);
-				jPanelCargar.setBounds(41, 216, 151, 78);
-				jPanelCargar.setBorder(new LineBorder(new java.awt.Color(192,192,192), 1, false));
-				jPanelCargar.setLayout(null);
-				jPanelCargar.setOpaque(false);
-				{
-					cargarCodigoFuente = new JButton();
-					jPanelCargar.add(cargarCodigoFuente);
-					cargarCodigoFuente.setText(Configuracion.cargarCodigo);
-					cargarCodigoFuente.setBounds(7, 7, 136, 28);
-					cargarCodigoFuente.addActionListener(this);
-				}
-				{
-					cargarReservadas = new JButton();
-					jPanelCargar.add(cargarReservadas);
-					cargarReservadas.setText(Configuracion.cargarReservadas);
-					cargarReservadas.setBounds(7, 40, 136, 28);
-					cargarReservadas.addActionListener(this);
-				}
-			}
-			{
-				jLabelCargar = new JLabel();
-				getContentPane().add(jLabelCargar);
-				jLabelCargar.setText(Configuracion.cargar);
-				jLabelCargar.setBounds(41, 194, 44, 16);
 			}
 
 			pack();
-			setSize(900, 700);
+			this.setSize(894, 733);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

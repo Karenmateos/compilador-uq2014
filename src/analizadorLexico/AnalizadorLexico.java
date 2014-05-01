@@ -1632,7 +1632,7 @@ public class AnalizadorLexico {
 	 * @param filaInicial. fila en la que inicia el lexema
 	 * @param columnaInicial. columna en la que inicia el lexema
 	 */
-	void almacenarToken(String lexema, String tipo, int filaInicial, int columnaInicial) 
+public	void almacenarToken(String lexema, String tipo, int filaInicial, int columnaInicial) 
 	{
 		SimboloLexico auxiliar = new SimboloLexico(lexema, tipo, filaInicial, columnaInicial);
 		tablaSimbolos.add(auxiliar);
@@ -1646,7 +1646,7 @@ public class AnalizadorLexico {
 	 * @param filaInicial. fila en la que comienza el lexema
 	 * @param columnaInicial. columna en al que comienza el lexema
 	 */
-	void almacenarError(String lexema, String error, int filaInicial, int columnaInicial)
+public	void almacenarError(String lexema, String error, int filaInicial, int columnaInicial)
 	{
 		SimboloLexico auxiliar = new SimboloLexico(lexema, error, filaInicial, columnaInicial);
 		tablaErrores.add(auxiliar);
