@@ -1,5 +1,12 @@
 package analizadorSintactico;
 
+/**
+*
+* @author Jorge Leonardo Aguirre Martinez
+* @author Luis Alberto Delgado Ortiz
+* 
+* 
+*/
 public class ErrorSintactico {
 	
 	private String msn;
