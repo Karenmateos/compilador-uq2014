@@ -19,13 +19,15 @@ public class InvocacionMetodo {
 	ArrayList<Argumento> argumentos;
 	SimboloLexico aperturaParentesis;
 	SimboloLexico cierreParentesis;
+	SimboloLexico terminal;
 
-	public InvocacionMetodo(SimboloLexico identificador, SimboloLexico abreParentesis, ArrayList<Argumento> argumentos, SimboloLexico cierreParentesis) 
+	public InvocacionMetodo(SimboloLexico identificador, SimboloLexico abreParentesis, ArrayList<Argumento> argumentos, SimboloLexico cierreParentesis, SimboloLexico terminal) 
 	{
 		this.identificador = identificador;
 		this.aperturaParentesis = abreParentesis;
 		this.argumentos = argumentos;
 		this.cierreParentesis = cierreParentesis;
+		this.terminal = terminal;
 	}
 
 	public DefaultMutableTreeNode getArbolVisual()
@@ -55,6 +57,10 @@ public class InvocacionMetodo {
 		
 		if(cierreParentesis != null){
 			miRaiz.add(new DefaultMutableTreeNode(cierreParentesis.getLexema()));
+		}
+		
+		if(terminal != null){
+			miRaiz.add(new DefaultMutableTreeNode(terminal.getLexema()));
 		}
 
 		return miRaiz;
