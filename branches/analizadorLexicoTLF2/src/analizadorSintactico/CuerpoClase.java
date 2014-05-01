@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
+
 import analizadorLexico.Configuracion;
+
 
 public class CuerpoClase {
 
