@@ -7,6 +7,13 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
+/**
+*
+* @author Jorge Leonardo Aguirre Martinez
+* @author Luis Alberto Delgado Ortiz
+* 
+* <DeclaracionVariable> ::= <TipoDato> <Variables> “;”
+*/
 public class DeclaracionVariable extends Sentencia{
 
 	SimboloLexico tipoDato;
