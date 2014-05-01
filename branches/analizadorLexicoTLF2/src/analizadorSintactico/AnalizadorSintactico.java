@@ -232,6 +232,7 @@ cuerpoClase=null;
 //		else{
 //			reportarError(Configuracion.errorFaltaCuerpoClase,tokenActual.getFila(), tokenActual.getColumna());
 //		}
+        reportarError(Configuracion.errorFaltaIdClase,tokenActual.getFila(), tokenActual.getColumna());
 		return new Clase(modificadorAcceso, idClase, cuerpoClase);
 	}
 
@@ -800,6 +801,32 @@ cuerpoClase=null;
 			return tipoDato;
 		}
 	}
+	
+	public String [][]  mostrarTokensError()
+	{
+
+		ArrayList<ErrorSintactico> miTablaDeErrores;
+		miTablaDeErrores = getListaErroresSintacticos();
+
+
+
+		String [][]matriz = new String[miTablaDeErrores.size()][3];
+		int i=0;
+
+
+		while(i<miTablaDeErrores.size())
+		{
+			matriz[i][0]=miTablaDeErrores.get(i).getMsn();
+			matriz[i][1]=""+miTablaDeErrores.get(i).getFila();
+			matriz[i][2]=""+miTablaDeErrores.get(i).getColumna();
+			
+			i++;
+		}
+
+
+		return matriz;
+
+	}
 
 	/**
 	 * Este metodo avanza hasta encontrar el token indicado
@@ -820,6 +847,16 @@ cuerpoClase=null;
 	public void setMiUnidadDeCompilacion(UnidadCompilacion miUnidadDeCompilacion) {
 		this.miUnidadDeCompilacion = miUnidadDeCompilacion;
 	}
+
+	public ArrayList<ErrorSintactico> getListaErroresSintacticos() {
+		return listaErroresSintacticos;
+	}
+
+	public void setListaErroresSintacticos(
+			ArrayList<ErrorSintactico> listaErroresSintacticos) {
+		this.listaErroresSintacticos = listaErroresSintacticos;
+	}
+	
 	
 	
 }
