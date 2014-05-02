@@ -21,7 +21,7 @@ public class Asignacion extends Sentencia{
 	SimboloLexico idVariable2 = null;
 	SimboloLexico operadorAsignacion = null;
 
-	public Asignacion(SimboloLexico idVariable, SimboloLexico operadorAsignacion, ExpresionMatematica exprecionMatematica){
+	public Asignacion(SimboloLexico idVariable, SimboloLexico operadorAsignacion, ExpresionMatematica expresionMatematica){
 
 		this.idVariable = idVariable;
 		this.operadorAsignacion = operadorAsignacion;

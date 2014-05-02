@@ -34,9 +34,11 @@ public class ExpresionMatematica {
 
 		if(idVariable!=null){
 			miRaiz.add(new DefaultMutableTreeNode(idVariable.getTipo()+Configuracion.dosPuntos+idVariable.getLexema()));
+			System.out.println("paso idV");
 		}
 
-		if(operaciones.size()>0){
+		if(operaciones!=null && operaciones.size()>0){
+			System.out.println("pase");
 			DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(Configuracion.operaciones);
 
 			for(Operacion operacion: operaciones){				
