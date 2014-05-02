@@ -223,16 +223,17 @@ public class AnalizadorSintactico {
 				reportarError(Configuracion.errorFaltaIdClase,tokenActual.getFila(), tokenActual.getColumna());
 			}
 		}
-cuerpoClase=null;
-//		cuerpoClase = esCuerpoClase(); 
-//		if(cuerpoClase != null){
-//
-//			return new Clase(modificadorAcceso, idClase, cuerpoClase);
-//		}
-//		else{
-//			reportarError(Configuracion.errorFaltaCuerpoClase,tokenActual.getFila(), tokenActual.getColumna());
-//		}
-        reportarError(Configuracion.errorFaltaIdClase,tokenActual.getFila(), tokenActual.getColumna());
+
+		cuerpoClase = esCuerpoClase(); 
+		if(cuerpoClase != null){
+
+			return new Clase(modificadorAcceso, idClase, cuerpoClase);
+		}
+		else{
+			reportarError(Configuracion.errorFaltaCuerpoClase,tokenActual.getFila(), tokenActual.getColumna());
+			
+		}
+        
 		return new Clase(modificadorAcceso, idClase, cuerpoClase);
 	}
 
@@ -245,12 +246,34 @@ cuerpoClase=null;
 	 */
 	public CuerpoClase esCuerpoClase(){
 
-		ArrayList<DeclaracionVariable> listaDeclaraciones = esListaDeclaraciones();
-		ArrayList<Asignacion> listaAsignaciones = esListaAsignaciones();
-		ArrayList<DeclaracionMetodo>  listaMetodos = esListaMetodos();
-
-
-		return new CuerpoClase(listaDeclaraciones,listaAsignaciones,listaMetodos);
+		SimboloLexico llaveAbre = null;
+		SimboloLexico llaveCierra = null;
+		ArrayList<DeclaracionVariable> listaDeclaraciones = null;
+		ArrayList<Asignacion> listaAsignaciones = null;
+		ArrayList<DeclaracionMetodo>  listaMetodos = null;
+		
+		if(tokenActual.getTipo().equals(Configuracion.AbrirLlaves)){
+			llaveAbre = tokenActual;
+			darSiguienteToken();
+			
+			
+			 listaDeclaraciones = esListaDeclaraciones();
+		     listaAsignaciones = esListaAsignaciones();
+			  listaMetodos = esListaMetodos();
+			
+			if(tokenActual.getTipo().equals(Configuracion.CerrarLLaves)){
+				llaveCierra = tokenActual;
+				return new CuerpoClase(llaveAbre,listaDeclaraciones, listaAsignaciones, listaMetodos,llaveCierra);
+			}
+			else{
+				reportarError("falta cerrar el cuerpo de la clase", tokenActual.getFila(), tokenActual.getColumna());
+				modoPanico(";");
+				return new CuerpoClase(llaveAbre, listaDeclaraciones, listaAsignaciones, listaMetodos, llaveCierra);
+			}
+		}
+		else{
+			return null;
+		}
 
 	}
 
@@ -285,9 +308,20 @@ cuerpoClase=null;
 		Asignacion asignacion = esAsignacion();
 
 		while(asignacion != null){
-
+            
 			listaAsignacion.add(asignacion);
-			asignacion = esAsignacion(); 
+			
+			if(tokenActual.getTipo().equals(Configuracion.FinSentencia)){
+				
+				darSiguienteToken();
+				asignacion = esAsignacion(); 
+			}
+			else{
+				reportarError("falta el ;", tokenActual.getFila(), tokenActual.getColumna());
+				modoPanico(Configuracion.puntoyComa);
+				return listaAsignacion;
+			}
+			
 		}
 
 		return listaAsignacion;
@@ -464,6 +498,7 @@ cuerpoClase=null;
 				if(tokenActual.getTipo().equals(Configuracion.FinSentencia)){
 					terminal = tokenActual;
 					reportarError(Configuracion.errorFaltaVariables,tokenActual.getFila(), tokenActual.getColumna());
+					darSiguienteToken();
 					return new DeclaracionVariable(tipoDato,idVariables,terminal);
 				}
 				else{
@@ -473,6 +508,7 @@ cuerpoClase=null;
 			}
 			if(tokenActual.getTipo().equals(Configuracion.FinSentencia)){
 				terminal = tokenActual;
+				darSiguienteToken();
 				return  new DeclaracionVariable(tipoDato, idVariables, terminal);
 			}
 			else{
@@ -507,6 +543,7 @@ cuerpoClase=null;
 				if(tokenActual.getTipo().equals(Configuracion.IdVariable)){
 
 					reportarError(Configuracion.errorFaltaSeparador,tokenActual.getFila() , tokenActual.getColumna());
+					modoPanico(";");
 					break;
 				}
 				else{
@@ -552,7 +589,6 @@ cuerpoClase=null;
 		SimboloLexico idVariable = null;
 		SimboloLexico idVariable2 = null;
 		SimboloLexico operadorAsignacion = null;
-		SimboloLexico Valor = null;
 		ExpresionComparacion expresionComparacion = null;
 		ExpresionMatematica expresionMatematica = null;
 
@@ -574,6 +610,18 @@ cuerpoClase=null;
 			reportarError(Configuracion.errorOperadorAsignacion, tokenActual.getFila(), tokenActual.getColumna());
 		}
 
+		
+		expresionComparacion = esExpresionComparacion();
+		if(expresionComparacion != null){
+
+			return new Asignacion(idVariable, operadorAsignacion, expresionComparacion);
+		}
+		expresionMatematica = esExpresionMatematica();
+		if(expresionMatematica != null){
+
+			return new Asignacion(idVariable, operadorAsignacion, expresionMatematica);
+		}
+		
 		if(tokenActual.getTipo().equals(Configuracion.IdVariable)){
 			idVariable2 = tokenActual;
 			darSiguienteToken();
@@ -593,21 +641,10 @@ cuerpoClase=null;
 			return new Asignacion(idVariable, operadorAsignacion, idVariable2);
 		}
 
-		expresionComparacion = esExpresionComparacion();
-		if(expresionComparacion != null){
-
-			darSiguienteToken();
-			return new Asignacion(idVariable, operadorAsignacion, expresionComparacion);
-		}
-		expresionMatematica = esExpresionMatematica();
-		if(expresionMatematica != null){
-
-			darSiguienteToken();
-			return new Asignacion(idVariable, operadorAsignacion, expresionMatematica);
-		}
 
 		reportarError(Configuracion.errorFaltaValor, tokenActual.getFila(), tokenActual.getColumna());
-		return new Asignacion(idVariable, operadorAsignacion, expresionComparacion);
+		modoPanico(Configuracion.puntoyComa);
+		return new Asignacion(idVariable, operadorAsignacion, idVariable2 );
 	}
 
 	/**
@@ -700,6 +737,7 @@ cuerpoClase=null;
 		operaciones = esOperaciones();
 
 		if(operaciones.size()>0){
+			//
 			return new ExpresionMatematica(idVariable, operaciones);
 		}else{
 
@@ -733,13 +771,13 @@ cuerpoClase=null;
 	 * @return
 	 */
 	public Operacion esOperacion(){
-		int posBacktraking = indice;
-		SimboloLexico OperadorMatematico = null;
+		
+		SimboloLexico operadorMatematico = null;
 		SimboloLexico idVariable = null;
-		Operacion operacion = null;
+		
 
 		if(tokenActual.getTipo().equals(Configuracion.OperadorMatematico)){
-			OperadorMatematico = tokenActual;
+			operadorMatematico = tokenActual;
 			darSiguienteToken();
 		}
 		else{
@@ -749,11 +787,12 @@ cuerpoClase=null;
 		if(tokenActual.getTipo().equals(Configuracion.IdVariable) || tokenActual.getTipo().equals(Configuracion.Real) || tokenActual.getTipo().equals(Configuracion.Entero) ) {
 			idVariable = tokenActual;
 			darSiguienteToken();
-			return new Operacion(OperadorMatematico,idVariable);
+			return new Operacion(operadorMatematico,idVariable);
 		}
 		else{
-			realizarBactracking(posBacktraking);
-			return null;
+			reportarError("falta el identificador de variable", tokenActual.getFila(), tokenActual.getColumna());
+			modoPanico(Configuracion.puntoyComa);
+			return new Operacion(operadorMatematico, idVariable);
 		}
 
 
@@ -789,9 +828,9 @@ cuerpoClase=null;
 	private SimboloLexico esTipoDato(){
 		SimboloLexico tipoDato = null;
 
-		if (tokenActual.getLexema().equals(Configuracion.Real)
-				|| tokenActual.getLexema().equals(Configuracion.Entero)
-				|| tokenActual.getLexema().equals(Configuracion.Cadena)) {
+		if (tokenActual.getLexema().equals("INT")
+				|| tokenActual.getLexema().equals("REAL")
+				|| tokenActual.getLexema().equals("TEXT")) {
 			tipoDato = tokenActual;
 			darSiguienteToken();
 			return tipoDato;
@@ -836,8 +875,13 @@ cuerpoClase=null;
 
 		while (!tokenActual.getLexema().equals(tokenParada)) {
 			darSiguienteToken();
+			if(indice >= listaSimbolosLexicos.size()-1){
+				break;
+			}
 		}
-
+		if(!(indice >= listaSimbolosLexicos.size()-1)){
+		darSiguienteToken();
+		}
 	}
 
 	public UnidadCompilacion getMiUnidadDeCompilacion() {

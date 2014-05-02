@@ -650,7 +650,7 @@ public class AnalizadorLexico {
 				if(verificarTamanioId(lexema, 30)){
 
 					almacenarToken(lexema,Configuracion.IdClase,filaIniToken,columnaInicialToken);
-					sigteCaracter();
+					
 					return true;
 				}
 				almacenarError(lexema, Configuracion.desvorde, filaIniToken,columnaInicialToken);
@@ -808,7 +808,6 @@ public class AnalizadorLexico {
 			if(verificarEspacio()){
 				if(verificarTamanioId(lexema, 15)){
 					almacenarToken(lexema,Configuracion.IdVariable,filaIniToken,columnaInicialToken);
-					sigteCaracter();
 					return true;
 				}
 				almacenarError(lexema, Configuracion.desvorde, filaIniToken,columnaInicialToken);

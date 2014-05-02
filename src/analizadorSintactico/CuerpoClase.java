@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
-
 import analizadorLexico.Configuracion;
+import analizadorLexico.SimboloLexico;
 
 /**
  * 
@@ -17,12 +17,15 @@ import analizadorLexico.Configuracion;
 
 public class CuerpoClase {
 
-	ArrayList<DeclaracionVariable> listaDeclaraciones;
-	ArrayList<Asignacion> listaAsignaciones;
-	ArrayList<DeclaracionMetodo>  listaMetodos;
+	SimboloLexico llaveAbre = null;
+	SimboloLexico llaveCierra = null;
+	ArrayList<DeclaracionVariable> listaDeclaraciones = null;
+	ArrayList<Asignacion> listaAsignaciones = null;
+	ArrayList<DeclaracionMetodo>  listaMetodos = null;
 	
-	public CuerpoClase(ArrayList<DeclaracionVariable> listaDeclaraciones,ArrayList<Asignacion> listaAsignaciones ,ArrayList<DeclaracionMetodo> listaMetodos){
-		
+	public CuerpoClase(SimboloLexico llaveAbre,ArrayList<DeclaracionVariable> listaDeclaraciones,ArrayList<Asignacion> listaAsignaciones ,ArrayList<DeclaracionMetodo> listaMetodos, SimboloLexico llaveCierra){
+		this.llaveCierra = llaveCierra;
+		this.llaveAbre = llaveAbre;
 		this.listaDeclaraciones = listaDeclaraciones;
 		this.listaAsignaciones = listaAsignaciones;
 		this.listaMetodos = listaMetodos;
@@ -31,8 +34,12 @@ public class CuerpoClase {
 	public DefaultMutableTreeNode getArbolVisual()
 	{
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.cuerpoClase);
+		
+		if(llaveAbre!=null){
+			miRaiz.add(new DefaultMutableTreeNode(llaveAbre.getLexema()));
+		}
 
-		if(listaDeclaraciones.size() > 0)
+		if(listaDeclaraciones!=null && listaDeclaraciones.size() > 0)
 		{
 			DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(Configuracion.listaDeclaraciones);
 
@@ -43,7 +50,7 @@ public class CuerpoClase {
 			miRaiz.add(nodo);
 		}
 		
-		if(listaAsignaciones.size() >0){
+		if(listaAsignaciones!=null &&  listaAsignaciones.size() > 0){
 		
 			DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(Configuracion.listaAsignaciones);
 
@@ -55,7 +62,7 @@ public class CuerpoClase {
 			
 		}
 
-		if(listaMetodos.size()>0)
+		if(listaMetodos!=null && listaMetodos.size()>0)
 		{
 			DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(Configuracion.listaMetodos);
 
@@ -64,6 +71,10 @@ public class CuerpoClase {
 				nodo.add(metodo.getArbolVisual());			
 			}
 			miRaiz.add(nodo);
+		}
+		
+		if(llaveCierra!=null){
+			miRaiz.add(new DefaultMutableTreeNode(llaveCierra.getLexema()));
 		}
 
 		return miRaiz;
