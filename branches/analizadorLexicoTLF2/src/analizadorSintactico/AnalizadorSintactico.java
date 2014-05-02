@@ -107,7 +107,9 @@ public class AnalizadorSintactico {
 							tokenActual.getFila(), tokenActual.getColumna());
 					return new Argumento(tipoDato, identificadorVariable);
 
-				} else if (tokenActual.getTipo().equals(Configuracion.IdClase)) {
+				} else 
+					if (tokenActual.getTipo().equals(Configuracion.IdClase)) {
+						
 					reportarError(
 							Configuracion.errorIdentificador2,
 							tokenActual.getFila(), tokenActual.getColumna());
@@ -153,13 +155,17 @@ public class AnalizadorSintactico {
 				argumento = esArgumento();
 			}
 			else{
-				if(tokenActual.getTipo().equals(Configuracion.IdVariable)){
+				if (tokenActual.getLexema().equals("INT") || tokenActual.getTipo().equals("REAL") || tokenActual.getTipo().equals("TEXT")){
 
 					reportarError(Configuracion.errorFaltaSeparador,tokenActual.getFila() , tokenActual.getColumna());
+					modoPanico(Configuracion.puntoyComa);
 					break;
 				}
+				
+					break;					
+				}
 			}
-		}
+		
 
 		return listaArgumentos;
 	}
