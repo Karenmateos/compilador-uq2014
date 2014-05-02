@@ -514,7 +514,18 @@ public class AnalizadorSintactico {
 		while(sentencia!=null)
 		{
 			listaSentencias.add(sentencia);
-			sentencia = esSentencia();
+			
+			if(tokenActual.getTipo().equals(Configuracion.FinSentencia)){
+
+				darSiguienteToken();
+				sentencia = esSentencia();
+			}
+			else{
+				reportarError(Configuracion.errorFaltaPuntoyComa, tokenActual.getFila(), tokenActual.getColumna());
+				modoPanico(Configuracion.puntoyComa);
+				return listaSentencias;
+			}
+			
 		}
 
 		return listaSentencias;
@@ -969,6 +980,7 @@ public class AnalizadorSintactico {
 
 		if(tokenActual.getTipo().equals(Configuracion.IdVariable) || tokenActual.getTipo().equals(Configuracion.Entero) || tokenActual.getTipo().equals(Configuracion.Real)){
 			idVariable2 = tokenActual;
+			darSiguienteToken();
 			return new ExpresionComparacion(idVariable, operadorComparacion, idVariable2);
 		}
 
