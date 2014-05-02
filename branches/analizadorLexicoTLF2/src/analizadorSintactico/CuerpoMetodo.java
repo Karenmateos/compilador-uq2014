@@ -37,7 +37,7 @@ public class CuerpoMetodo {
 			miRaiz.add(new DefaultMutableTreeNode(aperturaLlaves.getLexema()));
 		}
 		
-		if(sentencias.size() > 0){
+		if(sentencias!=null && sentencias.size() > 0){
 			DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(Configuracion.listaSentencias);
 			for(Sentencia sentencia : sentencias){
 				nodo.add(sentencia.getArbolVisual());
