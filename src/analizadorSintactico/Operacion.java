@@ -14,11 +14,16 @@ import analizadorLexico.SimboloLexico;
 
 */
 public class Operacion {
-
+	// Variable que almacema un operador matematico
 	SimboloLexico operadorMatematico = null;
+	// Variable que almacema el id de variable
 	SimboloLexico idVariable = null;
 
-
+	/**
+	 * Constructor, permite crear objetos de tipp Operacion
+	 * @param operadorMatematico
+	 * @param idVariable
+	 */
 	public Operacion(SimboloLexico operadorMatematico, SimboloLexico idVariable){
 
 		this.operadorMatematico = operadorMatematico;
@@ -26,9 +31,13 @@ public class Operacion {
 	}
 
 
-
+	/**
+	 * Metodo que permite obtener el arbol sintactico de la clase
+	 * @return el arbol sintactico de la clase
+	 */
 	public DefaultMutableTreeNode getArbolVisual(){
 
+		// Variable que almacema un objeto de tipo DefaultMutableTreeNode
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.operacion);
 
 		if(operadorMatematico!=null){

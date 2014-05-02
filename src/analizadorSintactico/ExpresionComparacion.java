@@ -18,21 +18,32 @@ import analizadorLexico.SimboloLexico;
 
 */
 public class ExpresionComparacion {
-
+	// Variable que almacema el id de variable
 	SimboloLexico idVariable = null;
+	// Variable que almacema el operador de comparacion
 	SimboloLexico operadorComparacion = null;
+	// Variable que almacema el identificador de la segunda variable
 	SimboloLexico idVariable2 = null;
 
-
+	/**
+	 * Constructor, permite crear objetos de tipo ExpresionComparacion
+	 * @param idVariable
+	 * @param operadorComparacion
+	 * @param idVariable2
+	 */
 	public ExpresionComparacion(SimboloLexico idVariable, SimboloLexico operadorComparacion, SimboloLexico idVariable2){
-
 		this.idVariable = idVariable;
 		this.operadorComparacion = operadorComparacion;
 		this.idVariable2 = idVariable2;
 	}
 
+	/**
+	 * Metodo que permite obtener el arbol sintactico de la clase
+	 * @return el arbol sintactico de la clase
+	 */
 	public DefaultMutableTreeNode getArbolVisual(){
 
+		// Variable que almacema un objeto de tipo DefaultMutableTreeNode
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.expresionComparacion);
 
 		if(idVariable != null){

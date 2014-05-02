@@ -17,12 +17,25 @@ import analizadorLexico.SimboloLexico;
 
 public class CuerpoClase {
 
+	// Variable que almacema la apertura de llaves
 	SimboloLexico aperturaLlaves = null;
+	// Variable que almacema el cierre de llaves
 	SimboloLexico cierreLlaves = null;
+	// Variable que almacema un ArrayList de declaraciones de variable
 	ArrayList<DeclaracionVariable> listaDeclaraciones = null;
+	// Variable que almacema un ArrayList de asignaciones
 	ArrayList<Asignacion> listaAsignaciones = null;
+	// Variable que almacema un ArrayList de metodos
 	ArrayList<DeclaracionMetodo>  listaMetodos = null;
 	
+	/**
+	 * Constructor, permite crear objetos de tipo CuerpoClase
+	 * @param aperturaLlaves
+	 * @param listaDeclaraciones
+	 * @param listaAsignaciones
+	 * @param listaMetodos
+	 * @param cierreLlaves
+	 */
 	public CuerpoClase(SimboloLexico aperturaLlaves, ArrayList<DeclaracionVariable> listaDeclaraciones, ArrayList<Asignacion> listaAsignaciones ,ArrayList<DeclaracionMetodo> listaMetodos, SimboloLexico cierreLlaves){
 		this.aperturaLlaves = aperturaLlaves;
 		this.cierreLlaves = cierreLlaves;
@@ -31,8 +44,13 @@ public class CuerpoClase {
 		this.listaMetodos = listaMetodos;
 	}
 	
+	/**
+	 * Metodo que genera el arbol sintactico de la clase
+	 * @return el arbol sintactico de la clase
+	 */
 	public DefaultMutableTreeNode getArbolVisual()
 	{
+		// Variable que almacema un objeto de tipo DefaultMutableTreeNode
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.cuerpoClase);
 		
 		if(aperturaLlaves!=null){

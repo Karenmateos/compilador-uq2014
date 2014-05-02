@@ -15,12 +15,25 @@ import analizadorLexico.SimboloLexico;
 * <InvocacionMetodo>::= idMetodo "(" [<Argumentos>] ")" ";"
 */
 public class InvocacionMetodo {
+	// Variable que almacema el id de variable
 	SimboloLexico identificador;
+	// Variable que almacema un ArrayList de argumentos
 	ArrayList<Argumento> argumentos;
+	// Variable que almacema la apertura de parentesis
 	SimboloLexico aperturaParentesis;
+	// Variable que almacema el cierre de parentesis
 	SimboloLexico cierreParentesis;
+	// Variable que almacema un punto y coma (;)
 	SimboloLexico terminal;
 
+	/**
+	 * Constructor, permite crear objetos de tipo InvocacionMetodo
+	 * @param identificador
+	 * @param abreParentesis
+	 * @param argumentos
+	 * @param cierreParentesis
+	 * @param terminal
+	 */
 	public InvocacionMetodo(SimboloLexico identificador, SimboloLexico abreParentesis, ArrayList<Argumento> argumentos, SimboloLexico cierreParentesis, SimboloLexico terminal) 
 	{
 		this.identificador = identificador;
@@ -30,8 +43,13 @@ public class InvocacionMetodo {
 		this.terminal = terminal;
 	}
 
+	/**
+	 * Metodo que permite obtener el arbol sintactico de la clase
+	 * @return el arbol sintactico de la clase
+	 */
 	public DefaultMutableTreeNode getArbolVisual()
 	{
+		// Variable que almacema un objeto de tipo DefaultMutableTreeNode
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.unidadCompilacion);
 
 		if(identificador != null)

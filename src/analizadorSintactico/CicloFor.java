@@ -6,17 +6,40 @@ import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
 public class CicloFor extends Sentencia{
+	// Variable que almacema la palabra reservada inicial del ciclo for
 	SimboloLexico palabraFor;
+	// Variable que almacema la apertura de parentesis
 	SimboloLexico aperturaParentesis;
+	// Variable que almacema un objeto de tipo Asignacion
 	Asignacion asiganacion;
+	// Variable que almacema un ;
 	SimboloLexico puntoyComa;
+	// Variable que almacema un objeto de tipo ExpresionComparacion
 	ExpresionComparacion expresionComparacion;
+	// Variable que almacema un id de variable
 	SimboloLexico idVariable;
+	// Variable que almacema un operador de asignacion
 	SimboloLexico igual;
+	// Variable que almacema un objeto de tipo ExpresionMatematica
 	ExpresionMatematica expresionMatematica;
+	// Variable que almacema el cierre de parentesis
 	SimboloLexico cierreParentesis;
+	// Variable que almacema un objeto de tipo CuerpoCiclo
 	CuerpoCiclo cuerpoCiclo;
 	
+	/**
+	 * Constructor, permite crear objetos de tipo CicloFor
+	 * @param palabraFor
+	 * @param aperturaParentesis
+	 * @param asiganacion
+	 * @param puntoyComa
+	 * @param expesionComparacion
+	 * @param idVariable
+	 * @param igual
+	 * @param expresionMatematica
+	 * @param cierreParentesis
+	 * @param cuerpoCiclo
+	 */
 	public CicloFor(SimboloLexico palabraFor, SimboloLexico aperturaParentesis, Asignacion asiganacion, SimboloLexico puntoyComa, ExpresionComparacion expesionComparacion, SimboloLexico idVariable, SimboloLexico igual, ExpresionMatematica expresionMatematica, SimboloLexico cierreParentesis, CuerpoCiclo cuerpoCiclo){
 		this.palabraFor = palabraFor;
 		this.aperturaParentesis = aperturaParentesis;
@@ -30,8 +53,13 @@ public class CicloFor extends Sentencia{
 		this.cuerpoCiclo = cuerpoCiclo;
 	}
 	
+	/**
+	 * Metodo que genera el arbol sintactico de la clase
+	 * @return el arbol sintactico de la clase
+	 */
 	public DefaultMutableTreeNode getArbolVisual(){
 		
+		// Variable que almacema un objeto de tipo DefaultMutableTreeNode
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.cicloFor);
 		
 		if(palabraFor != null){
