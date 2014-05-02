@@ -263,6 +263,7 @@ public  class Configuracion {
 	public static final String declaracionVariable = properties.getString("declaracionVariable");
 	public static final String declaracionMetodo = properties.getString("declaracionMetodo");
 	public static final String cuerpoCiclo = properties.getString("cuerpoCiclo");
+	public static final String cuerpoWhen = properties.getString("cuerpoWhen");
 	public static final String listaSentencias = properties.getString("listaSentencias");
 	public static final String cuerpoMetodo = properties.getString("cuerpoMetodo");
 	public static final String cuerpoClase = properties.getString("cuerpoClase");

@@ -9,7 +9,7 @@ import analizadorLexico.Configuracion;
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 
-* <UnidadCompilacion> ::=  <Clase>
+* GIC: <UnidadCompilacion> ::=  <Clase>
 */
 public class UnidadCompilacion {
 

@@ -14,7 +14,7 @@ import analizadorLexico.SimboloLexico;
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 
-* <ExprecionMatematica> ::= <IdVariable> <Operacion> | <valor> <Operacion> 
+* GIC: <ExprecionMatematica> ::= <IdVariable> <Operacion> | <valor> <Operacion> 
 */
 public class ExpresionMatematica {
 

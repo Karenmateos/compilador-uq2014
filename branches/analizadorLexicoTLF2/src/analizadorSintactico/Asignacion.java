@@ -10,8 +10,7 @@ import analizadorLexico.SimboloLexico;
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 
-* <Asignacion> ::= <IdVariable> �=� <ExpresioneComparacion> |<IdVariable> �=� <ExpresioneMatematica>| <idVariable> �=� <Valor>
-*  | <idVariable> �=� <idVariable>
+* GIC: <Asignacion> ::= <IdVariable> “=” <ExpresioneComparacion> |<IdVariable> “=” <ExpresioneMatematica>| <idVariable> “=” <Valor> | <idVariable> “=” <idVariable>
 */
 public class Asignacion extends Sentencia{
 

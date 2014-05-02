@@ -10,7 +10,7 @@ import analizadorLexico.SimboloLexico;
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 
-* <Retorno> ::= �<SEND>� <idVariable> �;�
+* GIC: <Retorno> ::= “<SEND>” <idVeriable> “;”
 
 */
 public class Retorno {

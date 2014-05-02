@@ -12,7 +12,7 @@ import analizadorLexico.SimboloLexico;
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 
-* <CuerpoWHEN> ::= �{� [<ListaSentencias>] [<Retorno>] �}� | �{� [<ListaSentencias>] [�<Exit>�] �}� 
+* GIC: <CuerpoWHEN> ::= “{“ [<ListaSentencias>] [<Retorno>] “}” | “{“ [<ListaSentencias>] [“<Exit>”] “}” 
 * 
 */
 public class CuerpoWhen {
@@ -53,7 +53,7 @@ public class CuerpoWhen {
 	public DefaultMutableTreeNode getArbolVisual()
 	{
 		// Variable que almacema un objeto de tipo DefaultMutableTreeNode
-		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.cuerpoCiclo);
+		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.cuerpoWhen);
 
 		if(aperturaLlaves != null)
 		{

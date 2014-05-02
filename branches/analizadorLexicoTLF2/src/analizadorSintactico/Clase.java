@@ -10,7 +10,7 @@ import analizadorLexico.SimboloLexico;
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 
-* <Clase> ::= <ModificadorAcceso> <IdClase> <CuerpoClase>
+* GIC: <Clase> ::= <ModificadorAcceso> <IdClase> <CuerpoClase>
 */
 public class Clase {
 

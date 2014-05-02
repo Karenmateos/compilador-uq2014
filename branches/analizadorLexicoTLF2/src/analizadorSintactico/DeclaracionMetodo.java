@@ -12,7 +12,7 @@ import analizadorLexico.SimboloLexico;
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 
-* <DeclaracionMetodo> ::= <ModificadorAcceso> <TipoDato> <IdMetodo> �(� [<Argumentos>] �)�  <CuerpoMetodo> 
+* GIC: <DeclaracionMetodo> ::= <ModificadorAcceso> <TipoDato> <IdMetodo> “(“ [<Argumentos>] “)”  <CuerpoMetodo>
 */
 public class DeclaracionMetodo {
 	
