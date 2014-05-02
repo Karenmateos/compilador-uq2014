@@ -1,7 +1,7 @@
 package analizadorSintactico;
 
 /**
-*
+* Esta clase permite crear la categoria sintactica ErrorSintactico
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 

@@ -8,7 +8,7 @@ import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
 /**
-*
+* Esta clase permite crear la categoria sintactica DeclaracionVariable
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 

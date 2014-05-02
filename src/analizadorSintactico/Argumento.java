@@ -5,7 +5,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 /**
-*
+* Esta clase permite crear la categoria sintactica Argumento
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 

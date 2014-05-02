@@ -3,7 +3,7 @@ package analizadorSintactico;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
-*
+* Esta clase permite crear la categoria sintactica Sentencia
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 

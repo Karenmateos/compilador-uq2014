@@ -6,7 +6,7 @@ import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
 /**
-*
+* Esta clase permite crear la categoria sintactica Asignacion
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 

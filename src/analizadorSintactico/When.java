@@ -1,7 +1,7 @@
 package analizadorSintactico;
 
 /**
- *
+ * Esta clase permite crear la declaracion de la categoria sintactica When
  * @author Jorge Leonardo Aguirre Martinez
  * @author Luis Alberto Delgado Ortiz
  * 
