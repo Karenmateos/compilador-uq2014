@@ -286,7 +286,10 @@ public  class Configuracion {
 	public static final String tokenExit = properties.getString("tokenExit");
 	public static final String tokenBinaty = properties.getString("tokenBinaty");
 	
-	
+	// Interfaz
+	public static final String pestañalexico = properties.getString("pestañalexico");
+	public static final String pestañaSintactico = properties.getString("pestañaSintactico");
+	public static final String tablaErroresSintacticos = properties.getString("tablaErroresSintacticos");
 	
 	// Errores
 	public static final String errorIdentificador1 = properties.getString("errorIdentificador1");
