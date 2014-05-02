@@ -32,10 +32,10 @@ public class Operacion {
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.operacion);
 
 		if(operadorMatematico!=null){
-			miRaiz.add(new DefaultMutableTreeNode(operadorMatematico.getTipo()+Configuracion.dosPuntos+ operadorMatematico.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(operadorMatematico.getLexema()));
 		}
 		if(idVariable!=null){
-			miRaiz.add(new DefaultMutableTreeNode(idVariable.getTipo()+Configuracion.dosPuntos+ idVariable.getLexema()) );
+			miRaiz.add(new DefaultMutableTreeNode(idVariable.getLexema() + Configuracion.dosPuntos + idVariable.getTipo()) );
 		}
 
 		return miRaiz;

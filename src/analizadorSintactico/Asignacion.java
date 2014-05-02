@@ -10,8 +10,8 @@ import analizadorLexico.SimboloLexico;
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 
-* <Asignacion> ::= <IdVariable> “=” <ExpresioneComparacion> |<IdVariable> “=” <ExpresioneMatematica>| <idVariable> “=” <Valor>
-*  | <idVariable> “=” <idVariable>
+* <Asignacion> ::= <IdVariable> ï¿½=ï¿½ <ExpresioneComparacion> |<IdVariable> ï¿½=ï¿½ <ExpresioneMatematica>| <idVariable> ï¿½=ï¿½ <Valor>
+*  | <idVariable> ï¿½=ï¿½ <idVariable>
 */
 public class Asignacion extends Sentencia{
 
@@ -46,7 +46,7 @@ public class Asignacion extends Sentencia{
 	{
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.asignacion);
 		if(idVariable != null){
-			miRaiz.add(new DefaultMutableTreeNode(idVariable.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(idVariable.getLexema() + Configuracion.dosPuntos + idVariable.getTipo()));
 		}
 
 		if(operadorAsignacion != null){
@@ -67,7 +67,7 @@ public class Asignacion extends Sentencia{
 
 		if(idVariable2!=null)
 		{
-			miRaiz.add(new DefaultMutableTreeNode(idVariable2.getTipo()+Configuracion.dosPuntos+idVariable2.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(idVariable2.getLexema() + Configuracion.dosPuntos + idVariable2.getTipo()));
 			return miRaiz;
 		}
 		return miRaiz;

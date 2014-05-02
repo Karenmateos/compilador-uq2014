@@ -5,7 +5,7 @@ package analizadorSintactico;
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 
-* <SentenciaDecision> ::=  “WHEN” “(“ <ExpresionComparacion> “)” <CuerpoWHEN>
+* <SentenciaDecision> ::=  ï¿½WHENï¿½ ï¿½(ï¿½ <ExpresionComparacion> ï¿½)ï¿½ <CuerpoWHEN>
 */
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -33,7 +33,7 @@ public class When extends Sentencia{
 
 		if(when != null)
 		{
-			miRaiz.add(new DefaultMutableTreeNode(when.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(when.getLexema() + Configuracion.dosPuntos + when.getTipo()));
 		}
 		
 		if(aperturaParentesis != null){

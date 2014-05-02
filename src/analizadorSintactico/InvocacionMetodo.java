@@ -36,7 +36,7 @@ public class InvocacionMetodo {
 
 		if(identificador != null)
 		{
-			miRaiz.add(new DefaultMutableTreeNode(identificador.getTipo() +Configuracion.dosPuntos+ identificador.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(identificador.getLexema() + Configuracion.dosPuntos + identificador.getTipo()));
 		}
 		
 		if(aperturaParentesis != null){
