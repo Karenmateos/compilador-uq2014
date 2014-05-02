@@ -24,6 +24,7 @@ public class CuerpoWhen {
 	SimboloLexico salida;
 	// Variable que almacema el cierre de llaves
 	SimboloLexico cierreLlaves;
+	Retorno retorno = null;
 	
 	/**
 	 * Constructor, permite crear objetos de tipo CuerpoWhen
@@ -39,10 +40,16 @@ public class CuerpoWhen {
 		this.cierreLlaves = cierreLlaves;
 	}
 	
-	/**
-	 * Metodo que genera el arbol sintactico de la clase
-	 * @return el arbol sintactico de la clase
-	 */
+
+	public CuerpoWhen(SimboloLexico aperturaLlaves, ArrayList<Sentencia> sentencias, Retorno retorno, SimboloLexico cierreLlaves){
+		
+		this.aperturaLlaves = aperturaLlaves;
+		this.sentencias = sentencias;
+		this.retorno = retorno;
+		this.cierreLlaves = cierreLlaves;
+	}
+	
+
 	public DefaultMutableTreeNode getArbolVisual()
 	{
 		// Variable que almacema un objeto de tipo DefaultMutableTreeNode
@@ -65,6 +72,9 @@ public class CuerpoWhen {
 			miRaiz.add(new DefaultMutableTreeNode(salida.getLexema() + Configuracion.dosPuntos + salida.getTipo()));
 		}
 		
+		if(retorno!=null){
+			miRaiz.add(retorno.getArbolVisual());
+		}
 		if(cierreLlaves != null){
 			miRaiz.add(new DefaultMutableTreeNode(cierreLlaves.getLexema()));
 		}
