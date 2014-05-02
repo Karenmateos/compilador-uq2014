@@ -5,7 +5,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import analizadorLexico.Configuracion;
 
 /**
-*
+* Esta clase permite crear la categoria sintactica UnidadCompilacion
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 

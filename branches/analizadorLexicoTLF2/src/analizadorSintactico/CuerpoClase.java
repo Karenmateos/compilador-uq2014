@@ -8,7 +8,7 @@ import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
 /**
- * 
+ * Esta clase permite crear la categoria sintactica CuerpoClase
  * @author Jorge Leonardo Aguirre Martinez
  * @author Luis Alberto Delgado Ortiz
  * GIC: <CuerpoClase> ::= “{“ [<ListaDeclaraciones>] [ListaAsignaciones] [<ListaMetodos>] “}”

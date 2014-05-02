@@ -10,7 +10,7 @@ import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
 /**
-*
+* Esta clase permite crear la categoria sintactica ExpresionMatematica
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 

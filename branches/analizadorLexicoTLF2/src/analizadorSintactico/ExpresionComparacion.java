@@ -1,16 +1,11 @@
 package analizadorSintactico;
 
-import java.util.Enumeration;
-
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.MutableTreeNode;
-import javax.swing.tree.TreeNode;
-
 import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
 /**
-*
+* Esta clase permite crear la categoria sintactica ExpresionComparacion
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 
