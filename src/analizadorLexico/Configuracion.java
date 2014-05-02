@@ -281,6 +281,7 @@ public  class Configuracion {
 	public static final String entero = properties.getString("entero");
 	public static final String real = properties.getString("real");
 	public static final String texto = properties.getString("texto");
+	public static final String retornar = properties.getString("retornar");
 	
 	// Errores
 	public static final String errorIdentificador1 = properties.getString("errorIdentificador1");
@@ -305,5 +306,7 @@ public  class Configuracion {
 	public static final String errorFaltaCierreParentesis = properties.getString("errorFaltaCierreParentesis");
 	public static final String errorFaltaIdMetodo = properties.getString("errorFaltaIdMetodo");
 	public static final String errorFaltaIdVariable = properties.getString("errorFaltaIdVariable");
-		
+	public static final String errorFaltaCierreCuerpoMetodo = properties.getString("errorFaltaCierreCuerpoMetodo");
+	public static final String errorFaltaRetornoMetodo = properties.getString("errorFaltaRetornoMetodo");	
+	
 }
