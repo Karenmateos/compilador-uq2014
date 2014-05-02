@@ -231,9 +231,9 @@ public class AnalizadorSintactico {
 		}
 		else{
 			reportarError(Configuracion.errorFaltaCuerpoClase,tokenActual.getFila(), tokenActual.getColumna());
-			
+
 		}
-        
+
 		return new Clase(modificadorAcceso, idClase, cuerpoClase);
 	}
 
@@ -251,16 +251,16 @@ public class AnalizadorSintactico {
 		ArrayList<DeclaracionVariable> listaDeclaraciones = null;
 		ArrayList<Asignacion> listaAsignaciones = null;
 		ArrayList<DeclaracionMetodo>  listaMetodos = null;
-		
+
 		if(tokenActual.getTipo().equals(Configuracion.AbrirLlaves)){
 			llaveAbre = tokenActual;
 			darSiguienteToken();
-			
-			
-			 listaDeclaraciones = esListaDeclaraciones();
-		     listaAsignaciones = esListaAsignaciones();
-			  listaMetodos = esListaMetodos();
-			
+
+
+			listaDeclaraciones = esListaDeclaraciones();
+			listaAsignaciones = esListaAsignaciones();
+			listaMetodos = esListaMetodos();
+
 			if(tokenActual.getTipo().equals(Configuracion.CerrarLLaves)){
 				llaveCierra = tokenActual;
 				return new CuerpoClase(llaveAbre,listaDeclaraciones, listaAsignaciones, listaMetodos,llaveCierra);
@@ -308,11 +308,11 @@ public class AnalizadorSintactico {
 		Asignacion asignacion = esAsignacion();
 
 		while(asignacion != null){
-            
+
 			listaAsignacion.add(asignacion);
-			
+
 			if(tokenActual.getTipo().equals(Configuracion.FinSentencia)){
-				
+
 				darSiguienteToken();
 				asignacion = esAsignacion(); 
 			}
@@ -321,7 +321,7 @@ public class AnalizadorSintactico {
 				modoPanico(Configuracion.puntoyComa);
 				return listaAsignacion;
 			}
-			
+
 		}
 
 		return listaAsignacion;
@@ -397,32 +397,33 @@ public class AnalizadorSintactico {
 			if(tipoDato==null){
 				if(tokenActual.getTipo().equals(Configuracion.IdMetodo)){
 					reportarError("falta el tipo de dato de retorno", tokenActual.getFila(), tokenActual.getColumna());
-				modoPanico(";");
-				return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
+					modoPanico(";");
+					return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
 				}
 				else{
 					reportarError("falta el tipo de dato de retorno del metodo",tokenActual.getFila(), tokenActual.getColumna());
-				    modoPanico(";");
-				    return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
+					modoPanico(";");
+					return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
 				}
-				
+
 			}
 			if(tokenActual.getTipo().equals(Configuracion.IdMetodo)){
 				idMetodo = tokenActual;
 				darSiguienteToken();
-				
+
 				if(tokenActual.getTipo().equals(Configuracion.AperturaParentesis)){
 					aperturaParentesis = tokenActual;
 					darSiguienteToken();
-					
+
 					argumentos = esListaArgumentos();
 					if(tokenActual.getTipo().equals(Configuracion.CierreParentesis)){
 						cierreParentesis = tokenActual;
 						darSiguienteToken();
-						
+
 						cuerpoMetodo = esCuerpoMetodo();
-						
+
 						if(cuerpoMetodo != null ){
+							darSiguienteToken();
 							return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
 						}
 						else{
@@ -430,7 +431,7 @@ public class AnalizadorSintactico {
 							modoPanico(Configuracion.puntoyComa);
 							return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
 						}
-						
+
 					}
 					else{
 						reportarError("falta el cierre de parentesis", tokenActual.getFila(),tokenActual.getColumna());
@@ -450,32 +451,32 @@ public class AnalizadorSintactico {
 				return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
 			}
 		}
-		
+
 	}
-	
+
 	public CuerpoMetodo esCuerpoMetodo(){
-		
+
 		int posBacktraking = indice;
 		SimboloLexico llaveAbre = null;
 		SimboloLexico llaveCierre = null;
 		ArrayList<Sentencia> sentencias = null;
 		Retorno retorno = null;
-		
+
 		if(tokenActual.getTipo().equals(Configuracion.AbrirLlaves)){
 			llaveAbre = tokenActual;
 			darSiguienteToken();
-			
+
 			sentencias = esListaSentencias();
-	
+
 			retorno = esRetorno();
-			
-			
-			
+
+
+
 			if(retorno!=null){
 				if(tokenActual.getTipo().equals(Configuracion.CerrarLLaves)){
 					llaveCierre = tokenActual;
 					return new CuerpoMetodo(llaveAbre, sentencias, retorno, llaveCierre);
-					
+
 				}
 				else{
 					reportarError("Falta cerrar el cuerpo del metodo", tokenActual.getFila(), tokenActual.getColumna());
@@ -497,42 +498,67 @@ public class AnalizadorSintactico {
 					return new CuerpoMetodo(llaveAbre, sentencias, retorno, llaveCierre);
 				}
 			}
-			
+
 		}
 		else{
 			return null;
 		}
-		
+
 	}
-	
+
 	public ArrayList<Sentencia> esListaSentencias(){
-	
+
 		ArrayList<Sentencia> listaSentencias = new ArrayList<Sentencia>();
+		Sentencia sentencia = esSentencia();
+
+		while(sentencia!=null)
+		{
+			listaSentencias.add(sentencia);
+			sentencia = esSentencia();
+		}
+
 		return listaSentencias;
-		
-		
-		
+
 	}
-	
+
+	public Sentencia esSentencia(){
+
+		Sentencia sentencia = null;
+
+		sentencia = esDeclaracionVariable();
+		if(sentencia != null){
+
+			return sentencia;  
+		}
+
+		sentencia = esAsignacion();
+		if(sentencia != null){
+
+			return sentencia;  
+		}
+
+		return sentencia;
+
+	}
 	/**
 	 * GIC: “<SEND>” <idVeriable> “;”
 	 * @return
 	 */
-	
+
 	public Retorno esRetorno(){
-		
+
 		SimboloLexico retornar = null;
 		SimboloLexico idVariable = null;
 		SimboloLexico terminal = null;
-		
+
 		if(tokenActual.getLexema().equals("<SEND>")){
 			retornar = tokenActual;
 			darSiguienteToken();
-			
+
 			if(tokenActual.getTipo().equals(Configuracion.IdVariable)){
 				idVariable = tokenActual;
 				darSiguienteToken();
-				
+
 				if(tokenActual.getTipo().equals(Configuracion.FinSentencia)){
 					terminal = tokenActual;
 					darSiguienteToken();
@@ -551,7 +577,7 @@ public class AnalizadorSintactico {
 					reportarError("falta el identificador de variable", tokenActual.getFila(), tokenActual.getColumna());
 					darSiguienteToken();
 					return new Retorno(retornar, idVariable, terminal);
-					
+
 				}
 				else{
 					reportarError("falta el identificador de variable", tokenActual.getFila(), tokenActual.getColumna());
@@ -563,8 +589,8 @@ public class AnalizadorSintactico {
 		else{
 			return null;
 		}
-		
-		
+
+
 	}
 
 	/**
@@ -701,7 +727,7 @@ public class AnalizadorSintactico {
 			reportarError(Configuracion.errorOperadorAsignacion, tokenActual.getFila(), tokenActual.getColumna());
 		}
 
-		
+
 		expresionComparacion = esExpresionComparacion();
 		if(expresionComparacion != null){
 
@@ -712,7 +738,7 @@ public class AnalizadorSintactico {
 
 			return new Asignacion(idVariable, operadorAsignacion, expresionMatematica);
 		}
-		
+
 		if(tokenActual.getTipo().equals(Configuracion.IdVariable)){
 			idVariable2 = tokenActual;
 			darSiguienteToken();
@@ -862,10 +888,10 @@ public class AnalizadorSintactico {
 	 * @return
 	 */
 	public Operacion esOperacion(){
-		
+
 		SimboloLexico operadorMatematico = null;
 		SimboloLexico idVariable = null;
-		
+
 
 		if(tokenActual.getTipo().equals(Configuracion.OperadorMatematico)){
 			operadorMatematico = tokenActual;
@@ -931,7 +957,7 @@ public class AnalizadorSintactico {
 			return tipoDato;
 		}
 	}
-	
+
 	public String [][]  mostrarTokensError()
 	{
 
@@ -949,7 +975,7 @@ public class AnalizadorSintactico {
 			matriz[i][0]=miTablaDeErrores.get(i).getMsn();
 			matriz[i][1]=""+miTablaDeErrores.get(i).getFila();
 			matriz[i][2]=""+miTablaDeErrores.get(i).getColumna();
-			
+
 			i++;
 		}
 
@@ -971,7 +997,7 @@ public class AnalizadorSintactico {
 			}
 		}
 		if(!(indice >= listaSimbolosLexicos.size()-1)){
-		darSiguienteToken();
+			darSiguienteToken();
 		}
 	}
 
@@ -991,7 +1017,7 @@ public class AnalizadorSintactico {
 			ArrayList<ErrorSintactico> listaErroresSintacticos) {
 		this.listaErroresSintacticos = listaErroresSintacticos;
 	}
-	
-	
-	
+
+
+
 }
