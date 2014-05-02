@@ -15,11 +15,19 @@ import analizadorLexico.SimboloLexico;
 * <DeclaracionVariable> ::= <TipoDato> <Variables> �;�
 */
 public class DeclaracionVariable extends Sentencia{
-
+	// Variable que almacema el tipo de dato
 	SimboloLexico tipoDato;
+	// Variable que almacema un AyyarList de identificadores de variable
 	ArrayList<SimboloLexico> idVariables;
+	// Variable que almacema un punto y coma (;)
 	SimboloLexico terminal;
 
+	/**
+	 * Constructor, permite crear objetos de tipo DeclaracionVariable
+	 * @param tipoDato
+	 * @param idVariables
+	 * @param terminal
+	 */
 	public DeclaracionVariable(SimboloLexico tipoDato, ArrayList<SimboloLexico> idVariables, SimboloLexico terminal){
 
 		this.tipoDato = tipoDato;
@@ -28,8 +36,13 @@ public class DeclaracionVariable extends Sentencia{
 
 	}
 
+	/**
+	 * Metodo que genera el arbol sintactico de la clase
+	 * @return el arbol sintactico de la clase
+	 */
 	public DefaultMutableTreeNode getArbolVisual()
 	{
+		// Variable que almacema un objeto de tipo DefaultMutableTreeNode
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.declaracionVariable);
 
 		if(tipoDato != null){

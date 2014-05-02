@@ -15,12 +15,25 @@ import analizadorLexico.SimboloLexico;
 */
 public class CicloWhile extends Sentencia{
 	
+	// Variable que almacema la palabra reservada del ciclo While
 	SimboloLexico palabraWhile;
+	// Variable que almacema la apaertura de parentesis
 	SimboloLexico aperturaParentesis;
+	// Variable que almacema un objeto de ExpresionComparacion
 	ExpresionComparacion expresion;
+	// Variable que almacema el cierre de parentesis
 	SimboloLexico cierreParentesis;
+	// Variable que almacema un objeto de tipo CuerpoCiclo
 	CuerpoCiclo cuerpoCiclo;
 	
+	/**
+	 * Constructor, permite crear objetos de tipo CicloWhile
+	 * @param palabraWhile
+	 * @param aperturaParentesis
+	 * @param expresion
+	 * @param cierreParentesis
+	 * @param cuerpoCiclo
+	 */
 	public CicloWhile(SimboloLexico palabraWhile, SimboloLexico aperturaParentesis, ExpresionComparacion expresion, SimboloLexico cierreParentesis, CuerpoCiclo cuerpoCiclo){
 		this.palabraWhile = palabraWhile;
 		this.aperturaParentesis = aperturaParentesis;
@@ -30,8 +43,13 @@ public class CicloWhile extends Sentencia{
 		
 	}
 	
+	/**
+	 * Metodo que genera el arbol sintactico de la clase
+	 * @return el arbol sintactico de la clase
+	 */
 	public DefaultMutableTreeNode getArbolVisual()
 	{
+		// Variable que almacema un objeto de tipo DefaultMutableTreeNode
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.cicloWhile);
 
 		if(palabraWhile != null)

@@ -16,14 +16,31 @@ import analizadorLexico.SimboloLexico;
 */
 public class DeclaracionMetodo {
 	
+	// Variable que almacema el modificador de acceso
 	SimboloLexico modificadorAcceso;
+	// Variable que almacema el tipo de dato
 	SimboloLexico tipoDato;
+	// Variable que almacema el id del metodo
 	SimboloLexico idMetodo;
+	// Variable que almacema la apertura parentesis
 	SimboloLexico aperturaParentesis;
+	// Variable que almacema un ArrayList de argumentos
 	ArrayList<Argumento> argumentos;
+	// Variable que almacema el cierre de parentesis
 	SimboloLexico cierreParentesis;
+	// Variable que almacema un objeto de tipo CuerpoMetodo
 	CuerpoMetodo cuerpoMetodo;
 	
+	/**
+	 * Constructor, permite crear objetos de tipo DeclaracionMetodo
+	 * @param modificadorAcceso
+	 * @param tipoDato
+	 * @param idMetodo
+	 * @param aperturaParentesis
+	 * @param argumentos
+	 * @param cierreParentesis
+	 * @param cuerpoMetodo
+	 */
 	public DeclaracionMetodo(SimboloLexico modificadorAcceso, SimboloLexico tipoDato, SimboloLexico idMetodo, SimboloLexico aperturaParentesis, ArrayList<Argumento> argumentos, SimboloLexico cierreParentesis, CuerpoMetodo cuerpoMetodo){
 		this.modificadorAcceso = modificadorAcceso;
 		this.tipoDato = tipoDato;
@@ -34,8 +51,13 @@ public class DeclaracionMetodo {
 		this.cuerpoMetodo = cuerpoMetodo;
 	}
 	
+	/**
+	 * Metodo que genera el arbol sintactico de la clase
+	 * @return el arbol sintactico de la clase
+	 */
 	public DefaultMutableTreeNode getArbolVisual()
 	{
+		// Variable que almacema un objeto de tipo DefaultMutableTreeNode
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.declaracionMetodo);
 
 		if(modificadorAcceso != null)

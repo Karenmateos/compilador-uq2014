@@ -14,10 +14,19 @@ import analizadorLexico.SimboloLexico;
 
 */
 public class Retorno {
+	// Variable que almacema la palabra reservada del retorno
 	SimboloLexico send;
+	// Variable que almacema el id de variable
 	SimboloLexico idVariable;
+	// Variable que almacema un punto y coma (;)
 	SimboloLexico terminal;
 
+	/**
+	 * Constructor, permite crear objetos de tipo Retorno
+	 * @param send
+	 * @param idVariable
+	 * @param terminal
+	 */
 	public Retorno(SimboloLexico send, SimboloLexico idVariable, SimboloLexico terminal) 
 	{
 		this.send = send;
@@ -25,8 +34,13 @@ public class Retorno {
 		this.terminal = terminal;
 	}
 
+	/**
+	 * Metodo que permite obtener el arbol sintactico de la clase
+	 * @return el arbol sintactico de la clase
+	 */
 	public DefaultMutableTreeNode getArbolVisual()
 	{
+		// Variable que almacema un objeto de tipo DefaultMutableTreeNode
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.retorno);
 
 		if(send != null)

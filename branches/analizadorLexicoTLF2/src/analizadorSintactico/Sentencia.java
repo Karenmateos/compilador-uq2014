@@ -11,6 +11,10 @@ import javax.swing.tree.DefaultMutableTreeNode;
 */
 public class Sentencia {
 	
+	/**
+	 * Metodo que genera el arbol sintactico de la clase
+	 * @return el arbol sintactico de la clase
+	 */
 	public DefaultMutableTreeNode getArbolVisual(){
 		return null;
 	}

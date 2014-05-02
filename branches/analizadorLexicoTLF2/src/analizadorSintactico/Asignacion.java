@@ -15,12 +15,23 @@ import analizadorLexico.SimboloLexico;
 */
 public class Asignacion extends Sentencia{
 
+	// Variable que almacena el id de variable
 	SimboloLexico idVariable = null;
+	// Variable que almacema un objeto de tipo ExpresionMatematica
 	ExpresionMatematica expresionMatematica = null;
+	// Variable que almacema un objeto de tipo ExpresionComparacion
 	ExpresionComparacion expresionComparacion = null;
+	// Variable que almacema id de variable
 	SimboloLexico idVariable2 = null;
+	// Variable que almacema un operador de asignacion
 	SimboloLexico operadorAsignacion = null;
 
+	/**
+	 * Constructor, permite crear objetos de tipo Asignacion de la forma: <IdVariable> “=” <ExpresioneMatematica>
+	 * @param idVariable
+	 * @param operadorAsignacion
+	 * @param expresionMatematica
+	 */
 	public Asignacion(SimboloLexico idVariable, SimboloLexico operadorAsignacion, ExpresionMatematica expresionMatematica){
 
 		this.idVariable = idVariable;
@@ -28,6 +39,12 @@ public class Asignacion extends Sentencia{
 		this.expresionMatematica = expresionMatematica;
 	}
 
+	/**
+	 * Constructor, permite crear objetos de tipo Asignacion de la forma: <IdVariable> “=” <ExpresioneComparacion>
+	 * @param idVariable
+	 * @param operadorAsignacion
+	 * @param expresionComparacion
+	 */
 	public Asignacion(SimboloLexico idVariable, SimboloLexico operadorAsignacion, ExpresionComparacion expresionComparacion){
 
 		this.idVariable = idVariable;
@@ -35,6 +52,12 @@ public class Asignacion extends Sentencia{
 		this.expresionComparacion = expresionComparacion;
 	}
 
+	/**
+	 * Constructor, permite crear objetos de tipo Asignacion de la forma: <idVariable> “=” <idVariable>
+	 * @param idVariable
+	 * @param operadorAsignacion
+	 * @param idVariable2
+	 */
 	public Asignacion(SimboloLexico idVariable, SimboloLexico operadorAsignacion, SimboloLexico idVariable2){
 
 		this.idVariable = idVariable;
@@ -42,8 +65,13 @@ public class Asignacion extends Sentencia{
 		this.idVariable2 = idVariable2;
 	}
 
+	/**
+	 * Metodo que genera el arbol sintactico de la clase
+	 * @return el arbol sintactico de la clase
+	 */
 	public DefaultMutableTreeNode getArbolVisual()
 	{
+		// Variable que almacema un objeto de tipo DefaultMutableTreeNode
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.asignacion);
 		if(idVariable != null){
 			miRaiz.add(new DefaultMutableTreeNode(idVariable.getLexema() + Configuracion.dosPuntos + idVariable.getTipo()));
