@@ -404,11 +404,7 @@ public class AnalizadorSintactico {
 
 					reportarError(Configuracion.errorFaltaTipoRetorno, tokenActual.getFila(), tokenActual.getColumna());
 				    modoPanico(Configuracion.puntoyComa);
-				    return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
-
-					reportarError("falta el tipo de dato de retorno del metodo",tokenActual.getFila(), tokenActual.getColumna());
-					modoPanico(";");
-					return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
+				    return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);				
 
 				}
 
@@ -485,7 +481,7 @@ public class AnalizadorSintactico {
 
 				}
 				else{
-					reportarError("Falta cerrar el cuerpo del metodo", tokenActual.getFila(), tokenActual.getColumna());
+					reportarError(Configuracion.errorFaltaCierreCuerpoMetodo, tokenActual.getFila(), tokenActual.getColumna());
 					modoPanico(Configuracion.puntoyComa);
 					return new CuerpoMetodo(llaveAbre, sentencias, retorno, llaveCierre);
 				}
@@ -493,13 +489,13 @@ public class AnalizadorSintactico {
 			else{
 				if(tokenActual.getTipo().equals(Configuracion.CerrarLLaves)){
 					llaveCierre = tokenActual;
-					reportarError("falta el retorno del metodo", tokenActual.getFila(), tokenActual.getColumna());
+					reportarError(Configuracion.errorFaltaRetornoMetodo, tokenActual.getFila(), tokenActual.getColumna());
 					darSiguienteToken();
 					return new CuerpoMetodo(llaveAbre, sentencias, retorno, llaveCierre);
 				}
 				else{
-					reportarError("falta el retorno del metodo", tokenActual.getFila(), tokenActual.getColumna());
-					reportarError("falta cerrar el cuerpo del metodo", tokenActual.getFila(), tokenActual.getColumna());
+					reportarError(Configuracion.errorFaltaRetornoMetodo, tokenActual.getFila(), tokenActual.getColumna());
+					reportarError(Configuracion.errorFaltaCierreCuerpoMetodo, tokenActual.getFila(), tokenActual.getColumna());
 					modoPanico(Configuracion.puntoyComa);
 					return new CuerpoMetodo(llaveAbre, sentencias, retorno, llaveCierre);
 				}
@@ -557,7 +553,7 @@ public class AnalizadorSintactico {
 		SimboloLexico idVariable = null;
 		SimboloLexico terminal = null;
 
-		if(tokenActual.getLexema().equals("<SEND>")){
+		if(tokenActual.getLexema().equals(Configuracion.retornar)){
 			retornar = tokenActual;
 			darSiguienteToken();
 
@@ -571,7 +567,7 @@ public class AnalizadorSintactico {
 					return new Retorno(retornar, idVariable, terminal);
 				}
 				else{
-					reportarError("falta el ;",tokenActual.getFila(), tokenActual.getColumna());
+					reportarError(Configuracion.errorFaltaPuntoyComa, tokenActual.getFila(), tokenActual.getColumna());
 					modoPanico(Configuracion.puntoyComa);
 					return new Retorno(retornar, idVariable, terminal);
 				}
@@ -580,13 +576,13 @@ public class AnalizadorSintactico {
 			{
 				if(tokenActual.getTipo().equals(Configuracion.FinSentencia)){
 					terminal = tokenActual;
-					reportarError("falta el identificador de variable", tokenActual.getFila(), tokenActual.getColumna());
+					reportarError(Configuracion.errorFaltaIdVariable, tokenActual.getFila(), tokenActual.getColumna());
 					darSiguienteToken();
 					return new Retorno(retornar, idVariable, terminal);
 
 				}
 				else{
-					reportarError("falta el identificador de variable", tokenActual.getFila(), tokenActual.getColumna());
+					reportarError(Configuracion.errorFaltaIdVariable, tokenActual.getFila(), tokenActual.getColumna());
 					modoPanico(Configuracion.puntoyComa);
 					return new Retorno(retornar, idVariable, terminal);
 				}
