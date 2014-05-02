@@ -29,8 +29,7 @@ public class AnalizadorSintactico {
 	private UnidadCompilacion miUnidadDeCompilacion;
 
 	/**
-	 * Constructor de la clase AnalizadorSintactico
-	 * 
+	 * Constructor de la clase AnalizadorSintactico	 * 
 	 * @param un arraylist de tipo SimboloLexico
 	 */
 	public AnalizadorSintactico(ArrayList<SimboloLexico> listaSimbolos) {
@@ -55,8 +54,7 @@ public class AnalizadorSintactico {
 	}
 
 	/**
-	 * Realiza Backtracking - devuelve la posicion y el token anterior
-	 * 
+	 * Realiza Backtracking - devuelve la posicion y el token anterior	 * 
 	 * @param la posicion del token para realizar backtraking
 	 */
 	public void realizarBactracking(int posBT) {
@@ -76,9 +74,8 @@ public class AnalizadorSintactico {
 	}
 
 	/**
-	 * Indica si cierto conjunto de tokens pertenecen a la categoria sintactica
-	 * Argumento GIC:<Argumento>::=<TipoDato> identificadorVariable
-	 * 
+	 * Indica si cierto conjunto de tokens pertenecen a la categoria sintactica Argumento 
+	 * GIC: <Argumento> ::= <TipoDato> <IdVariable> 
 	 * @return un objeto de tipó Argumento
 	 */
 	public Argumento esArgumento() {
@@ -136,7 +133,6 @@ public class AnalizadorSintactico {
 	/**
 	 * Indica si cierto conjunto de tokens pertenecen a la categoria sintactica Argumentos 
 	 * GIC: <Argumentos> ::= <Argumento> [ "," <Argumentos> ]
-	 * 
 	 * @return un arraylist de tipo Argumento
 	 */
 	public ArrayList<Argumento> esListaArgumentos() {
@@ -170,8 +166,7 @@ public class AnalizadorSintactico {
 
 	/**
 	 * Indica si cierto conjunto de tokens conforman La Unidad de Compilaci�n
-	 * GIC: <UnidadDeCompilacion> ::=<Clase>
-	 * 
+	 * GIC: <UnidadDeCompilacion> ::=<Clase> 
 	 * @return un objeto de tipo UnidadCompilacion
 	 */
 	public UnidadCompilacion esUnidadDeCompilacion() {
@@ -183,8 +178,7 @@ public class AnalizadorSintactico {
 
 	/**
 	 * Indica si cierto conjunto de tokens conforman la clase
-	 * GIC:<Clase> ::= <ModificadorAcceso> <IdClase> <CuerpoClase>
-	 * 
+	 * GIC: <Clase> ::= <ModificadorAcceso> <IdClase> <CuerpoClase> 
 	 * @return un objeto de tippo Clase
 	 */
 	public Clase esClase(){
@@ -241,9 +235,8 @@ public class AnalizadorSintactico {
 	}
 
 	/**
-	 * indica si cierto conjunto de tokens conforman el cuerpo de la clase
-	 * GIC: <CuerpoClase> ::= �{� [<ListaDeclaraciones>] [ListaAsignaciones] [<ListaMetodos>] �}�
-	 * 
+	 * Indica si cierto conjunto de tokens conforman el cuerpo de la clase
+	 * GIC: <CuerpoClase> ::= “{“ [<ListaDeclaraciones>] [ListaAsignaciones] [<ListaMetodos>] “}” 
 	 * @return un objeto de tipo cuerpoClase
 	 */
 	public CuerpoClase esCuerpoClase(){
@@ -280,9 +273,8 @@ public class AnalizadorSintactico {
 	}
 
 	/**
-	 * indica si cierto conjunto de tokens conforman una lista de declaraciones
-	 * GIC: <ListaDeclaraciones> ::= <DeclaracionVariable> [<ListaDeclaraciones>] 
-	 * 
+	 * Indica si cierto conjunto de tokens conforman una lista de declaraciones
+	 * GIC: <ListaDeclaraciones> ::= <DeclaracionVariable> [<ListaDeclaraciones>]  
 	 * @return una ArrayList de tipo DeclaracionVariable
 	 */
 	public ArrayList<DeclaracionVariable> esListaDeclaraciones(){
@@ -299,9 +291,8 @@ public class AnalizadorSintactico {
 	}
 
 	/**
-	 * indica si cierto conjunto de tokens conforman una lista de Asignaciones
+	 * Indica si cierto conjunto de tokens conforman una lista de Asignaciones
 	 * GIC: <ListaAsignaciones> ::= <Asignacion> [<ListaAsignaciones>]
-	 *
 	 * @return una ArrayList de tipo Asignacion 
 	 */
 	public ArrayList<Asignacion> esListaAsignaciones(){
@@ -331,9 +322,8 @@ public class AnalizadorSintactico {
 	}
 
 	/**
-	 * indica si cierto conjunto de tokens conforman una lista de metodos
-	 * GIC:<Metodos> ::= <DeclaracionMetodo> [<Metodos>]
-	 * 
+	 * Indica si cierto conjunto de tokens conforman una lista de metodos
+	 * GIC: <Metodos> ::= <DeclaracionMetodo> [<Metodos>] 
 	 * @return una ArrayList de tipo DeclaracionMetodo
 	 */
 	public ArrayList<DeclaracionMetodo> esListaMetodos(){
@@ -349,9 +339,8 @@ public class AnalizadorSintactico {
 	}
 
 	/**
-	 * indica si cierto conjunto de tokens conforman la declaracion de un metodo
-	 * GIC:<DeclaracionMetodo> ::= <ModificadorAcceso> <TipoDato> <IdMetodo> �(� [<Argumentos>] �)�  <CuerpoMetodo> 
-	 * 
+	 * Indica si cierto conjunto de tokens conforman la declaracion de un metodo
+	 * GIC: <DeclaracionMetodo> ::= <ModificadorAcceso> <TipoDato> <IdMetodo> “(“ [<Argumentos>] “)” <CuerpoMetodo>
 	 * @return un objeto de tipo DeclaracionMetodo
 	 */
 	public DeclaracionMetodo esDeclaracionMetodo(){
@@ -460,8 +449,7 @@ public class AnalizadorSintactico {
 
 	/**
 	 * Indica si cierto conjunto de tokens conforman el cuerpo de un metodo
-	 * GIC: <CuerpoMetodo> ::= “{” [<ListaSentencias>] <Retorno> “}”
-	 * 
+	 * GIC: <CuerpoMetodo> ::= “{” [<ListaSentencias>] <Retorno> “}” 
 	 * @return un objeto de tipo CuerpoMetodo
 	 */
 	public CuerpoMetodo esCuerpoMetodo(){
@@ -514,8 +502,7 @@ public class AnalizadorSintactico {
 	}
 
 	/**
-	 * Indica si cierto conjunto de tokens conforman una lista de sentencias
-	 * 
+	 * Indica si cierto conjunto de tokens conforman una lista de sentencias 
 	 * @return un ArrayList de Sentencias
 	 */
 	public ArrayList<Sentencia> esListaSentencias(){
@@ -535,8 +522,7 @@ public class AnalizadorSintactico {
 
 	/**
 	 * Indica si cierto conjunto de tokens conforman una sentencia
-	 * GIC: <Sentencia> ::= <DeclaracionVariable>  | <Asignacion> | <SentenciaDecision>  | <WHILE> | <FOR>
-	 * 
+	 * GIC: <Sentencia> ::= <DeclaracionVariable>  | <Asignacion> | <SentenciaDecision>  | <WHILE> | <FOR> 
 	 * @return un objeto de tipo Sentencia
 	 */
 	public Sentencia esSentencia(){
@@ -560,8 +546,7 @@ public class AnalizadorSintactico {
 	}
 	/**
 	 * Indica si cierto conjunto de token conforman un retorno
-	 * GIC: �<SEND>� <idVeriable> �;�
-	 * 
+	 * GIC: <Retorno> ::= “<SEND>” <idVeriable> “;”
 	 * @return un objeto de tipo retorno
 	 */
 
@@ -615,8 +600,7 @@ public class AnalizadorSintactico {
 
 	/**
 	 * Indica si cierto conjunto de tokens conforman la declaracion de una variable
-	 * GIC:<DeclaracionVariable> ::= <TipoDato> <Variables> �;�
-	 * 
+	 * GIC: <DeclaracionVariable> ::= <TipoDato> <Variables> “;”
 	 * @return un objeto de tipo DeclaracionVariable
 	 */
 	public DeclaracionVariable esDeclaracionVariable(){
@@ -658,9 +642,8 @@ public class AnalizadorSintactico {
 	}
 
 	/**
-	 *Indica si cierto conjunto de tokens pertenecen a la categoria sintactica Lista de variables 
-	 * GIC: <Variables> ::= <IdVariable> [�,� <Variables>]
-	 *  
+	 * Indica si cierto conjunto de tokens pertenecen a la categoria sintactica Lista de variables 
+	 * GIC: <Variables> ::= <IdVariable> [“,” <Variables>] 
 	 * @return un ArrayList de variables
 	 */
 	public ArrayList<SimboloLexico> esVariables(){
@@ -695,8 +678,7 @@ public class AnalizadorSintactico {
 	}
 
 	/**
-	 * indica si el token es un identificador de variable
-	 *  
+	 * Indica si el token es un identificador de variable  
 	 * @return el identidicador de la variable
 	 */
 	public SimboloLexico esIdVariable(){
@@ -714,9 +696,8 @@ public class AnalizadorSintactico {
 	}
 
 	/**
-	 *Indica si cierto conjunto de tokens pertenecen a la categoria sintactica de asignaciones 
-	 * GIC: <Asignacion> ::= <IdVariable> �=� <ExpresioneComparacion> |<IdVariable> �=� <ExpresioneMatematica>| <idVariable> �=� <Valor> | <idVariable> �=� <idVariable>
-	 * 
+	 * Indica si cierto conjunto de tokens pertenecen a la categoria sintactica de asignaciones 
+	 * GIC: <Asignacion> ::= <IdVariable> “=” <ExpresioneComparacion> |<IdVariable> “=” <ExpresioneMatematica>| <idVariable> “=” <Valor> | <idVariable> “=” <idVariable>
 	 * @return un objeto de tipo Asignacion
 	 */
 	public Asignacion esAsignacion(){
@@ -786,7 +767,6 @@ public class AnalizadorSintactico {
 	/**
 	 * Indica si cierto conjunto de tokens pertenecen a la categoria sintactica ExprecionComparacion
 	 * GIC: <ExpresionComparacion> ::= <IdVariable> <OperadorComparacion> <IdVariable> | <IdVariable> <OperadorComparacion> <Valor> | <Valor> <OperadorComparacion> <Valor> | <Valor> <OperadorComparacion> <IdVariable>
-	 * 
 	 * @return un objeto de tipo ExpresionComparacion
 	 */
 	public ExpresionComparacion esExpresionComparacion(){
@@ -844,9 +824,8 @@ public class AnalizadorSintactico {
 	}
 
 	/**
-	 *Indica si cierto conjunto de tokens pertenecen a la categoria sintactica ExprecionMatematica 
-	 *GIC:<ExprecionMatematica> ::= <IdVariable> <Operacion> | <valor> <Operacion> 
-	 * 
+	 * Indica si cierto conjunto de tokens pertenecen a la categoria sintactica ExprecionMatematica 
+	 * GIC: <ExprecionMatematica> ::= <IdVariable> <Operacion> | <valor> <Operacion> 
 	 * @return un objeto de tipo ExpresionMatematica
 	 */
 	public ExpresionMatematica esExpresionMatematica(){
@@ -886,7 +865,6 @@ public class AnalizadorSintactico {
 	/**
 	 * Indica si cierto conjunto de tokens pertenecen a la categoria sintactica de operaciones
 	 * GIC: <Operacion> ::= <OperadorMatematico> <IdVariable> | <OperadorMatematico> <valor> | <OperadorMatematico> <IdVariable> <Operacion> | <OperadorMatematico> <valor> <Operacion>
-	 * 
 	 * @return un ArrayList de operaciones
 	 */
 	public ArrayList<Operacion> esOperaciones(){
@@ -903,8 +881,7 @@ public class AnalizadorSintactico {
 	}
 
 	/**
-	 * indica si el token actual es una operacion
-	 * 
+	 * Indica si el token actual es una operacion
 	 * @return un objeto de tipo Operacion
 	 */
 	public Operacion esOperacion(){
@@ -937,7 +914,6 @@ public class AnalizadorSintactico {
 
 	/**
 	 * Metodo que indica si el token actual es un modoficador de acceso
-	 * 
 	 * @return un modificador de acceso
 	 */
 	private SimboloLexico esModificadorAcceso(){
@@ -960,7 +936,6 @@ public class AnalizadorSintactico {
 
 	/**
 	 * Metodo que indica si el token actual corresponde a uno de los tipos de dato
-	 * 
 	 * @return un tipo de dato
 	 */
 	private SimboloLexico esTipoDato(){
@@ -981,7 +956,6 @@ public class AnalizadorSintactico {
 
 	/**
 	 * Este metodo crea una matriz de errores sintacticos
-	 * 
 	 * @return una matriz de tipo string con los errores sintacticos
 	 */
 	public String [][]  mostrarTokensError()
@@ -1012,7 +986,6 @@ public class AnalizadorSintactico {
 
 	/**
 	 * Este metodo avanza hasta encontrar el token indicado
-	 * 
 	 * @param el token a buscar
 	 */
 	public void modoPanico(String tokenParada) {
@@ -1030,7 +1003,6 @@ public class AnalizadorSintactico {
 
 	/**
 	 * Este metodo permite obtener la unidad de compilacion
-	 * 
 	 * @return un objeto de tipo UnidadCompilacion
 	 */
 	public UnidadCompilacion getMiUnidadDeCompilacion() {
@@ -1039,7 +1011,6 @@ public class AnalizadorSintactico {
 
 	/**
 	 * Este metodo recibe un objeto de tipo UnidadCompilacion y lo almacena en el objeto miUnidadCompilacion
-	 * 
 	 * @param un objeto de tipo UnidadCompilacion
 	 */
 	public void setMiUnidadDeCompilacion(UnidadCompilacion miUnidadDeCompilacion) {
@@ -1048,7 +1019,6 @@ public class AnalizadorSintactico {
 
 	/**
 	 * Este metodo permite obtener el ArrayList de errores sintacticos
-	 * 
 	 * @return un ArrayList de tipo ErrorSintactico
 	 */
 	public ArrayList<ErrorSintactico> getListaErroresSintacticos() {
@@ -1057,7 +1027,6 @@ public class AnalizadorSintactico {
 
 	/**
 	 * Este metodo recibe un ArrayList de errores sintacticos y los guarda en el ArrayList listaErrorSintacticos
-	 * 
 	 * @param un ArrayList de tipo ErrorSintactico
 	 */
 	public void setListaErroresSintacticos(
