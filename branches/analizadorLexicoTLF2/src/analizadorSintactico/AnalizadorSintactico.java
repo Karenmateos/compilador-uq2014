@@ -104,17 +104,17 @@ public class AnalizadorSintactico {
 
 				} else 
 					if (tokenActual.getTipo().equals(Configuracion.IdClase)) {
-						
-					reportarError(
-							Configuracion.errorIdentificador2,
-							tokenActual.getFila(), tokenActual.getColumna());
-					return new Argumento(tipoDato, identificadorVariable);
 
-				} else {
-					reportarError(Configuracion.errorNombreParametro,
-							tokenActual.getFila(), tokenActual.getColumna());
-					return new Argumento(tipoDato, identificadorVariable);
-				}
+						reportarError(
+								Configuracion.errorIdentificador2,
+								tokenActual.getFila(), tokenActual.getColumna());
+						return new Argumento(tipoDato, identificadorVariable);
+
+					} else {
+						reportarError(Configuracion.errorNombreParametro,
+								tokenActual.getFila(), tokenActual.getColumna());
+						return new Argumento(tipoDato, identificadorVariable);
+					}
 
 			}
 		}
@@ -149,17 +149,17 @@ public class AnalizadorSintactico {
 				argumento = esArgumento();
 			}
 			else{
-				if (tokenActual.getLexema().equals("INT") || tokenActual.getTipo().equals("REAL") || tokenActual.getTipo().equals("TEXT")){
+				if (tokenActual.getLexema().equals(Configuracion.entero) || tokenActual.getTipo().equals(Configuracion.real) || tokenActual.getTipo().equals(Configuracion.texto) || tokenActual.getTipo().equals("BINARY")){
 
 					reportarError(Configuracion.errorFaltaSeparador,tokenActual.getFila() , tokenActual.getColumna());
 					modoPanico(Configuracion.puntoyComa);
 					break;
 				}
-				
-					break;					
-				}
+
+				break;					
 			}
-		
+		}
+
 
 		return listaArgumentos;
 	}
@@ -416,7 +416,7 @@ public class AnalizadorSintactico {
 						cuerpoMetodo = esCuerpoMetodo();
 
 						if(cuerpoMetodo != null ){
-							darSiguienteToken();
+
 							return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
 						}
 						else{
@@ -470,6 +470,7 @@ public class AnalizadorSintactico {
 			if(retorno!=null){
 				if(tokenActual.getTipo().equals(Configuracion.CerrarLLaves)){
 					llaveCierre = tokenActual;
+					darSiguienteToken();
 					return new CuerpoMetodo(llaveAbre, sentencias, retorno, llaveCierre);
 
 				}
@@ -541,8 +542,156 @@ public class AnalizadorSintactico {
 			return sentencia;  
 		}
 
-		return sentencia;
+		sentencia = esWHEN();
+		if(sentencia != null){
 
+			return sentencia;  
+		}
+
+		return sentencia;
+	}
+
+
+	public When esWHEN(){
+
+		SimboloLexico parentesisAbre = null;
+		SimboloLexico parentesisCierra = null;
+		SimboloLexico when= null;
+		ExpresionComparacion expresionComparacion = null;
+		CuerpoWhen cuerpoWhen = null;
+		SimboloLexico posError = null;
+
+		if(tokenActual.getLexema().equals("WHEN")){
+			when = tokenActual;
+			darSiguienteToken();
+
+			if(tokenActual.getTipo().equals(Configuracion.AperturaParentesis)){
+				parentesisAbre = tokenActual;
+				darSiguienteToken();
+
+				expresionComparacion = esExpresionComparacion();
+				if(expresionComparacion != null ){
+					//puede ir un avance
+					if(tokenActual.getTipo().equals(Configuracion.CierreParentesis)){
+						parentesisCierra = tokenActual;
+						darSiguienteToken();
+
+						cuerpoWhen = esCuerpoWhen();
+						if(cuerpoWhen!=null){
+							
+							return new When(when, parentesisAbre, expresionComparacion, parentesisCierra, cuerpoWhen);
+						}
+						else{
+							reportarError("falta el cuerpo del when", tokenActual.getFila(), tokenActual.getColumna());
+							modoPanico(Configuracion.puntoyComa);
+							return new When(when, parentesisAbre, expresionComparacion, parentesisCierra, cuerpoWhen);
+						}
+					}
+					else{
+						posError = tokenActual;
+						cuerpoWhen = esCuerpoWhen();
+						if(cuerpoWhen!=null){
+							
+							reportarError("falta cerrar parentesis",posError.getFila(), posError.getColumna());
+							return new When(when, parentesisAbre, expresionComparacion, parentesisCierra, cuerpoWhen);
+
+						}
+						else{
+							reportarError("falta cerrar parentesis",tokenActual.getFila(), tokenActual.getColumna());
+							reportarError("falta cuerpo del when",tokenActual.getFila(), tokenActual.getColumna());
+							modoPanico(Configuracion.puntoyComa);
+							return new When(when, parentesisAbre, expresionComparacion, parentesisCierra, cuerpoWhen);
+						}
+					}
+				}
+				else{
+					reportarError("falta la expresion de comparacion", tokenActual.getFila(), tokenActual.getColumna());
+					modoPanico(Configuracion.puntoyComa);
+					return new When(when, parentesisAbre, expresionComparacion, parentesisCierra, cuerpoWhen);
+				}
+			}
+			else{
+				reportarError("falta abrir parentesis", tokenActual.getFila(), tokenActual.getColumna());
+				modoPanico(Configuracion.puntoyComa);
+				return new When(when, parentesisAbre, expresionComparacion, parentesisCierra, cuerpoWhen);
+			}
+		}
+		else{
+			return null;
+		}
+
+
+	}
+	
+	public CuerpoWhen esCuerpoWhen(){
+		
+		SimboloLexico llaveAbre = null;
+		SimboloLexico llaveCierra = null;
+		ArrayList<Sentencia> sentencias = null;
+		Retorno retorno = null;
+		SimboloLexico salida = null;
+		
+		if(tokenActual.getTipo().equals(Configuracion.AbrirLlaves)){
+			llaveAbre =tokenActual;
+			darSiguienteToken();
+			
+			sentencias = esListaSentencias();
+			
+			retorno = esRetorno();
+			
+			if(retorno!=null){
+			
+				if(tokenActual.getTipo().equals(Configuracion.CerrarLLaves)){
+					llaveCierra = tokenActual;
+					darSiguienteToken();
+					return new CuerpoWhen(llaveAbre, sentencias, retorno, llaveCierra);
+				}
+				else{
+					reportarError("falta cerrar llaves", tokenActual.getFila(), tokenActual.getColumna());
+					modoPanico(Configuracion.puntoyComa);
+					return new CuerpoWhen(llaveAbre, sentencias, retorno, llaveCierra);
+				}
+			
+			}
+			else{
+				if(tokenActual.getLexema().equals("<EXIT>")){
+					salida = tokenActual;
+					darSiguienteToken();
+					
+					if(tokenActual.getTipo().equals(Configuracion.CerrarLLaves)){
+						llaveCierra = tokenActual;
+						darSiguienteToken();
+						return new CuerpoWhen(llaveAbre, sentencias, salida, llaveCierra);
+					}
+					else{
+						reportarError("falta cerrar las llaves", tokenActual.getFila(), tokenActual.getColumna());
+						modoPanico(Configuracion.puntoyComa);
+						return new CuerpoWhen(llaveAbre, sentencias, salida, llaveCierra);
+					}
+					
+				}
+				else{
+					if(tokenActual.getTipo().equals(Configuracion.CerrarLLaves)){
+						darSiguienteToken();
+						return new CuerpoWhen(llaveAbre, sentencias, retorno, llaveCierra);
+					}
+					else{
+						reportarError("Falta cerrar llave", tokenActual.getFila(), tokenActual.getColumna());
+						modoPanico(Configuracion.puntoyComa);
+						return new CuerpoWhen(llaveAbre, sentencias, retorno, llaveCierra);
+					}
+					
+				}
+				
+				
+			}
+			
+			
+		}
+		else{
+			return null;
+		}
+		
 	}
 	/**
 	 * Indica si cierto conjunto de token conforman un retorno
@@ -943,7 +1092,8 @@ public class AnalizadorSintactico {
 
 		if (tokenActual.getLexema().equals(Configuracion.entero)
 				|| tokenActual.getLexema().equals(Configuracion.real)
-				|| tokenActual.getLexema().equals(Configuracion.texto)) {
+				|| tokenActual.getLexema().equals(Configuracion.texto)
+				|| tokenActual.getLexema().equals("BINARY")) {
 			tipoDato = tokenActual;
 			darSiguienteToken();
 			return tipoDato;
