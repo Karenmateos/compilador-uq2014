@@ -5,7 +5,7 @@ package analizadorSintactico;
  * @author Jorge Leonardo Aguirre Martinez
  * @author Luis Alberto Delgado Ortiz
  * 
- * GIC: <SentenciaDecision> ::=  “WHEN” “(“ <ExpresionComparacion> “)” <CuerpoWHEN>
+ * GIC: <When> ::=  “WHEN” “(“ <ExpresionComparacion> “)” <CuerpoWHEN> “;”
  */
 import javax.swing.tree.DefaultMutableTreeNode;
 

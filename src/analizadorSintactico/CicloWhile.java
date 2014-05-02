@@ -10,7 +10,7 @@ import analizadorLexico.SimboloLexico;
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 
-* GIC: <WHILE> ::= “WHILE” “(“ <ExpresionComparacion> “)” <CuerpoCiclo>
+* GIC: <WHILE> ::= “WHILE” “(“ <ExpresionComparacion> “)” <CuerpoCiclo> “;”
 
 */
 public class CicloWhile extends Sentencia{
