@@ -134,7 +134,7 @@ public class Ventana extends javax.swing.JFrame implements ActionListener{
 				panelPestanas.setPreferredSize(new java.awt.Dimension(878, 697));
 				{
 					panelLexico = new JPanel();
-					panelPestanas.addTab("LÈxico", null, panelLexico, null);
+					panelPestanas.addTab(Configuracion.pesta√±alexico, null, panelLexico, null);
 					panelLexico.setLayout(null);
 					panelLexico.setPreferredSize(new java.awt.Dimension(874, 531));
 					panelLexico.setLocale(new java.util.Locale("es", "US"));
@@ -273,7 +273,7 @@ public class Ventana extends javax.swing.JFrame implements ActionListener{
 				}
 				{
 					panelSintactico = new JPanel();
-					panelPestanas.addTab("Sint·ctico", null, panelSintactico, null);
+					panelPestanas.addTab(Configuracion.pesta√±aSintactico, null, panelSintactico, null);
 					panelSintactico.setLayout(null);
 					panelSintactico2 = new PanelAnalizadorSintactico(300,630);
 					panelSintactico.add(panelSintactico2);
@@ -281,7 +281,7 @@ public class Ventana extends javax.swing.JFrame implements ActionListener{
 					{
 						jLabelErroresSintacticos = new JLabel();
 						panelSintactico.add(jLabelErroresSintacticos);
-						jLabelErroresSintacticos.setText("Tabla de errores Sintacticos");
+						jLabelErroresSintacticos.setText(Configuracion.tablaErroresSintacticos);
 						jLabelErroresSintacticos.setBounds(384, 11, 154, 16);
 					}
 					{
