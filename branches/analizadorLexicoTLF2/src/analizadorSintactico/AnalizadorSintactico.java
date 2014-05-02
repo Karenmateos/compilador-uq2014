@@ -564,6 +564,7 @@ public class AnalizadorSintactico {
 
 	/**
 	 * Indica si cierto conjunto de tokens conforman la categoria sintactica when
+	 * GIC: <When> ::=  “WHEN” “(“ <ExpresionComparacion> “)” <CuerpoWHEN> “;”
 	 * @return un objeto de tipo When
 	 */
 	public When esWHEN(){
@@ -639,6 +640,7 @@ public class AnalizadorSintactico {
 	
 	/**
 	 * Indica si cierto conjunto de tokens conforman el cuerpo del When
+	 * GIC: <CuerpoWHEN> ::= “{“ [<ListaSentencias>] [<Retorno>] “}” | “{“ [<ListaSentencias>] [“<Exit>”] “}”
 	 * @return un objeto de tipo CuerpoWhen
 	 */
 	public CuerpoWhen esCuerpoWhen(){
