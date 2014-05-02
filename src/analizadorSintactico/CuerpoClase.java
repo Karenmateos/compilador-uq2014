@@ -11,7 +11,7 @@ import analizadorLexico.SimboloLexico;
  * 
  * @author Jorge Leonardo Aguirre Martinez
  * @author Luis Alberto Delgado Ortiz
- *<CuerpoClase> ::= �{� [<ListaDeclaraciones>] [ListaAsignaciones] [<ListaMetodos>] �}�
+ * GIC: <CuerpoClase> ::= “{“ [<ListaDeclaraciones>] [ListaAsignaciones] [<ListaMetodos>] “}”
 
  */
 

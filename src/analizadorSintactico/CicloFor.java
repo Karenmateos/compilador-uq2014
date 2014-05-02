@@ -5,6 +5,14 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
+/**
+*
+* @author Jorge Leonardo Aguirre Martinez
+* @author Luis Alberto Delgado Ortiz
+* 
+* GIC: <FOR> ::= “FOR” “(“ <Asignacion> “;” <ExpresionComparacion> “;” <IdVariable> “=” <ExpresionMatematica> “)”  <CuerpoCiclo>
+
+*/
 public class CicloFor extends Sentencia{
 	// Variable que almacema la palabra reservada inicial del ciclo for
 	SimboloLexico palabraFor;

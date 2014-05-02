@@ -12,7 +12,7 @@ import analizadorLexico.SimboloLexico;
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 
-* <CuerpoMetodo> ::= �{� [<ListaSentencias>] [<Retorno>] �}�
+* GIC: <CuerpoMetodo> ::= “{” [<ListaSentencias>] <Retorno> “}”
 */
 public class CuerpoMetodo {
 	// Variable que almacema la apertura de llaves

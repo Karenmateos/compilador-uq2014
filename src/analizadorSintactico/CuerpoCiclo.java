@@ -12,7 +12,7 @@ import analizadorLexico.SimboloLexico;
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 
-* <CuerpoCiclo> ::=  �{� [<ListaSentencias>]  �}�
+* GIC: <CuerpoCiclo> ::=  “{” [<ListaSentencias>]  “}”
 
 */
 public class CuerpoCiclo {

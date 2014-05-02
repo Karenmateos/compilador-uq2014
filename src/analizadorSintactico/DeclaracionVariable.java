@@ -12,7 +12,7 @@ import analizadorLexico.SimboloLexico;
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 
-* <DeclaracionVariable> ::= <TipoDato> <Variables> �;�
+* GIC: <DeclaracionVariable> ::= <TipoDato> <Variables> “;”
 */
 public class DeclaracionVariable extends Sentencia{
 	// Variable que almacema el tipo de dato

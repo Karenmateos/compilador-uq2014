@@ -12,7 +12,7 @@ import analizadorLexico.SimboloLexico;
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 
-* <InvocacionMetodo>::= idMetodo "(" [<Argumentos>] ")" ";"
+* GIC: <InvocacionMetodo>::= idMetodo "(" [<Argumentos>] ")" ";"
 */
 public class InvocacionMetodo {
 	// Variable que almacema el id de variable

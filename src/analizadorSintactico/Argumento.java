@@ -9,7 +9,7 @@ import analizadorLexico.SimboloLexico;
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 
-* <Argumento> ::= <TipoDato> <IdVariable>
+* GIC: <Argumento> ::= <TipoDato> <IdVariable>
 */
 public class Argumento {
 	
