@@ -282,6 +282,11 @@ public  class Configuracion {
 	public static final String real = properties.getString("real");
 	public static final String texto = properties.getString("texto");
 	public static final String retornar = properties.getString("retornar");
+	public static final String tokenWhen = properties.getString("tokenWhen");
+	public static final String tokenExit = properties.getString("tokenExit");
+	public static final String tokenBinaty = properties.getString("tokenBinaty");
+	
+	
 	
 	// Errores
 	public static final String errorIdentificador1 = properties.getString("errorIdentificador1");
@@ -307,6 +312,8 @@ public  class Configuracion {
 	public static final String errorFaltaIdMetodo = properties.getString("errorFaltaIdMetodo");
 	public static final String errorFaltaIdVariable = properties.getString("errorFaltaIdVariable");
 	public static final String errorFaltaCierreCuerpoMetodo = properties.getString("errorFaltaCierreCuerpoMetodo");
-	public static final String errorFaltaRetornoMetodo = properties.getString("errorFaltaRetornoMetodo");	
-	
+	public static final String errorFaltaRetornoMetodo = properties.getString("errorFaltaRetornoMetodo");
+	public static final String errorFaltaCuerpoWhen = properties.getString("errorFaltaCuerpoWhen");
+	public static final String errorFaltaExpresionComparacion = properties.getString("errorFaltaExpresionComparacion");
+	public static final String errorFaltaCierreLlaves = properties.getString("errorFaltaCierreLlaves");
 }

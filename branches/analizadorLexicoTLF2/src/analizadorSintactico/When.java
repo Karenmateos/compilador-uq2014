@@ -13,7 +13,7 @@ import analizadorLexico.Configuracion;
 import analizadorLexico.SimboloLexico;
 
 public class When extends Sentencia{
-	// Variable que almacema la palabra reservada del ciclo
+	// Variable que almacema la palabra reservada de la decision
 	SimboloLexico when;
 	// Variable que almacema la apertura de parentesis
 	SimboloLexico aperturaParentesis;

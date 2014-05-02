@@ -149,7 +149,7 @@ public class AnalizadorSintactico {
 				argumento = esArgumento();
 			}
 			else{
-				if (tokenActual.getLexema().equals(Configuracion.entero) || tokenActual.getTipo().equals(Configuracion.real) || tokenActual.getTipo().equals(Configuracion.texto) || tokenActual.getTipo().equals("BINARY")){
+				if (tokenActual.getLexema().equals(Configuracion.entero) || tokenActual.getTipo().equals(Configuracion.real) || tokenActual.getTipo().equals(Configuracion.texto) || tokenActual.getTipo().equals(Configuracion.tokenBinaty)){
 
 					reportarError(Configuracion.errorFaltaSeparador,tokenActual.getFila() , tokenActual.getColumna());
 					modoPanico(Configuracion.puntoyComa);
@@ -165,7 +165,7 @@ public class AnalizadorSintactico {
 	}
 
 	/**
-	 * Indica si cierto conjunto de tokens conforman La Unidad de Compilaci�n
+	 * Indica si cierto conjunto de tokens conforman La Unidad de Compilación
 	 * GIC: <UnidadDeCompilacion> ::=<Clase> 
 	 * @return un objeto de tipo UnidadCompilacion
 	 */
@@ -551,7 +551,10 @@ public class AnalizadorSintactico {
 		return sentencia;
 	}
 
-
+	/**
+	 * Indica si cierto conjunto de tokens conforman la categoria sintactica when
+	 * @return un objeto de tipo When
+	 */
 	public When esWHEN(){
 
 		SimboloLexico parentesisAbre = null;
@@ -561,7 +564,7 @@ public class AnalizadorSintactico {
 		CuerpoWhen cuerpoWhen = null;
 		SimboloLexico posError = null;
 
-		if(tokenActual.getLexema().equals("WHEN")){
+		if(tokenActual.getLexema().equals(Configuracion.tokenWhen)){
 			when = tokenActual;
 			darSiguienteToken();
 
@@ -582,7 +585,7 @@ public class AnalizadorSintactico {
 							return new When(when, parentesisAbre, expresionComparacion, parentesisCierra, cuerpoWhen);
 						}
 						else{
-							reportarError("falta el cuerpo del when", tokenActual.getFila(), tokenActual.getColumna());
+							reportarError(Configuracion.errorFaltaCuerpoWhen, tokenActual.getFila(), tokenActual.getColumna());
 							modoPanico(Configuracion.puntoyComa);
 							return new When(when, parentesisAbre, expresionComparacion, parentesisCierra, cuerpoWhen);
 						}
@@ -592,26 +595,26 @@ public class AnalizadorSintactico {
 						cuerpoWhen = esCuerpoWhen();
 						if(cuerpoWhen!=null){
 							
-							reportarError("falta cerrar parentesis",posError.getFila(), posError.getColumna());
+							reportarError(Configuracion.errorFaltaCierreParentesis,posError.getFila(), posError.getColumna());
 							return new When(when, parentesisAbre, expresionComparacion, parentesisCierra, cuerpoWhen);
 
 						}
 						else{
-							reportarError("falta cerrar parentesis",tokenActual.getFila(), tokenActual.getColumna());
-							reportarError("falta cuerpo del when",tokenActual.getFila(), tokenActual.getColumna());
+							reportarError(Configuracion.errorFaltaCierreParentesis, tokenActual.getFila(), tokenActual.getColumna());
+							reportarError(Configuracion.errorFaltaCuerpoWhen, tokenActual.getFila(), tokenActual.getColumna());
 							modoPanico(Configuracion.puntoyComa);
 							return new When(when, parentesisAbre, expresionComparacion, parentesisCierra, cuerpoWhen);
 						}
 					}
 				}
 				else{
-					reportarError("falta la expresion de comparacion", tokenActual.getFila(), tokenActual.getColumna());
+					reportarError(Configuracion.errorFaltaExpresionComparacion, tokenActual.getFila(), tokenActual.getColumna());
 					modoPanico(Configuracion.puntoyComa);
 					return new When(when, parentesisAbre, expresionComparacion, parentesisCierra, cuerpoWhen);
 				}
 			}
 			else{
-				reportarError("falta abrir parentesis", tokenActual.getFila(), tokenActual.getColumna());
+				reportarError(Configuracion.errorFaltaAbreParentesis, tokenActual.getFila(), tokenActual.getColumna());
 				modoPanico(Configuracion.puntoyComa);
 				return new When(when, parentesisAbre, expresionComparacion, parentesisCierra, cuerpoWhen);
 			}
@@ -623,6 +626,10 @@ public class AnalizadorSintactico {
 
 	}
 	
+	/**
+	 * Indica si cierto conjunto de tokens conforman el cuerpo del When
+	 * @return un objeto de tipo CuerpoWhen
+	 */
 	public CuerpoWhen esCuerpoWhen(){
 		
 		SimboloLexico llaveAbre = null;
@@ -647,14 +654,14 @@ public class AnalizadorSintactico {
 					return new CuerpoWhen(llaveAbre, sentencias, retorno, llaveCierra);
 				}
 				else{
-					reportarError("falta cerrar llaves", tokenActual.getFila(), tokenActual.getColumna());
+					reportarError(Configuracion.errorFaltaCierreLlaves, tokenActual.getFila(), tokenActual.getColumna());
 					modoPanico(Configuracion.puntoyComa);
 					return new CuerpoWhen(llaveAbre, sentencias, retorno, llaveCierra);
 				}
 			
 			}
 			else{
-				if(tokenActual.getLexema().equals("<EXIT>")){
+				if(tokenActual.getLexema().equals(Configuracion.tokenExit)){
 					salida = tokenActual;
 					darSiguienteToken();
 					
@@ -664,7 +671,7 @@ public class AnalizadorSintactico {
 						return new CuerpoWhen(llaveAbre, sentencias, salida, llaveCierra);
 					}
 					else{
-						reportarError("falta cerrar las llaves", tokenActual.getFila(), tokenActual.getColumna());
+						reportarError(Configuracion.errorFaltaCierreLlaves, tokenActual.getFila(), tokenActual.getColumna());
 						modoPanico(Configuracion.puntoyComa);
 						return new CuerpoWhen(llaveAbre, sentencias, salida, llaveCierra);
 					}
@@ -676,7 +683,7 @@ public class AnalizadorSintactico {
 						return new CuerpoWhen(llaveAbre, sentencias, retorno, llaveCierra);
 					}
 					else{
-						reportarError("Falta cerrar llave", tokenActual.getFila(), tokenActual.getColumna());
+						reportarError(Configuracion.errorFaltaCierreLlaves, tokenActual.getFila(), tokenActual.getColumna());
 						modoPanico(Configuracion.puntoyComa);
 						return new CuerpoWhen(llaveAbre, sentencias, retorno, llaveCierra);
 					}
@@ -698,7 +705,6 @@ public class AnalizadorSintactico {
 	 * GIC: <Retorno> ::= “<SEND>” <idVeriable> “;”
 	 * @return un objeto de tipo retorno
 	 */
-
 	public Retorno esRetorno(){
 
 		SimboloLexico retornar = null;
@@ -1093,7 +1099,7 @@ public class AnalizadorSintactico {
 		if (tokenActual.getLexema().equals(Configuracion.entero)
 				|| tokenActual.getLexema().equals(Configuracion.real)
 				|| tokenActual.getLexema().equals(Configuracion.texto)
-				|| tokenActual.getLexema().equals("BINARY")) {
+				|| tokenActual.getLexema().equals(Configuracion.tokenBinaty)) {
 			tipoDato = tokenActual;
 			darSiguienteToken();
 			return tipoDato;
