@@ -10,7 +10,7 @@ import analizadorLexico.SimboloLexico;
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 
-* <Retorno> ::= “<SEND>” <idVariable> “;”
+* <Retorno> ::= ï¿½<SEND>ï¿½ <idVariable> ï¿½;ï¿½
 
 */
 public class Retorno {
@@ -31,11 +31,11 @@ public class Retorno {
 
 		if(send != null)
 		{
-			miRaiz.add(new DefaultMutableTreeNode(send.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(send.getLexema() + Configuracion.dosPuntos + send.getTipo()));
 		}
 		
 		if(idVariable != null){
-			miRaiz.add(new DefaultMutableTreeNode(idVariable.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(idVariable.getLexema() + Configuracion.dosPuntos + idVariable.getTipo()));
 		}
 		
 		if(terminal != null){

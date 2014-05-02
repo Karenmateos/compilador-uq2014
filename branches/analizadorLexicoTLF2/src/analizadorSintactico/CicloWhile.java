@@ -10,10 +10,10 @@ import analizadorLexico.SimboloLexico;
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 
-* <WHILE> ::= “WHILE” “(“ <ExpresionComparacion> “)” <CuerpoCiclo>
+* <WHILE> ::= ï¿½WHILEï¿½ ï¿½(ï¿½ <ExpresionComparacion> ï¿½)ï¿½ <CuerpoCiclo>
 
 */
-public class CicloWhile {
+public class CicloWhile extends Sentencia{
 	
 	SimboloLexico palabraWhile;
 	SimboloLexico aperturaParentesis;
@@ -36,7 +36,7 @@ public class CicloWhile {
 
 		if(palabraWhile != null)
 		{
-			miRaiz.add(new DefaultMutableTreeNode(palabraWhile.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(palabraWhile.getLexema() + Configuracion.dosPuntos + palabraWhile.getTipo()));
 		}
 		
 		if(aperturaParentesis != null){

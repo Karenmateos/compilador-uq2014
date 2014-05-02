@@ -12,7 +12,7 @@ import analizadorLexico.SimboloLexico;
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 
-* <DeclaracionVariable> ::= <TipoDato> <Variables> “;”
+* <DeclaracionVariable> ::= <TipoDato> <Variables> ï¿½;ï¿½
 */
 public class DeclaracionVariable extends Sentencia{
 
@@ -33,13 +33,13 @@ public class DeclaracionVariable extends Sentencia{
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.declaracionVariable);
 
 		if(tipoDato != null){
-			miRaiz.add(new DefaultMutableTreeNode(tipoDato.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(tipoDato.getLexema() + Configuracion.dosPuntos + tipoDato.getTipo()));
 		}
 
 		if(idVariables.size() > 0){
 			for (SimboloLexico identificador : idVariables)
 			{
-				miRaiz.add(new DefaultMutableTreeNode(identificador.getLexema()));
+				miRaiz.add(new DefaultMutableTreeNode(identificador.getLexema() + Configuracion.dosPuntos + identificador.getTipo()));
 			}
 		}
 		

@@ -36,17 +36,17 @@ public class ExpresionComparacion {
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.expresionComparacion);
 
 		if(idVariable != null){
-			miRaiz.add(new DefaultMutableTreeNode(idVariable.getTipo()+Configuracion.dosPuntos+idVariable.getLexema()) );
+			miRaiz.add(new DefaultMutableTreeNode(idVariable.getLexema() + Configuracion.dosPuntos + idVariable.getTipo()));
 		}
 
 		if(operadorComparacion != null){
 
-			miRaiz.add(new DefaultMutableTreeNode(operadorComparacion.getTipo()+Configuracion.dosPuntos+operadorComparacion.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(operadorComparacion.getLexema()));
 		}
 
 		if(idVariable2 !=null){
 
-			miRaiz.add(new DefaultMutableTreeNode(idVariable2.getTipo()+Configuracion.dosPuntos+idVariable2.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(idVariable2.getLexema() + Configuracion.dosPuntos + idVariable2.getTipo()));
 
 
 		}

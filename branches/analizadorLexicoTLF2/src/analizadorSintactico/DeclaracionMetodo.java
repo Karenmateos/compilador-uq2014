@@ -12,7 +12,7 @@ import analizadorLexico.SimboloLexico;
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 
-* <DeclaracionMetodo> ::= <ModificadorAcceso> <TipoDato> <IdMetodo> “(“ [<Argumentos>] “)”  <CuerpoMetodo> 
+* <DeclaracionMetodo> ::= <ModificadorAcceso> <TipoDato> <IdMetodo> ï¿½(ï¿½ [<Argumentos>] ï¿½)ï¿½  <CuerpoMetodo> 
 */
 public class DeclaracionMetodo {
 	
@@ -40,15 +40,15 @@ public class DeclaracionMetodo {
 
 		if(modificadorAcceso != null)
 		{
-			miRaiz.add(new DefaultMutableTreeNode(modificadorAcceso.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(modificadorAcceso.getLexema() + Configuracion.dosPuntos + modificadorAcceso.getTipo()));
 		}
 		
 		if(tipoDato != null){
-			miRaiz.add(new DefaultMutableTreeNode(tipoDato.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(tipoDato.getLexema() + Configuracion.dosPuntos + tipoDato.getTipo()));
 		}
 		
 		if(idMetodo != null){
-			miRaiz.add(new DefaultMutableTreeNode(idMetodo.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(idMetodo.getLexema() + Configuracion.dosPuntos + idMetodo.getTipo()));
 		}
 		
 		if(aperturaParentesis != null){

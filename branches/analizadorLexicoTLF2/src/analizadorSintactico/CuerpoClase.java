@@ -11,21 +11,21 @@ import analizadorLexico.SimboloLexico;
  * 
  * @author Jorge Leonardo Aguirre Martinez
  * @author Luis Alberto Delgado Ortiz
- *<CuerpoClase> ::= “{“ [<ListaDeclaraciones>] [ListaAsignaciones] [<ListaMetodos>] “}”
+ *<CuerpoClase> ::= ï¿½{ï¿½ [<ListaDeclaraciones>] [ListaAsignaciones] [<ListaMetodos>] ï¿½}ï¿½
 
  */
 
 public class CuerpoClase {
 
-	SimboloLexico llaveAbre = null;
-	SimboloLexico llaveCierra = null;
+	SimboloLexico aperturaLlaves = null;
+	SimboloLexico cierreLlaves = null;
 	ArrayList<DeclaracionVariable> listaDeclaraciones = null;
 	ArrayList<Asignacion> listaAsignaciones = null;
 	ArrayList<DeclaracionMetodo>  listaMetodos = null;
 	
-	public CuerpoClase(SimboloLexico llaveAbre,ArrayList<DeclaracionVariable> listaDeclaraciones,ArrayList<Asignacion> listaAsignaciones ,ArrayList<DeclaracionMetodo> listaMetodos, SimboloLexico llaveCierra){
-		this.llaveCierra = llaveCierra;
-		this.llaveAbre = llaveAbre;
+	public CuerpoClase(SimboloLexico aperturaLlaves, ArrayList<DeclaracionVariable> listaDeclaraciones, ArrayList<Asignacion> listaAsignaciones ,ArrayList<DeclaracionMetodo> listaMetodos, SimboloLexico cierreLlaves){
+		this.aperturaLlaves = aperturaLlaves;
+		this.cierreLlaves = cierreLlaves;
 		this.listaDeclaraciones = listaDeclaraciones;
 		this.listaAsignaciones = listaAsignaciones;
 		this.listaMetodos = listaMetodos;
@@ -35,8 +35,8 @@ public class CuerpoClase {
 	{
 		DefaultMutableTreeNode miRaiz = new DefaultMutableTreeNode(Configuracion.cuerpoClase);
 		
-		if(llaveAbre!=null){
-			miRaiz.add(new DefaultMutableTreeNode(llaveAbre.getLexema()));
+		if(aperturaLlaves!=null){
+			miRaiz.add(new DefaultMutableTreeNode(aperturaLlaves.getLexema()));
 		}
 
 		if(listaDeclaraciones!=null && listaDeclaraciones.size() > 0)
@@ -73,8 +73,8 @@ public class CuerpoClase {
 			miRaiz.add(nodo);
 		}
 		
-		if(llaveCierra!=null){
-			miRaiz.add(new DefaultMutableTreeNode(llaveCierra.getLexema()));
+		if(cierreLlaves!=null){
+			miRaiz.add(new DefaultMutableTreeNode(cierreLlaves.getLexema()));
 		}
 
 		return miRaiz;

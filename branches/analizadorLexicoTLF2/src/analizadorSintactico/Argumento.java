@@ -26,11 +26,11 @@ public class Argumento {
 
 		if(tipoDato != null)
 		{
-			miRaiz.add(new DefaultMutableTreeNode(tipoDato.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(tipoDato.getLexema() + Configuracion.dosPuntos + tipoDato.getTipo()));
 		}
 		
 		if(idVariable != null){
-			miRaiz.add(new DefaultMutableTreeNode(idVariable.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(idVariable.getLexema()  + Configuracion.dosPuntos + idVariable.getTipo()));
 		}
 		
 		return miRaiz;

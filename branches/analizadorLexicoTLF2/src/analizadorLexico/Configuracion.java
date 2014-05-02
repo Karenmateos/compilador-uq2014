@@ -273,6 +273,16 @@ public  class Configuracion {
 	public static final String cicloWhile = properties.getString("cicloWhile");
 	public static final String asignacion = properties.getString("asignacion");
 	public static final String argumento = properties.getString("argumento");
+	public static final String cicloFor = properties.getString("cicloFor");
+	
+	// Reservadas
+	public static final String publico = properties.getString("publico");
+	public static final String privado = properties.getString("privado");	
+	public static final String entero = properties.getString("entero");
+	public static final String real = properties.getString("real");
+	public static final String texto = properties.getString("texto");
+	
+	// Errores
 	public static final String errorIdentificador1 = properties.getString("errorIdentificador1");
 	public static final String errorIdentificador2 = properties.getString("errorIdentificador2");
 	public static final String errorNombreParametro = properties.getString("errorNombreParametro");
@@ -288,7 +298,12 @@ public  class Configuracion {
 	public static final String errorFaltaValorComparar = properties.getString("errorFaltaValorComparar");
 	public static final String errorFaltaOperadorRelacional = properties.getString("errorFaltaOperadorRelacional");
 	public static final String errorFaltaValorOperacion = properties.getString("errorFaltaValorOperacion");
-	public static final String publico = properties.getString("publico");
-	public static final String privado = properties.getString("privado");
-	
+	public static final String errorFaltaPuntoyComa = properties.getString("errorFaltaPuntoyComa");
+	public static final String errorFaltaTipoRetorno = properties.getString("errorFaltaTipoRetorno");
+	public static final String errorFaltaCuerpoMetodo = properties.getString("errorFaltaCuerpoMetodo");
+	public static final String errorFaltaAbreParentesis = properties.getString("errorFaltaAbreParentesis");
+	public static final String errorFaltaCierreParentesis = properties.getString("errorFaltaCierreParentesis");
+	public static final String errorFaltaIdMetodo = properties.getString("errorFaltaIdMetodo");
+	public static final String errorFaltaIdVariable = properties.getString("errorFaltaIdVariable");
+		
 }

@@ -239,7 +239,7 @@ public class AnalizadorSintactico {
 
 	/**
 	 * indica si cierto conjunto de tokens conforman el cuerpo de la clase
-	 * GIC: <CuerpoClase> ::= “{“ [<ListaDeclaraciones>] [ListaAsignaciones] [<ListaMetodos>] “}”
+	 * GIC: <CuerpoClase> ::= ï¿½{ï¿½ [<ListaDeclaraciones>] [ListaAsignaciones] [<ListaMetodos>] ï¿½}ï¿½
 
 	 * 
 	 * @return
@@ -266,8 +266,8 @@ public class AnalizadorSintactico {
 				return new CuerpoClase(llaveAbre,listaDeclaraciones, listaAsignaciones, listaMetodos,llaveCierra);
 			}
 			else{
-				reportarError("falta cerrar el cuerpo de la clase", tokenActual.getFila(), tokenActual.getColumna());
-				modoPanico(";");
+				reportarError(Configuracion.errorFaltaCuerpoClase, tokenActual.getFila(), tokenActual.getColumna());
+				modoPanico(Configuracion.puntoyComa);
 				return new CuerpoClase(llaveAbre, listaDeclaraciones, listaAsignaciones, listaMetodos, llaveCierra);
 			}
 		}
@@ -317,7 +317,7 @@ public class AnalizadorSintactico {
 				asignacion = esAsignacion(); 
 			}
 			else{
-				reportarError("falta el ;", tokenActual.getFila(), tokenActual.getColumna());
+				reportarError(Configuracion.errorFaltaPuntoyComa, tokenActual.getFila(), tokenActual.getColumna());
 				modoPanico(Configuracion.puntoyComa);
 				return listaAsignacion;
 			}
@@ -348,7 +348,7 @@ public class AnalizadorSintactico {
 
 	/**
 	 * indica si cierto conjunto de tokens conforman la declaracion de un metodo
-	 * GIC:<DeclaracionMetodo> ::= <ModificadorAcceso> <TipoDato> <IdMetodo> “(“ [<Argumentos>] “)”  <CuerpoMetodo> 
+	 * GIC:<DeclaracionMetodo> ::= <ModificadorAcceso> <TipoDato> <IdMetodo> ï¿½(ï¿½ [<Argumentos>] ï¿½)ï¿½  <CuerpoMetodo> 
 	 * 
 	 * @return
 	 */
@@ -369,9 +369,9 @@ public class AnalizadorSintactico {
 			if(tipoDato==null){
 				if(tokenActual.getTipo().equals(Configuracion.IdMetodo)){
 					idMetodo = tokenActual;
-					reportarError("falta el modificador de acceso",tokenActual.getFila(), tokenActual.getColumna());
-					reportarError("falta el tipo de dato",tokenActual.getFila(), tokenActual.getColumna());
-					modoPanico(";");
+					reportarError(Configuracion.errorFaltaModificadorAcceso, tokenActual.getFila(), tokenActual.getColumna());
+					reportarError(Configuracion.errorFaltaTipoDato, tokenActual.getFila(), tokenActual.getColumna());
+					modoPanico(Configuracion.puntoyComa);
 					return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
 
 				}
@@ -382,8 +382,8 @@ public class AnalizadorSintactico {
 			else{
 				if(tokenActual.getTipo().equals(Configuracion.IdMetodo)){
 					idMetodo = tokenActual;
-					reportarError("falta el modificador de acceso",tokenActual.getFila(), tokenActual.getColumna());
-					modoPanico(";");
+					reportarError(Configuracion.errorFaltaModificadorAcceso, tokenActual.getFila(), tokenActual.getColumna());
+					modoPanico(Configuracion.puntoyComa);
 					return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
 				}
 				else{
@@ -396,14 +396,20 @@ public class AnalizadorSintactico {
 			tipoDato = esTipoDato();
 			if(tipoDato==null){
 				if(tokenActual.getTipo().equals(Configuracion.IdMetodo)){
-					reportarError("falta el tipo de dato de retorno", tokenActual.getFila(), tokenActual.getColumna());
-					modoPanico(";");
+					reportarError(Configuracion.errorFaltaTipoRetorno, tokenActual.getFila(), tokenActual.getColumna());
+					modoPanico(Configuracion.puntoyComa);
 					return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
 				}
 				else{
+
+					reportarError(Configuracion.errorFaltaTipoRetorno, tokenActual.getFila(), tokenActual.getColumna());
+				    modoPanico(Configuracion.puntoyComa);
+				    return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
+
 					reportarError("falta el tipo de dato de retorno del metodo",tokenActual.getFila(), tokenActual.getColumna());
 					modoPanico(";");
 					return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
+
 				}
 
 			}
@@ -427,27 +433,27 @@ public class AnalizadorSintactico {
 							return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
 						}
 						else{
-							reportarError("falta el cuerpo del metodo", tokenActual.getFila(), tokenActual.getColumna());
+							reportarError(Configuracion.errorFaltaCuerpoMetodo, tokenActual.getFila(), tokenActual.getColumna());
 							modoPanico(Configuracion.puntoyComa);
 							return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
 						}
 
 					}
 					else{
-						reportarError("falta el cierre de parentesis", tokenActual.getFila(),tokenActual.getColumna());
-						modoPanico(";");
+						reportarError(Configuracion.errorFaltaCierreParentesis, tokenActual.getFila(),tokenActual.getColumna());
+						modoPanico(Configuracion.puntoyComa);
 						return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
 					} 
 				}
 				else{
-					reportarError("falta abrir parentesis", tokenActual.getFila(),tokenActual.getColumna());
-					modoPanico(";");
+					reportarError(Configuracion.errorFaltaAbreParentesis, tokenActual.getFila(),tokenActual.getColumna());
+					modoPanico(Configuracion.puntoyComa);
 					return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
 				}
 			}
 			else{
-				reportarError("falta el identificador de metodo", tokenActual.getFila(),tokenActual.getColumna());
-				modoPanico(";");
+				reportarError(Configuracion.errorFaltaIdMetodo, tokenActual.getFila(),tokenActual.getColumna());
+				modoPanico(Configuracion.puntoyComa);
 				return new DeclaracionMetodo(modificadorAcceso, tipoDato, idMetodo, aperturaParentesis, argumentos, cierreParentesis, cuerpoMetodo);
 			}
 		}
@@ -541,7 +547,7 @@ public class AnalizadorSintactico {
 
 	}
 	/**
-	 * GIC: “<SEND>” <idVeriable> “;”
+	 * GIC: ï¿½<SEND>ï¿½ <idVeriable> ï¿½;ï¿½
 	 * @return
 	 */
 
@@ -595,7 +601,7 @@ public class AnalizadorSintactico {
 
 	/**
 	 * indica si cierto conjunto de tokens conforman la declaracion de una variable
-	 * GIC:<DeclaracionVariable> ::= <TipoDato> <Variables> “;”
+	 * GIC:<DeclaracionVariable> ::= <TipoDato> <Variables> ï¿½;ï¿½
 	 * 
 	 * @return
 	 */
@@ -639,7 +645,7 @@ public class AnalizadorSintactico {
 
 	/**
 	 *Indica si cierto conjunto de tokens pertenecen a la categoria sintactica Lista de variables 
-	 *  GIC: <Variables> ::= <IdVariable> [“,” <Variables>]
+	 *  GIC: <Variables> ::= <IdVariable> [ï¿½,ï¿½ <Variables>]
 	 *  
 	 * @return
 	 */
@@ -660,7 +666,7 @@ public class AnalizadorSintactico {
 				if(tokenActual.getTipo().equals(Configuracion.IdVariable)){
 
 					reportarError(Configuracion.errorFaltaSeparador,tokenActual.getFila() , tokenActual.getColumna());
-					modoPanico(";");
+					modoPanico(Configuracion.puntoyComa);
 					break;
 				}
 				else{
@@ -696,7 +702,7 @@ public class AnalizadorSintactico {
 
 	/**
 	 *Indica si cierto conjunto de tokens pertenecen a la categoria sintactica de asignaciones 
-	 * GIC: <Asignacion> ::= <IdVariable> “=” <ExpresioneComparacion> |<IdVariable> “=” <ExpresioneMatematica>| <idVariable> “=” <Valor> | <idVariable> “=” <idVariable>
+	 * GIC: <Asignacion> ::= <IdVariable> ï¿½=ï¿½ <ExpresioneComparacion> |<IdVariable> ï¿½=ï¿½ <ExpresioneMatematica>| <idVariable> ï¿½=ï¿½ <Valor> | <idVariable> ï¿½=ï¿½ <idVariable>
 	 * 
 	 * @return
 	 */
@@ -907,7 +913,7 @@ public class AnalizadorSintactico {
 			return new Operacion(operadorMatematico,idVariable);
 		}
 		else{
-			reportarError("falta el identificador de variable", tokenActual.getFila(), tokenActual.getColumna());
+			reportarError(Configuracion.errorFaltaIdVariable, tokenActual.getFila(), tokenActual.getColumna());
 			modoPanico(Configuracion.puntoyComa);
 			return new Operacion(operadorMatematico, idVariable);
 		}
@@ -945,9 +951,9 @@ public class AnalizadorSintactico {
 	private SimboloLexico esTipoDato(){
 		SimboloLexico tipoDato = null;
 
-		if (tokenActual.getLexema().equals("INT")
-				|| tokenActual.getLexema().equals("REAL")
-				|| tokenActual.getLexema().equals("TEXT")) {
+		if (tokenActual.getLexema().equals(Configuracion.entero)
+				|| tokenActual.getLexema().equals(Configuracion.real)
+				|| tokenActual.getLexema().equals(Configuracion.texto)) {
 			tipoDato = tokenActual;
 			darSiguienteToken();
 			return tipoDato;

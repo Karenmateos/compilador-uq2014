@@ -12,7 +12,7 @@ import analizadorLexico.SimboloLexico;
 * @author Jorge Leonardo Aguirre Martinez
 * @author Luis Alberto Delgado Ortiz
 * 
-* <CuerpoWHEN> ::= “{“ [<ListaSentencias>] [<Retorno>] “}” | “{“ [<ListaSentencias>] [“<Exit>”] “}” 
+* <CuerpoWHEN> ::= ï¿½{ï¿½ [<ListaSentencias>] [<Retorno>] ï¿½}ï¿½ | ï¿½{ï¿½ [<ListaSentencias>] [ï¿½<Exit>ï¿½] ï¿½}ï¿½ 
 * 
 */
 public class CuerpoWhen {
@@ -46,7 +46,7 @@ public class CuerpoWhen {
 		}
 		
 		if(salida != null){
-			miRaiz.add(new DefaultMutableTreeNode(salida.getLexema()));
+			miRaiz.add(new DefaultMutableTreeNode(salida.getLexema() + Configuracion.dosPuntos + salida.getTipo()));
 		}
 		
 		if(cierreLlaves != null){
